@@ -1,0 +1,300 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1"
+        android:padding="20dp">
+
+        <!-- everything you already have -->
+        <TextView
+            android:id="@+id/txtCircuito2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Circuito:" />
+
+        <Spinner
+            android:id="@+id/spinnerCircuito2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/txtTorneio2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Torneio:" />
+
+        <Spinner
+            android:id="@+id/spinnerTorneio2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp" />
+
+        <TextView
+            android:id="@+id/txtCategoria2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Categoria:" />
+
+        <Spinner
+            android:id="@+id/spinnerCategoria2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/txtTitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Atleta 1"
+            android:textColor="#0E0F16"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtNomeAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Nome:" />
+
+        <EditText
+            android:id="@+id/edtNomeAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtCpfAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="CPF:" />
+
+        <EditText
+            android:id="@+id/edtCpfAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="CPF"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtTelAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Telefone:" />
+
+        <EditText
+            android:id="@+id/edtTelAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="(xx) x xxxx-xxxx"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/txtEmailAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Email:" />
+
+        <EditText
+            android:id="@+id/edtEmailAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="xxxxx@xxxxx.com"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/txtNascimentoAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Data Nascimento:" />
+
+        <EditText
+            android:id="@+id/edtNascimentoAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="xx/xx/xxxx"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/txtSexoAtleta1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Sexo:" />
+
+        <Spinner
+            android:id="@+id/spinnerSexo1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/txtAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Atleta 2"
+            android:textColor="#040504"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtNomeAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Nome:" />
+
+        <EditText
+            android:id="@+id/edtNomeAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtCpfAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="CPF:" />
+
+        <EditText
+            android:id="@+id/edtCpfAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="CPF"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtTelAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Telefone:" />
+
+        <EditText
+            android:id="@+id/edtTelAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="(xx) x xxxx-xxxx"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/txtEmailAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Email:" />
+
+        <EditText
+            android:id="@+id/edtEmailAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="xxxxx@xxxxx.com"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/txtNascimentoAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Data Nascimento:" />
+
+        <EditText
+            android:id="@+id/edtNascimentoAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:ems="10"
+            android:hint="xx/xx/xxxx"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/txtSexoAtleta2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Sexo:" />
+
+        <Spinner
+            android:id="@+id/spinnerSexo2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:text="Salvar" />
+
+    </TableLayout>
+</ScrollView>
+

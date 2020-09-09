@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>FourZeta</title>
+	<!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" href="style/styleCss.css"/>
+</head>
+<body>
+
+	<header>
+		<nav class="menu">
+		    <div class="nav-wrapper" th:each="circuito : ${circuito}">
+		      <a href="#" class="brand-logo">&nbsp;Edicao do Torneio</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		      <li><a th:href="${(#mvc.url('CC#listaCircuitos').arg(0, circuito.usuario.id)).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>lista Circuitos</a></li>
+		        <li><a th:href="${(#mvc.url('CC#detalhesCircuito').arg(0, circuito.usuario.id).arg(1, circuito.id)).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Detalhes do Circuito</a></li>
+		      </ul>
+		    </div>
+		</nav>
+	
+	</header>
+	
+	<div th:each="circuito : ${circuito}" class="container detalhesEvento">
+	<h5>Detalhes do Circuito</h5>
+		<div class="row">
+			<p>Nome: <span th:text="${circuito.nome}"></span></p>
+			<p>Descricao: <span th:text="${circuito.descricao}"></span></p>
+		</div>
+	</div>
+	
+	
+	<div class="container formEvento" th:each="torneio : ${torneio}">
+	
+	<form class="container" method="post">
+		<div class="row">
+		
+			<div class="input-field col s6">
+				Nome: <input type="text" th:value="${torneio.nome}" name="nome"/>
+			</div >
+			<div class="input-field col s6">
+				Descricao: <input type="text" th:value="${torneio.descricao}" name="descricao"/>
+			</div>
+			<div class="input-field col s3">
+				Valor: <input type="text" th:value="${torneio.valor}" name="valor"/>
+			</div>
+			<div class="input-field col s3">
+				Data Fim Inscricao: <input type="date" th:value="${torneio.datFimInsc}" name="datFimInsc">
+			</div>
+			<div class="input-field col s3">
+				Data Inicio Jogos: <input type="date" th:value="${torneio.datIniJogos}" name="datIniJogos"/>
+			</div>
+			<div class="input-field col s3">
+				Data Fim Jogos: <input type="date" th:value="${torneio.datFimJogos}" name="datFimJogos"/>
+			</div>
+			
+		</div>
+		<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+	
+	</form>
+	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+
+
+</html>

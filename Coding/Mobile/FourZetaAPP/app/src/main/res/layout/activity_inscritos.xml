@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InscritosActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/txtCircuito"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="2dp"
+        android:text="Circuito:"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCircuito"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCircuito"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTorneio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCircuito" />
+
+    <TextView
+        android:id="@+id/txtTorneio"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="2dp"
+        android:text="Torneio:"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerTorneio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCircuito" />
+
+    <Spinner
+        android:id="@+id/spinnerTorneio"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnPesquisar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTorneio" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/txtCategoria"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="19dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--android:text="Categoria:"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/spinnerCategoria"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/spinnerTorneio" />-->
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spinnerCategoria"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="24dp"-->
+        <!--android:layout_marginStart="2dp"-->
+        <!--android:layout_marginLeft="2dp"-->
+        <!--android:layout_marginEnd="2dp"-->
+        <!--android:layout_marginRight="2dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/btnPesquisar"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />-->
+
+    <Button
+        android:id="@+id/btnPesquisar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Pesquisar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTorneio" />
+
+</android.support.constraint.ConstraintLayout>

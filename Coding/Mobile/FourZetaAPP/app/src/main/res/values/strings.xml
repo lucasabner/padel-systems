@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">FourZeta</string>
+
+    <string-array name="circuitos">
+        <item>Aqua Padel Cristal 2019</item>
+    </string-array>
+
+    <string-array name="torneios">
+        <item>1ª Etapa</item>
+        <item>2ª Etapa</item>
+        <item>3ª Etapa</item>
+    </string-array>
+
+    <string-array name="categorias">
+        <item>1ª Categoria Livre</item>
+        <item>1ª Categoria Feminina</item>
+        <item>1ª Categoria Masculina</item>
+        <item>2ª Categoria Livre</item>
+        <item>2ª Categoria Feminina</item>
+        <item>2ª Categoria Masculina</item>
+        <item>3ª Categoria Livre</item>
+        <item>3ª Categoria Feminina</item>
+        <item>3ª Categoria Masculina</item>
+        <item>4ª Categoria Livre</item>
+        <item>4ª Categoria Feminina</item>
+        <item>4ª Categoria Masculina</item>
+        <item>5ª Categoria Livre</item>
+        <item>5ª Categoria Feminina</item>
+        <item>5ª Categoria Masculina</item>
+    </string-array>
+    <string name="title_activity_lista_inscritos_acitivity">ListaInscritosAcitivity</string>
+</resources>
