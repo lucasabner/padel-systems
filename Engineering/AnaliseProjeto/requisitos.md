@@ -1,17 +1,17 @@
 # **Especificação dos Requisitos** #
 
 ### **Histórico de Versões**  ###
-| Data       | Versão | Descrição                                                                                                                                       |     Autor     |
-|:----------:|:------:|------------------------------------------------------------------------------------------------------------------------------------------------|:-------------:|]
-| 13/08/2019 | 0.1    | Criação e modelação do documento. | Arthur Becker |
-| 19/08/2019 | 0.2    | Preenchimento do documento. | Arthur Becker |
+|   Data   |  Versão  |    Descrição    |    Autor    |
+|     :---:      |     :---:      |     :---:      |     :---:      |
+| 13/08/2019   | 0.1    | Criação e modelação do documento. | Arthur Becker |
+| 19/08/2019   | 0.2    | Preenchimento do documento. | Arthur Becker |
 
-#**1 Introdução**
-##**1.1 Escopo**
+### **1 Introdução** ###
+#### **1.1 Escopo** ####
 O objetivo deste documento é fornecer informações específicas dos requisitos necessários para o desenvolvimento do  sistema para gerenciar torneios de Padel. Ao especificar os requisitos, esperamos reduzir a probabilidade de incoerência entre os interessados.
 
-#**2 Requisitos**
-##**2.1 Requisitos Pedro (Organizador de Torneios - Rio Grande)**
+### **2 Requisitos** ###
+#### **2.1 Requisitos Pedro (Organizador de Torneios - Rio Grande)** ####
 
 **P1: Quais os documentos necessários para realizar uma inscrição em um torneio de Padel?**
 
@@ -33,7 +33,7 @@ O objetivo deste documento é fornecer informações específicas dos requisitos
 
 >**R5:** A distribuição de quadras eu faço conforme meu interesse, seguindo a lógica das melhores categorias nas principais quadras.
 
-##**2.2 Requisitos Patrick (Padel House Alegrete - Alegrete)**
+#### **2.2 Requisitos Patrick (Padel House Alegrete - Alegrete)** ####
 
 **P1: Quais são as categorias do Padel?**
 
@@ -83,7 +83,7 @@ O objetivo deste documento é fornecer informações específicas dos requisitos
 
 >**R5:** Um integrante da dupla se cadastra em um torneio em uma modalidade que será verificada pelos coordenadores do torneio.
 
-##**2.3 Requisitos Arian Fagundes Rodrigues (Conhecido - Rosario do Sul)**
+#### **2.3 Requisitos Arian Fagundes Rodrigues (Conhecido - Rosario do Sul)** ####
 
 **P1: Como faz para se inscrever em um campeonato?**
 
@@ -115,11 +115,11 @@ O objetivo deste documento é fornecer informações específicas dos requisitos
 
 >**R5:** Geralmente, são três ou quatro duplas por chave. Cada chave se classificam duas duplas. A eliminação ocorre no formato “mata-mata”. As chaves são definidas por sorteio.
 
-##**2.4 Requisitos Órgãos Regulamentadores**
-###**2.4.1 International Padel Federation (IPF)**
+#### **2.4 Requisitos Órgãos Regulamentadores** ####
+##### **2.4.1 International Padel Federation (IPF)** #####
 Os idiomas oficiais da Federação são inglês e espanhol.
 
-####**2.4.1.1 Associação de organizações ao IPF**
+###### **2.4.1.1 Associação de organizações ao IPF** ######
 É essencial que cada Associação seja uma Associação sem fins lucrativos.
 
 A constituição e as regras de um membro não podem estar em conflito com o da IPF. Em caso de conflito deve prevalecer as regras do IPF.
@@ -136,7 +136,7 @@ Os membros da Federação serão os seguintes:
 
 * _Membros Classe C:_ São associações de padel ou organizações correspondentes de países ou territórios que, na opinião do conselho, não estão suficientemente maduras em questões de papel para garantir a afiliação Classe B, mas estão suficientemente desenvolvidas para garantir a afiliação Classe C.
 
-####**2.4.1.2 Competições**
+###### **2.4.1.2 Competições** ######
 
 O título “Campeonatos Mundiais” em conexão com Padel, não deve ser instituído ou revivido em qualquer momento sem o consentimento unânime de uma Assembléia Geral do Conselho.
 
@@ -144,6 +144,6 @@ Os Campeonatos Mundiais de Equipes, Absolutos, Júnior e Sênior, e World Open C
 
 Os jogadores que residem em países onde não há entidades com qualquer tipo de relação com a IPF, necessitarão de autorização prévia do Conselho de Administração para participar de uma competição do IPF.
 
-####**2.4.1.3 Arbitragem**
+###### **2.4.1.3 Arbitragem** ######
 
 Qualquer Arbitragem será regida pela Lei Suíça.
