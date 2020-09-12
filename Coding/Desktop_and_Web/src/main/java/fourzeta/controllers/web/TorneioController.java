@@ -6,13 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import fourzeta.models.Chave;
 import fourzeta.models.Circuito;
 import fourzeta.models.Dupla;
-import fourzeta.models.Ranking;
 import fourzeta.models.Torneio;
-import fourzeta.models.Usuario;
 import fourzeta.repository.ChaveRepository;
 import fourzeta.repository.CircuitoRepository;
 import fourzeta.repository.DuplaRepository;

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import fourzeta.desktop_views.GradeJogos;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;

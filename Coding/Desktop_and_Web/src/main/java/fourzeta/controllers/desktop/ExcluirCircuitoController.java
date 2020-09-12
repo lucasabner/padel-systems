@@ -7,12 +7,10 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
-
 import fourzeta.desktop_views.ExcluirCircuito;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
 import fourzeta.resources.CircuitoResource;
-
 
 public class ExcluirCircuitoController implements ActionListener {
 

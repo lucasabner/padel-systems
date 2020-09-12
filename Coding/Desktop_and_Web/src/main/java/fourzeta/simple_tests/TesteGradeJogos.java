@@ -1,13 +1,10 @@
 package fourzeta.simple_tests;
 
 import java.text.ParseException;
-
 import fourzeta.desktop_views.GradeJogos;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.resources.TorneioResource;
-
-
 
 public class TesteGradeJogos {
 

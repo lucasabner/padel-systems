@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,14 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-
 import fourzeta.controllers.desktop.PesquisarJogosController;
 import fourzeta.models.Jogo;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.table.GradeJogosTableModel;
-
-
 
 public class GradeJogos extends JFrame {
 

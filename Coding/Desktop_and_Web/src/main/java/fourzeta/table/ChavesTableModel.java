@@ -5,9 +5,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import fourzeta.models.Chave;
 import fourzeta.resources.ChaveResource;
 

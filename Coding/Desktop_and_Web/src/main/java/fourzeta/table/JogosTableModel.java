@@ -2,12 +2,9 @@ package fourzeta.table;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import fourzeta.models.Jogo;
 import fourzeta.resources.JogoResource;
-
 
 public class JogosTableModel extends AbstractTableModel {
 

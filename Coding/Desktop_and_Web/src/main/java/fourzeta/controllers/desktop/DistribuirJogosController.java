@@ -3,14 +3,12 @@ package fourzeta.controllers.desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import fourzeta.desktop_views.DistribuirJogos;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.resources.JogoResource;
-
 
 public class DistribuirJogosController implements ActionListener {
 

@@ -2,15 +2,12 @@ package fourzeta.table;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import fourzeta.IElement;
 import fourzeta.models.Chave;
 import fourzeta.models.Jogo;
 import fourzeta.models.Torneio;
 import fourzeta.resources.JogoResource;
-
 
 public class GradeJogosTableModel extends AbstractTableModel {
 

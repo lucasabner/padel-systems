@@ -5,12 +5,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
-
 import fourzeta.desktop_views.Inicial;
 import fourzeta.desktop_views.SelecionarTorneio;
 import fourzeta.models.Usuario;
-
-
 
 public class InicialGerenciarController implements ActionListener {
 	private Inicial tela;

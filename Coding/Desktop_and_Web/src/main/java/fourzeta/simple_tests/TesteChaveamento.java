@@ -2,7 +2,6 @@ package fourzeta.simple_tests;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import fourzeta.models.Atleta;
 import fourzeta.models.Chave;
 import fourzeta.models.Circuito;

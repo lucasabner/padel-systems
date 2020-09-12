@@ -9,14 +9,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 import fourzeta.controllers.desktop.InicialGerenciarController;
 import fourzeta.controllers.desktop.MostrarCreditosController;
 import fourzeta.controllers.desktop.MostrarRankingController;

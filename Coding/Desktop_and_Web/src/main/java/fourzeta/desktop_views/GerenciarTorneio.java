@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,14 +17,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-
 import fourzeta.controllers.desktop.EncerrarController;
 import fourzeta.controllers.desktop.GradeJogosController;
 import fourzeta.controllers.desktop.InicialInscricaoController;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.resources.TorneioResource;
-
 
 public class GerenciarTorneio extends JFrame {
 
