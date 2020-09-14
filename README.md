@@ -17,7 +17,7 @@
 > + Java Swing ou JavaFx;
 > + Java Server Faces (JSF);
 > + RMI para web service.
-c + Java Android
+> + Java Android
 
 -----------------------
 
