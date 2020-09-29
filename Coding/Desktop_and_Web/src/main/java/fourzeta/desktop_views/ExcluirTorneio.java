@@ -7,14 +7,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-
 import fourzeta.controllers.desktop.ExcluirTorneioController;
 import fourzeta.models.Usuario;
 import fourzeta.models.Torneio;

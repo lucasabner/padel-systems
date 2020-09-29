@@ -3,14 +3,12 @@ package fourzeta.desktop_views;
 import java.awt.Dimension;
 import java.text.ParseException;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import fourzeta.IElement;
 import fourzeta.models.Chave;
 import fourzeta.models.Circuito;

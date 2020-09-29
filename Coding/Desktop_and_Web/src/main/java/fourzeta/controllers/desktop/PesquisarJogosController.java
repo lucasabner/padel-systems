@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import fourzeta.desktop_views.GradeJogos;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;
@@ -38,20 +37,20 @@ public class PesquisarJogosController implements ActionListener {
 
 		if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("LARANJA")) {
 			for (Jogo j : jogos) {
-				if (j.getQuadra().getNum() == 1) {
+				if (j.getQuadra().getNumero() == 1) {
 					selecionados.add(j);
 				}
 
 			}
 		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("AZUL")) {
 			for (Jogo j : jogos) {
-				if (j.getQuadra().getNum() == 2) {
+				if (j.getQuadra().getNumero() == 2) {
 					selecionados.add(j);
 				}
 			}
 		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("VERDE")) {
 			for (Jogo j : jogos) {
-				if (j.getQuadra().getNum() == 3) {
+				if (j.getQuadra().getNumero() == 3) {
 					selecionados.add(j);
 				}
 			}

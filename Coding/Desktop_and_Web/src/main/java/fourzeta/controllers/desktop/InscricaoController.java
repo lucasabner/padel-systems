@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import fourzeta.IElement;
 import fourzeta.desktop_views.InscricaoDuplas;
 import fourzeta.models.Atleta;
@@ -77,6 +76,8 @@ public class InscricaoController implements ActionListener {
 		boolean encontrado1 = false, encontrado2 = false;
 
 		ar = new AtletaResource();
+		ar.registraAtleta(dupla.getAtleta1());
+		ar.registraAtleta(dupla.getAtleta2());
 		for (Atleta a : ar.listaAtletas()) {
 			if (a.getCpf().equalsIgnoreCase(dupla.getAtleta1().getCpf()) == true) {
 				dupla.getAtleta1().getRankings().add(this.getRankingAtleta(a));

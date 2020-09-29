@@ -9,7 +9,6 @@ import fourzeta.resources.CircuitoResource;
 import fourzeta.resources.DuplaResource;
 import fourzeta.resources.TorneioResource;
 
-
 public class TesteSistema2 {
 public static void main(String[] args) {
 	CircuitoResource cr = new CircuitoResource();

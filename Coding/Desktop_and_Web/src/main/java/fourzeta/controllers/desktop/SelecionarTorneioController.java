@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
-
 import fourzeta.desktop_views.GerenciarTorneio;
 import fourzeta.desktop_views.SelecionarTorneio;
 import fourzeta.models.Usuario;

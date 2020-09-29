@@ -7,9 +7,6 @@ import java.rmi.NotBoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Valid;
-
 import fourzeta.desktop_views.CadastrarTorneio;
 import fourzeta.desktop_views.SelecionarTorneio;
 import fourzeta.models.Circuito;
@@ -17,7 +14,6 @@ import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.resources.CircuitoResource;
 import fourzeta.resources.TorneioResource;
-
 
 public class CadastrarTorneioController implements ActionListener {
 

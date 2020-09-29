@@ -1,7 +1,6 @@
 package fourzeta.repository;
 
 import org.springframework.data.repository.CrudRepository;
-
 import fourzeta.models.Circuito;
 import fourzeta.models.Ranking;
 

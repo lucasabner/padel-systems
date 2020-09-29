@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
-
 import fourzeta.desktop_views.Inicial;
 import fourzeta.desktop_views.RankingView;
 import fourzeta.models.Usuario;

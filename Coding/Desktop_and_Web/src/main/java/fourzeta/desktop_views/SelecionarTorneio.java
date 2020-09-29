@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,12 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-
 import fourzeta.controllers.desktop.SelecionarTorneioController;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
 import fourzeta.resources.CircuitoResource;
-
 
 public class SelecionarTorneio extends JFrame {
 
