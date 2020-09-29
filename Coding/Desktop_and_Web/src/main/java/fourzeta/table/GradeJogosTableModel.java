@@ -63,8 +63,6 @@ public class GradeJogosTableModel extends AbstractTableModel {
 			return dados.get(linha).getPlacar();
 		case 4:
 			return dados.get(linha).getDuplas();
-		case 5:
-			return dados.get(linha).getEtapa();
 		}
 		return null;
 	}
