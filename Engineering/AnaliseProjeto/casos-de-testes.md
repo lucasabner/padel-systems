@@ -5,6 +5,7 @@
 |     :---:      |     :---:      |     :---:      |     :---:      |
 | 13/08/2019   | 0.1    | Criação e modelação do documento. | Arthur Becker |
 | 19/08/2019   | 0.2    | Preenchimento do documento. | Arthur Becker |
+| 29/09/2020   | 0.3    | Definição dos casos de teste. | Arthur Becker |
 
 ### **1 Introdução** ###
 #### 1.1 Escopo ####
@@ -35,19 +36,101 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 
 ### **3 Casos de Teste** ###
   
------------------------
-
-|   **Identificador:**   |  TC 01 EXEMPLO  |
+|   **Identificador:**   |  TC-01 Inscrição Nova Dupla  |
 |     :---:      |     :---:      |
 | **Prioridade:**   | Alta    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
-| **Rastreabilidade:**   | Esse caso de teste é referente ao (CR01)    |
 
+|   **Identificador:**   |  TC-02 Inscrição Dupla Jogador Existente  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Alta    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
------------------------
+  |   **Identificador:**   |  TC-03 Validação do CPF na Inscrição  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Alta    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-04 Inscrição Jogador C/ Dados Inválidos  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-05 Calcular Pontos da Dupla  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-06 Geração de lista de incritos  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-07 Geração de Chaves  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-08 Geração de Chaves C/ Suplentes  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-09 Cadastro de Torneio  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-10 Cadastro de Circuito  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-11 Cadastro de Jogos  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+|   **Identificador:**   |  TC-12 Ranking  |
+|     :---:      |     :---:      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | DESCRIÇÃO.    |
+| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 
 ### **4 Métricas dos Testes** ###
@@ -65,4 +148,4 @@ A seguir, se encontra uma tabela com o identificador do defeito, sua descrição
 
 | Identificador     | Descrição do Erro                                                                     | Grau de Severidade |
 |-------------------|---------------------------------------------------------------------------------------|--------------------|
-| E01 EXEMPLO        | O método EXEMPLO da classe EXEMPLO falhou no incremento da variável EXEMPLO.      |critico |
+| E01 EXEMPLO       | O método EXEMPLO da classe EXEMPLO falhou no incremento da variável EXEMPLO.      |critico |
