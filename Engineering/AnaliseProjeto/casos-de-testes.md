@@ -37,23 +37,23 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 ### **3 Casos de Teste** ###
   
 |   **Identificador:**   |  TC-01 Inscrição Nova Dupla  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Alta    |
 | **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio, um circuito.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Pós-condições:**   | Deve-se salvar a inscrição e atualizar o status da dupla na competição    |
 
 |   **Identificador:**   |  TC-02 Inscrição Dupla Jogador Existente  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Alta    |
 | **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Pré-condições:**  | Para a execução deste teste, deve-se ter cadastrado pelo menos um torneio, um circuito, bem como um dos jogadores deve já ter sido cadastrado anteriormente.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
-  |   **Identificador:**   |  TC-03 Validação do CPF na Inscrição  |
-|     :---:      |     :---:      |
+|   **Identificador:**   |  TC-03 Validação do CPF na Inscrição  |
+|     ---      |     ---      |
 | **Prioridade:**   | Alta    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -61,7 +61,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-04 Inscrição Jogador C/ Dados Inválidos  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -69,15 +69,15 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-05 Calcular Pontos da Dupla  |
-|     :---:      |     :---:      |
-| **Prioridade:**   | Média    |
+|     ---      |     ---      |
+| **Prioridade:**   | Baixa    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-06 Geração de lista de incritos  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -85,7 +85,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-07 Geração de Chaves  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -93,7 +93,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-08 Geração de Chaves C/ Suplentes  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -101,7 +101,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-09 Cadastro de Torneio  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -109,7 +109,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-10 Cadastro de Circuito  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -117,7 +117,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-11 Cadastro de Jogos  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
@@ -125,7 +125,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
 |   **Identificador:**   |  TC-12 Ranking  |
-|     :---:      |     :---:      |
+|     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
 | **Pré-condições:**  | PRÉ-CONDICAO.    |
