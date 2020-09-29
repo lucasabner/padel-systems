@@ -39,18 +39,18 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 |   **Identificador:**   |  TC-01 Inscrição Nova Dupla  |
 |     ---      |     ---      |
 | **Prioridade:**   | Alta    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio, um circuito.    |
+| **Descrição:**  | O presente caso de teste tem como finalidade testar e validar a funcionalidade de inscrever duplas.    |
+| **Pré-condições:**  | Deve-se ter cadastrado no sistema pelo menos um torneio, um circuito.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | Deve-se salvar a inscrição e atualizar o status da dupla na competição    |
+| **Pós-condições:**   | Deve-se salvar a inscrição e atualizar o status da dupla na competição, bem como fazer a soma de pontos.   |
 
 |   **Identificador:**   |  TC-02 Inscrição Dupla Jogador Existente  |
 |     ---      |     ---      |
 | **Prioridade:**   | Alta    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | Para a execução deste teste, deve-se ter cadastrado pelo menos um torneio, um circuito, bem como um dos jogadores deve já ter sido cadastrado anteriormente.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Descrição:**  | Com o objetivo de não se ter cadastros duplicados, deve-se sempre verificar os cpf dos jogadores da dupla a ser inscrita, verificação essa com o intuito de verificar se o jogador já está cadastrado no sistema.    |
+| **Pré-condições:**  | Para a execução deste teste, deve-se ter cadastrado pelo menos um torneio, um circuito, bem como um dos jogadores deve já ter sido cadastrado anteriormente. Vale ressaltar que as inscrições no torneio e circuito devem estar abertas.    |
+| **Comportamento esperado:**   | Ao verificar a existencia de cadastro de um dos jogadores, deve-se ao invés de realizar um novo cadastro faz uso do cadastro antigo.    |
+| **Pós-condições:**   | Deve-se salvar a inscrição e atualizar o status da dupla na competição, bem como fazer a soma de pontos.    |
 
 |   **Identificador:**   |  TC-03 Validação do CPF na Inscrição  |
 |     ---      |     ---      |
@@ -63,16 +63,16 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 |   **Identificador:**   |  TC-04 Inscrição Jogador C/ Dados Inválidos  |
 |     ---      |     ---      |
 | **Prioridade:**   | Média    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Descrição:**  | Deve-se verificar certas informações de cadastros como: Data de nascimento, não selecionar categoria, torneio ou circuito. Caso estas não sejam válidas é preciso informar o usuárioio sobre os campos inválidos    |
+| **Pré-condições:**  | Deve-se ter cadastrado no sistema pelo menos um torneio e um circuito,  estando esses com inscrições abertas.    |
+| **Comportamento esperado:**   | O sistema não pode realizar a inscrição ou salvar os jogadores com informações inválidas.    |
+| **Pós-condições:**   | Informar o usuário dos campos com informção inválida    |
 
 |   **Identificador:**   |  TC-05 Calcular Pontos da Dupla  |
 |     ---      |     ---      |
 | **Prioridade:**   | Baixa    |
 | **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
+| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições abertas.    |
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
