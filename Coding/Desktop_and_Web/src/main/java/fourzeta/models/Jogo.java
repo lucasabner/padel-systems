@@ -39,6 +39,7 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 
 	private String placar;
 
+
 	public Jogo() {
 	}
 
