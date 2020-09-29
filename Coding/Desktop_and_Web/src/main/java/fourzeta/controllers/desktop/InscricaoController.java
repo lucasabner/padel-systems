@@ -38,6 +38,10 @@ public class InscricaoController implements ActionListener {
 		this.torneio = torneio;
 	}
 
+	public InscricaoController() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -75,15 +79,15 @@ public class InscricaoController implements ActionListener {
 
 		boolean encontrado1 = false, encontrado2 = false;
 
-		ar = new AtletaResource();
-		ar.registraAtleta(dupla.getAtleta1());
-		ar.registraAtleta(dupla.getAtleta2());
+	
 		for (Atleta a : ar.listaAtletas()) {
-			if (a.getCpf().equalsIgnoreCase(dupla.getAtleta1().getCpf()) == true) {
+			if (a.getId() == dupla.getAtleta1().getId()) {
 				dupla.getAtleta1().getRankings().add(this.getRankingAtleta(a));
+				dupla.setAtleta1(a);
 				encontrado1 = true;
 
-			} else if (a.getCpf().equalsIgnoreCase(dupla.getAtleta2().getCpf()) == true) {
+			} else if (a.getId() == dupla.getAtleta2().getId()) {
+				dupla.setAtleta2(a);
 				dupla.getAtleta2().getRankings().add(this.getRankingAtleta(a));
 				encontrado2 = true;
 			}
@@ -116,6 +120,14 @@ public class InscricaoController implements ActionListener {
 		return true;
 	}
 
+	public Torneio getTorneio() {
+		return torneio;
+	}
+
+	public void setTorneio(Torneio torneio) {
+		this.torneio = torneio;
+	}
+
 	public Ranking getRankingAtleta(Atleta a) throws RemoteException, MalformedURLException, NotBoundException {
 		List<Ranking> pontuacoes = new ArrayList<Ranking>();
 		rr = new RankingResource();
@@ -123,10 +135,10 @@ public class InscricaoController implements ActionListener {
 																				// dupla
 		for (IElement element : pontuacoes) {
 			Ranking rank = (Ranking) element;
-			if (rank.getAtleta().getCpf().equalsIgnoreCase(dupla.getAtleta1().getCpf()) == true) {
+			if (rank.getAtleta().getId() == dupla.getAtleta1().getId()) {
 				return rank;
 			}
-			if (rank.getAtleta().getCpf().equalsIgnoreCase(dupla.getAtleta2().getCpf()) == true) {
+			if (rank.getAtleta().getId() == dupla.getAtleta2().getId()) {
 				return rank;
 			}
 		}
@@ -141,7 +153,7 @@ public class InscricaoController implements ActionListener {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 		atleta1.setNome(tela.getTxtNome1().getText());
-		atleta1.setCpf(tela.getTxtCpf1().getText());
+		atleta1.setId(Long.parseLong(tela.getTxtCpf1().getText()));
 		atleta1.setTel(tela.getTxtTelefone1().getText());
 		atleta1.setEmail(tela.getTxtEmail1().getText());
 		if (tela.getCbxMasc1().isSelected()) {
@@ -155,7 +167,7 @@ public class InscricaoController implements ActionListener {
 		atleta1.setDataNascimento(tela.getTxtDataNascimento1().getText());
 
 		atleta2.setNome(tela.getTxtNome2().getText());
-		atleta2.setCpf(tela.getTxtCpf2().getText());
+		atleta2.setId(Long.parseLong(tela.getTxtCpf2().getText()));
 		atleta2.setTel(tela.getTxtTelefone2().getText());
 		atleta2.setEmail(tela.getTxtEmail2().getText());
 		if (tela.getCbxMasc2().isSelected()) {
@@ -172,6 +184,9 @@ public class InscricaoController implements ActionListener {
 		dupla.setAtleta1(atleta1);
 		dupla.setAtleta2(atleta2);
 		this.verificarCpf(dupla);
+		ar = new AtletaResource();
+		ar.registraAtleta(dupla.getAtleta1());
+		ar.registraAtleta(dupla.getAtleta2());
 		dr = new DuplaResource();
 		dr.registraDupla(dupla);
 

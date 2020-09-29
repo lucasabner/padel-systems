@@ -2,7 +2,6 @@ package fourZetaTests;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,14 +53,14 @@ public class InscricaoTest {
 		tR.registraTorneio(t);
 		
 		a1 = new Atleta();
-		a1.setCpf("12345");
+		a1.setId(12345);
 		a1.setSexo("MASCULINO");
-		a1.setNome("Atleta para teste1");
+		a1.setNome("Atleta para teste1.1");
 
 		a2 = new Atleta();
-		a2.setCpf("123456");
+		a2.setId(123456);
 		a2.setSexo("MASCULINO");
-		a2.setNome("Atleta para teste1");
+		a2.setNome("Atleta para teste2.1");
 
 		aR = new AtletaResource();
 		aR.registraAtleta(a1);
@@ -73,6 +72,8 @@ public class InscricaoTest {
 		dupla.setCategoria("INICIANTE");
 		dupla.setTorneio(t);
 		dR = new DuplaResource();
+		
+	
 
 	}
 
@@ -80,34 +81,25 @@ public class InscricaoTest {
 	public void testInscricaoDupla() throws Exception {
 
 		/* ========== Execucao ========== */
+		for (Atleta a : aR.listaAtletas()) {
+			if (a.getId() == dupla.getAtleta1().getId()) {
+				dupla.setAtleta1(a);
+
+			} else if (a.getId() == dupla.getAtleta2().getId()) {
+				dupla.setAtleta2(a);
+			}
+		}
 
 		/* ========== Verificacoes ========== */
-		assertEquals(dupla, dR.registraDupla(dupla));
-//		assertEquals(dupla, dR.deletaDupla(dupla));
-//		assertEquals(a2, dR.registraDupla(dupla).getAtleta2());
-//		dR.deletaDupla(dupla);
-//		aR.deletaAtleta(a1);
-//		aR.deletaAtleta(a2);
+		Dupla d = dR.registraDupla(dupla);
+		
+		assertEquals(d, dR.deletaDupla(dupla));
+		assertEquals(d, dR.deletaDupla(dupla));
+		assertEquals(dupla.getAtleta1(), d.getAtleta1());
+		assertEquals(dupla.getAtleta2(), d.getAtleta2());
 	}
 	
 
-	@Test
-	public void testDelecaoDupla() throws Exception {
-
-		/* ========== Execucao ========== */
-
-		/* ========== Verificacoes ========== */
-		assertEquals(dupla, dR.deletaDupla(dupla));
-	}
-	
-	// Se quiser fazer algo depois dos testes, a ideia era deletar todos os registros de teste
-	// mas o delete n ta funfando, logo, esta criando novos registros a cada teste
-	 @After
-		public void limparBanco() throws Exception {
-		 uR.deletaUsuario(u);
-		 cR.deletaCircuito(c);
-		 tR.deletaTorneio(t);
-	 }
 }
 	
 	

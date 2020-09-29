@@ -19,14 +19,12 @@ import fourzeta.IElement;
 public class Atleta implements Serializable, IElement{
 
 	
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
-	private String nome;
 	@Id
 	@Column()
-	private String cpf;
+	private long cpf;
+
+	private String nome;
+	
 	@Column(name = "Telefone")
 	private String tel;
 	private String email;
@@ -70,13 +68,6 @@ public class Atleta implements Serializable, IElement{
 		this.tel = tel;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 
 	public String getSexo() {
 		return sexo;
@@ -87,11 +78,11 @@ public class Atleta implements Serializable, IElement{
 	}
 
 	public int getId() {
-		return id;
+		return (int) cpf;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long id) {
+		this.cpf = id;
 	}
 
 	public String getNome() {
