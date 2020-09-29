@@ -75,15 +75,12 @@ public class DuplaController {
 
 		dupla.getAtleta1().getRankings().add(ranking1);
 		dupla.getAtleta2().getRankings().add(ranking2);
-//		Atleta a1 = dupla.getAtleta1();
-//		a1.getRankings().add(new Ranking()));
+
 
 		ar.save(dupla.getAtleta1());
 		ar.save(dupla.getAtleta2());
 
 		dr.save(dupla);
-
-//		System.out.println(dupla.getAtleta1().getNome());
 
 		rr.save(ranking1);
 		rr.save(ranking2);
@@ -106,9 +103,6 @@ public class DuplaController {
 		ModelAndView mv = new ModelAndView("torneio/inscricaoDupla");
 		mv.addObject("circuito", circuito);
 		mv.addObject("torneio", torneio);
-
-//		Dupla dupla = new Dupla();
-//		mv.addObject("dupla", dupla);
 
 		return mv;
 	}
@@ -133,9 +127,6 @@ public class DuplaController {
 
 		dupla.getAtleta1().getRankings().add(ranking1);
 		dupla.getAtleta2().getRankings().add(ranking2);
-//		Atleta a1 = dupla.getAtleta1();
-//		a1.getRankings().add(new Ranking()));
-		// qtdAtletas
 
 		ar.save(dupla.getAtleta1());
 		ar.save(dupla.getAtleta2());

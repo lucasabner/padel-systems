@@ -29,15 +29,14 @@ public class InscricaoDuplas extends JFrame {
 	private final Dimension SIZE = new Dimension(800, 700);
 	private Dupla dupla;
 	private InscricaoController controllerCadastrar;
-	//private InscricaoPdfController controllerPdf;
 	private JTextField txtNome1;
-	private JTextField txtCpf1;
-	private JTextField txtTelefone1;
-	private JTextField txtEmail1;
 	private JTextField txtNome2;
-	private JTextField txtTelefone2;
-	private JTextField txtEmail2;
+	private JTextField txtCpf1;
 	private JTextField txtCpf2;
+	private JTextField txtTelefone1;
+	private JTextField txtTelefone2;
+	private JTextField txtEmail1;
+		private JTextField txtEmail2;
 	private JTextField txtDataNascimento1;
 	private JTextField txtDataNascimento2;
 	private ButtonGroup atletaSexo1;
@@ -57,7 +56,6 @@ public class InscricaoDuplas extends JFrame {
 	public InscricaoDuplas(Usuario usuario, Torneio torneio) throws ParseException {
 		dupla = new Dupla();
 		setTitle("Sistema de Gerenciamento de Padel");
-//		this.setVisible(true);
 		this.setSize(SIZE);
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
@@ -262,8 +260,6 @@ public class InscricaoDuplas extends JFrame {
 		btnPdf = new JButton("Gerar PDF");
 		btnPdf.setBounds(595, 640, 174, 23);
 		getContentPane().add(btnPdf);
-//		controllerPdf = new InscricaoPdfController(torneio, this);
-//		btnPdf.addActionListener(controllerPdf);
 		btnPdf.setFont(new Font("Times New Roman", Font.BOLD, 16));
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -304,7 +300,7 @@ public class InscricaoDuplas extends JFrame {
 		comboImpedimento.addItem("Sexta-Feira pela Noite");
 		comboImpedimento.addItem("Sábado pela Manhã");
 
-		JLabel lblImpedimento = new JLabel("Impedimento");
+		JLabel lblImpedimento = new JLabel("Impedimento de Horário");
 		lblImpedimento.setBounds(205, 538, 130, 23);
 		getContentPane().add(lblImpedimento);
 		lblImpedimento.setFont(new Font("Times New Roman", Font.BOLD, 16));
@@ -547,6 +543,7 @@ public class InscricaoDuplas extends JFrame {
 		frame.setVisible(true);
 		frame.setSize(frame.SIZE);
 		frame.setLocationRelativeTo(null);
+		
 
 	}
 }

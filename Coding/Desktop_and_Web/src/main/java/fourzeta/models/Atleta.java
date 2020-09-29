@@ -18,12 +18,13 @@ import fourzeta.IElement;
 @JsonIgnoreProperties("duplas")
 public class Atleta implements Serializable, IElement{
 
-	@Id
+	
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String nome;
+	@Id
 	@Column()
 	private String cpf;
 	@Column(name = "Telefone")
@@ -35,9 +36,6 @@ public class Atleta implements Serializable, IElement{
 //	@Enumerated(EnumType.ORDINAL)
 	private String sexo;
 
-	// Dessa maneira criou o Atleta Dupla
-//	@ManyToOne()
-//	private List<Dupla> duplas;
 
 	// Dessa maneira o Ranking que vai ter o ID do atleta
 	@OneToMany(mappedBy = "atleta")
