@@ -79,7 +79,7 @@ public class InscricaoController implements ActionListener {
 
 		boolean encontrado1 = false, encontrado2 = false;
 
-	
+		ar = new AtletaResource();
 		for (Atleta a : ar.listaAtletas()) {
 			if (a.getId() == dupla.getAtleta1().getId()) {
 				dupla.getAtleta1().getRankings().add(this.getRankingAtleta(a));
@@ -153,7 +153,9 @@ public class InscricaoController implements ActionListener {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
 		atleta1.setNome(tela.getTxtNome1().getText());
-		atleta1.setId(Long.parseLong(tela.getTxtCpf1().getText()));
+		String cpfTxt = tela.getTxtCpf1().getText().replaceAll(".", "");
+		cpfTxt = tela.getTxtCpf1().getText().replace("-", "");
+		atleta1.setId(Long.parseLong(cpfTxt));
 		atleta1.setTel(tela.getTxtTelefone1().getText());
 		atleta1.setEmail(tela.getTxtEmail1().getText());
 		if (tela.getCbxMasc1().isSelected()) {
@@ -183,6 +185,7 @@ public class InscricaoController implements ActionListener {
 		atleta2.setDataNascimento(tela.getTxtDataNascimento2().getText());
 		dupla.setAtleta1(atleta1);
 		dupla.setAtleta2(atleta2);
+		dupla.setTorneio(torneio);
 		this.verificarCpf(dupla);
 		ar = new AtletaResource();
 		ar.registraAtleta(dupla.getAtleta1());

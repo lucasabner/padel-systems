@@ -38,6 +38,18 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	private String horario;
 
 	private String placar;
+	
+	private String etapa;
+
+
+	public String getEtapa() {
+		return etapa;
+	}
+
+
+	public void setEtapa(String etapa) {
+		this.etapa = etapa.toUpperCase();
+	}
 
 
 	public Jogo() {

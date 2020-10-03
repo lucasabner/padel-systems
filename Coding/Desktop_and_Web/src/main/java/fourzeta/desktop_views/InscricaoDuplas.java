@@ -59,7 +59,7 @@ public class InscricaoDuplas extends JFrame {
 		this.setSize(SIZE);
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
-		MaskFormatter formatoCpf = new MaskFormatter("###.###.###-##");
+//		MaskFormatter formatoCpf = new MaskFormatter("###.###.###-##");
 		MaskFormatter formatoDataNasc = new MaskFormatter("##/##/####");
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -97,7 +97,7 @@ public class InscricaoDuplas extends JFrame {
 		cpf.setBounds(10, 67, 130, 14);
 		jpanelPrincipal.add(cpf);
 
-		txtCpf1 = new JFormattedTextField(formatoCpf);
+		txtCpf1 = new JFormattedTextField();
 		txtCpf1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		txtCpf1.setColumns(10);
 		txtCpf1.setBounds(10, 92, 99, 23);
@@ -182,7 +182,7 @@ public class InscricaoDuplas extends JFrame {
 		label_1.setBounds(10, 67, 130, 14);
 		panel.add(label_1);
 
-		txtCpf2 = new JFormattedTextField(formatoCpf);
+		txtCpf2 = new JFormattedTextField();
 		txtCpf2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		txtCpf2.setColumns(10);
 		txtCpf2.setBounds(10, 92, 99, 23);

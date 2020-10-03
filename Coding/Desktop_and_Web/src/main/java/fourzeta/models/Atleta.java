@@ -74,7 +74,7 @@ public class Atleta implements Serializable, IElement{
 	}
 
 	public void setSexo(String sexo) {
-		this.sexo = sexo;
+		this.sexo = sexo.toUpperCase();
 	}
 
 	public int getId() {

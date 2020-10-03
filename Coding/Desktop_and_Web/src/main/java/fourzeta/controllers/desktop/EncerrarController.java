@@ -165,7 +165,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("* X *");
 				
 				registraJogoChave(jogo, chave);
@@ -176,7 +176,7 @@ public class EncerrarController implements ActionListener {
 				jogo = new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("* X *");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -185,7 +185,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("* X *");
 				
 				registraJogoChave(jogo, chave);
@@ -199,7 +199,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -208,7 +208,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -217,7 +217,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("* X *");
 				
 				registraJogoChave(jogo, chave);
@@ -228,7 +228,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("* X *");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -237,7 +237,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -252,7 +252,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -261,7 +261,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -270,7 +270,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -279,7 +279,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -288,7 +288,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("Q1 X Q2");
 				
 				registraJogoChave(jogo, chave);
@@ -299,7 +299,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("Q3 X Q4");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -308,7 +308,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -323,7 +323,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave); 
 				
@@ -332,7 +332,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -341,7 +341,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -350,7 +350,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -359,7 +359,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -368,7 +368,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -377,7 +377,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("Q1 X Q2");
 				
 				registraJogoChave(jogo, chave);
@@ -388,7 +388,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("Q3 X Q4");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -397,7 +397,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -412,7 +412,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave); 
 				
@@ -421,7 +421,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -430,7 +430,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -439,7 +439,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -448,7 +448,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -457,7 +457,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -466,7 +466,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -475,7 +475,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("* X *");
 				registraJogoChave(jogo, chave);
 				
@@ -484,7 +484,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("Q1 X Q2");
 				
 				registraJogoChave(jogo, chave);
@@ -495,7 +495,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("Q3 X Q4");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -504,7 +504,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -519,7 +519,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("2F X 2G");
 				registraJogoChave(jogo, chave); 
 				
@@ -528,7 +528,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("2C X 1E");
 				registraJogoChave(jogo, chave);
 				
@@ -537,7 +537,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1D X 2B");
 				registraJogoChave(jogo, chave);
 				
@@ -546,7 +546,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1C X 2A");
 				registraJogoChave(jogo, chave);
 				
@@ -555,7 +555,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1F X 2D");
 				registraJogoChave(jogo, chave);
 				
@@ -564,7 +564,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("2E X 1G");
 				registraJogoChave(jogo, chave);
 				
@@ -573,7 +573,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("1A X O1");
 				registraJogoChave(jogo, chave);
 				
@@ -582,7 +582,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O2 X O3");
 				registraJogoChave(jogo, chave);
 				
@@ -591,7 +591,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O4 X O5");
 				registraJogoChave(jogo, chave);
 				
@@ -600,7 +600,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("1B X O6");
 				registraJogoChave(jogo, chave);
 				
@@ -609,7 +609,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("Q1 X Q2");
 				
 				registraJogoChave(jogo, chave);
@@ -620,7 +620,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("Q3 X Q4");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -629,7 +629,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -644,7 +644,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1A X 2B");
 				registraJogoChave(jogo, chave); 
 				
@@ -653,7 +653,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1H X 2G");
 				registraJogoChave(jogo, chave);
 				
@@ -662,7 +662,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1E X 2F");
 				registraJogoChave(jogo, chave);
 				
@@ -671,7 +671,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1D X 2C");
 				registraJogoChave(jogo, chave);
 				
@@ -680,7 +680,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1C X 2D");
 				registraJogoChave(jogo, chave);
 				
@@ -689,7 +689,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1F X 2E");
 				registraJogoChave(jogo, chave);
 				
@@ -698,7 +698,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1G X 2H");
 				registraJogoChave(jogo, chave);
 				
@@ -707,7 +707,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.OITAVA.ordinal());
+				jogo.setEtapa(Etapa.OITAVA.name());
 				jogo.setPartida("1B X 2A");
 				registraJogoChave(jogo, chave);
 				
@@ -716,7 +716,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O1 X O2");
 				registraJogoChave(jogo, chave);
 				
@@ -725,7 +725,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O3 X O4");
 				registraJogoChave(jogo, chave);
 				
@@ -734,7 +734,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O5 X O6");
 				registraJogoChave(jogo, chave);
 				
@@ -743,7 +743,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.QUARTA.ordinal());
+				jogo.setEtapa(Etapa.QUARTA.name());
 				jogo.setPartida("O7 X O8");
 				registraJogoChave(jogo, chave);
 				
@@ -752,7 +752,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				jogo.setPartida("Q1 X Q2");
 				
 				registraJogoChave(jogo, chave);
@@ -763,7 +763,7 @@ public class EncerrarController implements ActionListener {
 				jogo= new Jogo();
 				jogo.setChave(chave);
 				jogo.setPartida("Q3 X Q4");
-				jogo.setEtapa(Etapa.SEMI.ordinal());
+				jogo.setEtapa(Etapa.SEMI.name());
 				
 				registraJogoChave(jogo, chave);
 
@@ -772,7 +772,7 @@ public class EncerrarController implements ActionListener {
 				chave.setCategoria(cat);
 				jogo = new Jogo();
 				jogo.setChave(chave);
-				jogo.setEtapa(Etapa.FINAL.ordinal());
+				jogo.setEtapa(Etapa.FINAL.name());
 				jogo.setPartida("S1 X S2");
 				
 				registraJogoChave(jogo, chave);
@@ -807,7 +807,7 @@ public class EncerrarController implements ActionListener {
 
 	public Jogo distribuirHorarios(Chave chave, Dupla d1, Dupla d2, Jogo jogo) {
 		List<List<String>> hrs = this.getHorarios();
-		if (jogo.getEtapa() == Etapa.MATA_MATA.ordinal()) {
+		if (jogo.getEtapa() == Etapa.MATA_MATA.name()) {
 			if (!d1.getImpedimento().equals(Impedimento.NENHUM.name())) {
 				switch (d1.getImpedimento().toString()) {
 				case "QUINTA":

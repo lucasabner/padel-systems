@@ -2,6 +2,7 @@ package fourZetaTests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,12 +56,12 @@ public class InscricaoTest {
 		a1 = new Atleta();
 		a1.setId(12345);
 		a1.setSexo("MASCULINO");
-		a1.setNome("Atleta para teste1.1");
+		a1.setNome("Atleta para teste1");
 
 		a2 = new Atleta();
 		a2.setId(123456);
 		a2.setSexo("MASCULINO");
-		a2.setNome("Atleta para teste2.1");
+		a2.setNome("Atleta para teste2");
 
 		aR = new AtletaResource();
 		aR.registraAtleta(a1);
@@ -79,7 +80,6 @@ public class InscricaoTest {
 
 	@Test
 	public void testInscricaoDupla() throws Exception {
-
 		/* ========== Execucao ========== */
 		for (Atleta a : aR.listaAtletas()) {
 			if (a.getId() == dupla.getAtleta1().getId()) {
@@ -89,17 +89,28 @@ public class InscricaoTest {
 				dupla.setAtleta2(a);
 			}
 		}
-
+			
 		/* ========== Verificacoes ========== */
 		Dupla d = dR.registraDupla(dupla);
+		System.out.println(d.getTorneio().getId());
+		t = d.getTorneio();
+		c = d.getTorneio().getCircuito();
+		u = d.getTorneio().getCircuito().getUsuario();
 		
-		assertEquals(d, dR.deletaDupla(dupla));
-		assertEquals(d, dR.deletaDupla(dupla));
 		assertEquals(dupla.getAtleta1(), d.getAtleta1());
 		assertEquals(dupla.getAtleta2(), d.getAtleta2());
 	}
 	
+	@After
+	public void limpa() throws Exception {
 
+		/* ========== Execucao ========== */
+		
+		/* ========== Verificacoes ========== */
+		
+		
+	}
+	
 }
 	
 	
