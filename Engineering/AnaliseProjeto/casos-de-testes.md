@@ -71,10 +71,10 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 |   **Identificador:**   |  TC-05 Calcular Pontos da Dupla  |
 |     ---      |     ---      |
 | **Prioridade:**   | Baixa    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições abertas.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Descrição:**  | A dupla tem como seu saldo de pontos os pontos individuais de cada jogador, assim deve-se averiguar se está sendo calculado corretamente os pontos da dupla.    |
+| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições abertas. Por fim, o cadastro da dupla deve ser finalizado.    |
+| **Comportamento esperado:**   | O sistema deve pegar os pontos de cada jogador e somar, para assim obter a pontuação da dupla.    |
+| **Pós-condições:**   | Atualizar o saldo de pontos da dupla    |
 
 |   **Identificador:**   |  TC-06 Geração de lista de incritos  |
 |     ---      |     ---      |
