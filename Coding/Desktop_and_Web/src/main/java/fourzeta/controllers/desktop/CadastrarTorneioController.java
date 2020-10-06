@@ -39,78 +39,34 @@ public class CadastrarTorneioController implements ActionListener {
 			}
 		}
 
-		if (bindTorneio(tela).getNome().isEmpty() || bindTorneio(tela).getDescricao().isEmpty()
-				|| bindTorneio(tela).getDatIniJogos().isEmpty() || bindTorneio(tela).getDatFimJogos().isEmpty()) {
+		if (torneio.bindTorneio(tela).getNome().isEmpty() || torneio.bindTorneio(tela).getDescricao().isEmpty()
+				|| torneio.bindTorneio(tela).getDatIniJogos().isEmpty() || torneio.bindTorneio(tela).getDatFimJogos().isEmpty()) {
 			tela.notifyCampoIncompleto();
 		} else {
-			TorneioResource tr = new TorneioResource();
-			List<Torneio> torneios = new ArrayList<Torneio>();
-			torneio = bindTorneio(tela);
-			torneios.add(torneio);
-			torneio.setCircuito(circuito);
-			tr.registraTorneio(torneio);
-			circuito.setTorneios(torneios);
-
-			tela.notifyCadastroRealizado();
-			tela.setVisible(false);
-			SelecionarTorneio gerenciar = null;
-			try {
-				gerenciar = new SelecionarTorneio(usuario);
-			} catch (ParseException | IOException | NotBoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			gerenciar.setVisible(true);
+			realizarCadastro();
 
 		}
 
 	}
+	
+	public void realizarCadastro() {
+		TorneioResource tr = new TorneioResource();
+		List<Torneio> torneios = new ArrayList<Torneio>();
+		torneio = torneio.bindTorneio(tela);
+		torneios.add(torneio);
+		torneio.setCircuito(circuito);
+		tr.registraTorneio(torneio);
+		circuito.setTorneios(torneios);
 
-	public Torneio bindTorneio(CadastrarTorneio tela) {
-
-		Torneio torneio = new Torneio();
-		torneio.setNome(tela.getTextNomeTorneio().getText());
-		torneio.setDescricao(tela.getTextDescricaoTorneio().getText());
-		torneio.setDatIniJogos(tela.getTextDataInicio().getText());
-		torneio.setDatFimJogos(tela.getTextDataFim().getText());
-		if (!this.tela.getComboBoxQuadra1().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[0] = converterQuadra(
-					this.tela.getComboBoxQuadra1().getSelectedItem().toString());
+		tela.notifyCadastroRealizado();
+		tela.setVisible(false);
+		SelecionarTorneio gerenciar = null;
+		try {
+			gerenciar = new SelecionarTorneio(usuario);
+		} catch (ParseException | IOException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if (!this.tela.getComboBoxQuadra2().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[1] = converterQuadra(
-					this.tela.getComboBoxQuadra2().getSelectedItem().toString());
-		}
-		if (!this.tela.getComboBoxQuadra3().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[2] = converterQuadra(
-					this.tela.getComboBoxQuadra3().getSelectedItem().toString());
-		}
-		if (!this.tela.getComboBoxQuadra4().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[3] = converterQuadra(
-					this.tela.getComboBoxQuadra4().getSelectedItem().toString());
-		}
-		if (!this.tela.getComboBoxQuadra5().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[4] = converterQuadra(
-					this.tela.getComboBoxQuadra5().getSelectedItem().toString());
-		}
-		if (!this.tela.getComboBoxQuadra6().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[5] = converterQuadra(
-					this.tela.getComboBoxQuadra6().getSelectedItem().toString());
-		}
-
-		return torneio;
-
-	}
-
-	public int converterQuadra(String itemSelecionado) {
-		switch (itemSelecionado) {
-		case "LARANJA":
-			return 1;
-		case "AZUL":
-			return 2;
-		case "VERDE":
-			return 3;
-		}
-		return -1;
+		gerenciar.setVisible(true);
 	}
 }

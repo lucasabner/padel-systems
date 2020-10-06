@@ -24,6 +24,11 @@ public class Quadra implements Serializable, IElement {
 	public Quadra(int numero) {
 		this.numero = numero;
 	}
+	
+	// Sem constructor padrao
+	public Quadra() {
+		
+	}
 
 	public Torneio getTorneio() {
 		return torneio;

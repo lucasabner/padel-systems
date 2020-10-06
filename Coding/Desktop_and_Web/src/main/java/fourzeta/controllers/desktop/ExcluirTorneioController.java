@@ -35,27 +35,14 @@ public class ExcluirTorneioController implements ActionListener {
 					tela.getComboBoxTorneio().removeItem(torneio.getId());
 					tela.notifyExluirTorneio();
 					tela.setVisible(false);
-					;
 					ExcluirTorneio refresh = new ExcluirTorneio(usuario);
 					refresh.setVisible(true);
 				}
 			}
 
-		} catch (RemoteException e) {
+		} catch (ParseException | IOException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 }

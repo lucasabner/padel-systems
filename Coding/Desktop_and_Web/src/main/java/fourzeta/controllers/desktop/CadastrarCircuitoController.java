@@ -27,41 +27,21 @@ public class CadastrarCircuitoController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (bindCircuito(tela).getNome().isEmpty() || bindCircuito(tela).getDescricao().isEmpty()) {
+		if (circuito.bindCircuito(tela).getNome().isEmpty() || circuito.bindCircuito(tela).getDescricao().isEmpty()) {
 			tela.notifyCampoIncompleto();
 		} else {
 			try {
 				cr = new CircuitoResource();
-				cr.registraCircuito(bindCircuito(tela));
-//				cr.deletaCircuito(circuito);
-				// cr.registraCircuito(circuito);
+				cr.registraCircuito(circuito.bindCircuito(tela));
 				tela.notifyCadastroRealizado();
 				tela.setVisible(false);
 				SelecionarTorneio gerenciar = new SelecionarTorneio(usuario);
 				gerenciar.setVisible(true);
-			} catch (MalformedURLException | RemoteException | NotBoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException | ParseException | NotBoundException e) {
 				e.printStackTrace();
 			}
 
 		}
-
-	}
-
-	public Circuito bindCircuito(CadastrarCircuito tela) {
-
-		Circuito circuito = new Circuito();
-		circuito.setNome(tela.getTextNomeCircuito().getText());
-		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
-
-		return circuito;
-
 	}
 
 }

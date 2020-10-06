@@ -75,10 +75,20 @@ public class Circuito implements Serializable, IElement{
 		this.torneios = torneios;
 	}
 	
+	public Circuito bindCircuito(CadastrarCircuito tela) {
+	
 	//faz get no banco de Dados
 	public Circuito getCircuito() {
 		cr = new CircuitoResource();
 		Circuito circuito = new Circuito();
+
+		Circuito circuito = new Circuito();
+		circuito.setNome(tela.getTextNomeCircuito().getText());
+		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
+
+		return circuito;
+
+	}
 
 		for (Circuito c : cr.listaCircuitos()) {
 			for (Torneio t : c.getTorneios()) {
@@ -120,6 +130,7 @@ public class Circuito implements Serializable, IElement{
 
 		List<Ranking> pontCat = new ArrayList<Ranking>();
 
+	 
 		for (Ranking pontuacao : ranksCat) {
 			if (pontuacao.getCategoria().equals(categoria)) {
 				pontCat.add(pontuacao);
@@ -159,6 +170,7 @@ public class Circuito implements Serializable, IElement{
 		this.torneios = torneios;
 	}
 
+	//Sem anotação @Override
 	public int getId() {
 		return id;
 	}
@@ -174,5 +186,6 @@ public class Circuito implements Serializable, IElement{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 
 }

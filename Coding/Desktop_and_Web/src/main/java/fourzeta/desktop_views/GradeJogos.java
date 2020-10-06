@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -84,33 +85,33 @@ public class GradeJogos extends JFrame {
 		btnVoltar.setBounds(47, 644, 106, 23);
 		getContentPane().add(btnVoltar);
 
-		comboQuadra = new JComboBox();
-		comboQuadra.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboQuadra.addItem("Selecionar");
-		comboQuadra.addItem("LARANJA");
-		comboQuadra.addItem("AZUL");
-		comboQuadra.addItem("VERDE");
-
-		comboQuadra.setBounds(138, 147, 124, 22);
-		getContentPane().add(comboQuadra);
-		
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		controller = new PesquisarJogosController(usuario, torneio, this);
-		btnPesquisar.addActionListener(controller);
-		btnPesquisar.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnPesquisar.setBounds(274, 146, 157, 23);
-		getContentPane().add(btnPesquisar);
-
-
-		JLabel lblQuadras = new JLabel("Quadra:");
-		lblQuadras.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		lblQuadras.setBounds(47, 148, 132, 18);
-		getContentPane().add(lblQuadras);
-
-		JLabel lblselecione = new JLabel("*Selecione a Quadra que deseja visualizar os Jogos.");
-		lblselecione.setBounds(47, 172, 494, 58);
-		getContentPane().add(lblselecione);
+//		comboQuadra = new JComboBox();
+//		comboQuadra.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+//		comboQuadra.addItem("Selecionar");
+//		comboQuadra.addItem("LARANJA");
+//		comboQuadra.addItem("AZUL");
+//		comboQuadra.addItem("VERDE");
+//
+//		comboQuadra.setBounds(138, 147, 124, 22);
+//		getContentPane().add(comboQuadra);
+//		
+//
+//		JButton btnPesquisar = new JButton("Pesquisar");
+//		controller = new PesquisarJogosController(usuario, torneio, this);
+//		btnPesquisar.addActionListener(controller);
+//		btnPesquisar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+//		btnPesquisar.setBounds(274, 146, 157, 23);
+//		getContentPane().add(btnPesquisar);
+//
+//
+//		JLabel lblQuadras = new JLabel("Quadra:");
+//		lblQuadras.setFont(new Font("Times New Roman", Font.BOLD, 16));
+//		lblQuadras.setBounds(47, 148, 132, 18);
+//		getContentPane().add(lblQuadras);
+//
+//		JLabel lblselecione = new JLabel("*Selecione a Quadra que deseja visualizar os Jogos.");
+//		lblselecione.setBounds(47, 172, 494, 58);
+//		getContentPane().add(lblselecione);
 	}
 	
 	public void notifySelecioneQuadra() {
@@ -170,5 +171,15 @@ public class GradeJogos extends JFrame {
 			model.addRow(jogo);
 
 		}
+	}
+	
+	public static void main(String[] args) throws IOException, ParseException, NotBoundException {
+		Usuario g = new Usuario();
+		Torneio t = new Torneio();
+		g.setNome("Teste");
+
+		GradeJogos frame = new GradeJogos(g, t);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 	}
 }

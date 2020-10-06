@@ -22,17 +22,27 @@ public class DistribuirJogosController implements ActionListener {
 		this.usuario = usuario;
 		this.torneio = torneio;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Quadra quadra = null;
 
 		if (this.tela.getComboBoxCategoria().getSelectedItem().equals("SELECIONAR")) {
 			this.tela.notifyInformarCategoria();
 		} else if (this.tela.getComboBoxQuadra().getSelectedItem().equals("SELECIONAR")) {
 			this.tela.notifyInformarQuadra();
 		}
-
+		Quadra quadra = null;
+		configurarCorQuadra(quadra);
+		
+		jr = new JogoResource();
+		List<Jogo> jogos = jr.listaJogos();
+		configurarQuadras(jogos, quadra, this.tela.getComboBoxCategoria().getSelectedItem().toString());
+		this.tela.notifySucesso();
+	}
+	
+	
+	public Quadra configurarCorQuadra(Quadra quadra) {
 		switch (this.tela.getComboBoxQuadra().getSelectedItem().toString()) {
 		case "LARANJA":
 			quadra = new Quadra(1);
@@ -43,10 +53,7 @@ public class DistribuirJogosController implements ActionListener {
 		case "VERDE":
 			quadra = new Quadra(3);
 		}
-		jr = new JogoResource();
-		List<Jogo> jogos = jr.listaJogos();
-		configurarQuadras(jogos, quadra, this.tela.getComboBoxCategoria().getSelectedItem().toString());
-		this.tela.notifySucesso();
+		return quadra;
 	}
 
 	public void configurarQuadras(List<Jogo> jogos, Quadra quadra, String categoria) {

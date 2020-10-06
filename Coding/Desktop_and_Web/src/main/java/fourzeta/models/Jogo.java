@@ -12,11 +12,13 @@ import fourzeta.IElement;
 
 @Entity
 public class Jogo implements Comparable<Jogo>, Serializable, IElement {
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
 	private int id;
+	
 	private String partida;
 	
 	@OneToOne()
@@ -31,7 +33,8 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 //	@OneToOne
 	private Quadra quadra;
 	
-	private String Categoria;
+	// lower
+	private String categoria;
 
 	private String data;
 	
@@ -148,11 +151,11 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 
 
 	public String getCategoria() {
-		return Categoria;
+		return categoria;
 	}
 
 	public void setCategoria(String categoria) {
-		Categoria = categoria;
+		this.categoria = categoria;
 	}
 
 	@Override

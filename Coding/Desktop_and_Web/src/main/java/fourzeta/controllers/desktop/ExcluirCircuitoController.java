@@ -34,25 +34,12 @@ public class ExcluirCircuitoController implements ActionListener {
 					tela.getComboBoxCircuito().removeItem(circuito.getId());
 					tela.notifyExluirCircuito();
 					tela.setVisible(false);
-					;
 					ExcluirCircuito refresh = new ExcluirCircuito(usuario);
 					refresh.setVisible(true);
 				}
 			}
 
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ParseException | IOException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

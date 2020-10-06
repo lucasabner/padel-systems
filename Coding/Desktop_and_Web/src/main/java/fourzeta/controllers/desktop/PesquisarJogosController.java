@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import fourzeta.desktop_views.GradeJogos;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;
@@ -27,20 +28,36 @@ public class PesquisarJogosController implements ActionListener {
 		this.torneio = torneio;
 
 	}
-
+	
+	public void definirQuadraJogo(List<Jogo> jogos, List<Jogo> slc, int i) {
+		for (Jogo j : jogos) {
+			if (j.getQuadra().getNumero() == i) {
+				slc.add(j);
+			}
+	}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		jr = new JogoResource();
 		List<Jogo> jogos = jr.listaJogos();
 		configurarQuadras(jogos);
 		List<Jogo> selecionados = new ArrayList<Jogo>();
+		
+		switch(this.tela.getComboQuadra().getSelectedItem().toString()) {
+			case "LARANJA": definirQuadraJogo(jogos,selecionados,1);
+				break;
+			case "AZUL": definirQuadraJogo(jogos,selecionados,2);
+				break;
+			case "VERDE": definirQuadraJogo(jogos,selecionados,3);
+			default: this.tela.notifySelecioneQuadra();
+		}
 
 		if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("LARANJA")) {
 			for (Jogo j : jogos) {
 				if (j.getQuadra().getNumero() == 1) {
 					selecionados.add(j);
 				}
-
 			}
 		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("AZUL")) {
 			for (Jogo j : jogos) {
@@ -62,7 +79,6 @@ public class PesquisarJogosController implements ActionListener {
 			model.removeRow(0);
 		}
 		this.tela.readTable(selecionados);
-
 	}
 
 	public void configurarQuadras(List<Jogo> jogos) {
