@@ -38,7 +38,7 @@ public class RankingTableModel extends AbstractTableModel {
 		case 0:
 			return dados.get(linha).getAtleta().getNome();
 		case 1:
-			return dados.get(linha).getAtleta().getId();
+			return dados.get(linha).getAtleta().getCpf();
 		case 2:
 			return dados.get(linha).getPontos();
 
@@ -53,7 +53,7 @@ public class RankingTableModel extends AbstractTableModel {
 			dados.get(linha).getAtleta().setNome((String) valor);
 			break;
 		case 2:
-			dados.get(linha).getAtleta().setId((long) valor);
+			dados.get(linha).getAtleta().setCpf((String) valor);
 			break;
 		case 3:
 			dados.get(linha).setPontos((Integer) valor);

@@ -30,7 +30,7 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	@ManyToOne
 	private Chave chave;
 
-//	@OneToOne
+	@OneToOne
 	private Quadra quadra;
 	
 	// lower

@@ -2,15 +2,15 @@ package fourzeta.models;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import fourzeta.IElement;
 
-//@Entity
-public class Quadra implements Serializable, IElement {
+@Entity
+public class Quadra implements Serializable, IElement{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
@@ -18,17 +18,20 @@ public class Quadra implements Serializable, IElement {
 
 	@ManyToOne
 	private Torneio torneio;
-
+	
 	private int numero;
-
+	
 	public Quadra(int numero) {
 		this.numero = numero;
 	}
 	
+<<<<<<< HEAD
 	// Sem constructor padrao
 	public Quadra() {
 		
 	}
+=======
+>>>>>>> parent of d72ccd7... Refatorações na controller
 
 	public Torneio getTorneio() {
 		return torneio;
@@ -50,12 +53,15 @@ public class Quadra implements Serializable, IElement {
 		return "Quadra " + numero;
 	}
 
+
 	public int getNumero() {
 		return numero;
 	}
+
 
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
+	
 }
