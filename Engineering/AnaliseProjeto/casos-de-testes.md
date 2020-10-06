@@ -6,6 +6,7 @@
 | 13/08/2019   | 0.1    | Criação e modelação do documento. | Arthur Becker |
 | 19/08/2019   | 0.2    | Preenchimento do documento. | Arthur Becker |
 | 29/09/2020   | 0.3    | Definição dos casos de teste. | Arthur Becker |
+| 06/10/2020   | 0.4    | Criação de casos de teste relacionados a criação de Chaves e Jogos de Chaves  | Lucas Garais |
 
 ### **1 Introdução** ###
 #### 1.1 Escopo ####
