@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fourzeta.IElement;
+import fourzeta.desktop_views.CadastrarTorneio;
 
 @Entity
 @JsonIgnoreProperties("circuito")
@@ -118,6 +119,55 @@ public class Torneio implements Serializable, IElement {
 		}
 		return chaves;
 	}
+	
+	public Torneio bindTorneio(CadastrarTorneio tela) {
+
+		Torneio torneio = new Torneio();
+		torneio.setNome(tela.getTextNomeTorneio().getText());
+		torneio.setDescricao(tela.getTextDescricaoTorneio().getText());
+		torneio.setDatIniJogos(tela.getTextDataInicio().getText());
+		torneio.setDatFimJogos(tela.getTextDataFim().getText());
+		if (tela.getComboBoxQuadra1().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[0] = converterQuadra(
+					tela.getComboBoxQuadra1().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra2().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[1] = converterQuadra(
+					tela.getComboBoxQuadra2().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra3().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[2] = converterQuadra(
+					tela.getComboBoxQuadra3().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra4().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[3] = converterQuadra(
+					tela.getComboBoxQuadra4().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra5().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[4] = converterQuadra(
+					tela.getComboBoxQuadra5().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra6().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[5] = converterQuadra(
+					tela.getComboBoxQuadra6().getSelectedItem().toString());
+		}
+
+		return torneio;
+
+	}
+	
+	public int converterQuadra(String itemSelecionado) {
+		switch (itemSelecionado) {
+		case "LARANJA":
+			return 1;
+		case "AZUL":
+			return 2;
+		case "VERDE":
+			return 3;
+		}
+		return -1;
+	}
+	
 
 	public Torneio() {
 		this.distribuicaoJogos = new int[6];

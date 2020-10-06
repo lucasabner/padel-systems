@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
+import fourzeta.desktop_views.CadastrarCircuito;
 
 @Entity
 public class Circuito implements Serializable, IElement{
@@ -68,6 +69,16 @@ public class Circuito implements Serializable, IElement{
 		this.descricao = descricao;
 		this.rankings = rankings;
 		this.torneios = torneios;
+	}
+	
+	public Circuito bindCircuito(CadastrarCircuito tela) {
+
+		Circuito circuito = new Circuito();
+		circuito.setNome(tela.getTextNomeCircuito().getText());
+		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
+
+		return circuito;
+
 	}
 
 	public List<Ranking> getRanksByCategoria(String txtCategoria) {
@@ -154,5 +165,6 @@ public class Circuito implements Serializable, IElement{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 
 }
