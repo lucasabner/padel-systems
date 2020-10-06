@@ -86,21 +86,38 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 
 |   **Identificador:**   |  TC-07 Geração de Chaves  |
 |     ---      |     ---      |
-| **Prioridade:**   | Média    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+|| **Prioridade:**   | Média    |
+| **Descrição:**  |Após o fechamento das inscrições, as chaves devem ser geradas para dar inicio ao torneio, portanto deve-se verificar se as chaves estão sendo criadas corretamente. |
+| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições fechadas.    |
+| **Comportamento esperado:**   | O sistema deve receber as duplas cadastradas no torneio e ordenar cada uma delas por sua pontuação e categoria, logo depois, as chaves devem ser distribuidas e cada uma deve conter três duplas.     |
+| **Pós-condições:**   | As chaves do torneio em questão foram geradas com três duplas cada.  |
 
 |   **Identificador:**   |  TC-08 Geração de Chaves C/ Suplentes  |
 |     ---      |     ---      |
 | **Prioridade:**   | Média    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
+| **Descrição:**  | Durante a geração de chaves, os suplentes devem ser removidos da lista de duplas do torneio, para que as chaves sejam criadas corretamente.   |
+| **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições fechadas e com um número de duplas que não seja multiplo de três.     |
+| **Comportamento esperado:**   | As duplas suplentes serão removidas da lista de duplas do torneio e as chaves serão geradas e persistidas com três duplas cada.  |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
-|   **Identificador:**   |  TC-09 Cadastro de Torneio  |
+|   **Identificador:**   |  TC-09 Criação de Jogos  |
+|     ---      |     ---      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | Após a geração das chaves, os jogos devem ser criados onde cada uma das três duplas deve jogar uma contra a outra (totalizando dois jogos por dupla), tais jogos devem ser criados pelo sistema e mantidos na lista de jogos da chave.    |
+| **Pré-condições:**  | A chaves devem ter sido montadas e uma lista de jogos deve ser criada. |
+| **Comportamento esperado:**   | Os jogos das chaves serão gerados onde cada dupla joga uma contra a outra (dois jogos por dupla) e a chave juntamente com os seus jogos devem ser persistidos no banco de dados.  |
+| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+
+   **Identificador:**   |  TC-10 Distribuir Horário dos Jogos  |
+|     ---      |     ---      |
+| **Prioridade:**   | Média    |
+| **Descrição:**  | Durante a criação de cada jogo, um horário deve ser estipulado para que a partida aconteça, tal horário deve ser gerado levando em consideração a existência de um impedimento da dupla.    |
+| **Pré-condições:**  | As chaves devem ter sido montadas e uma lista de jogos deve ser criada.  |
+| **Comportamento esperado:**   | Deve ser gerado uma data/hora para cada jogo do torneio e os impedimentos da dupla devem ser levados em consideração (removendo o dia do impedimento do agendamento). Também, os horários devem ser distribuidos corretamente para que não haja conflito entre as partidas das dupla, uma dupla deve ter um intervalo de tempo entre um jogo e outro. |
+| **Pós-condições:**   | Os horários foram distribuidos sem gerar conflito entre os jogos e respeitando os impedimentos.  |
+
+
+|   **Identificador:**   |  TC-11 Cadastro de Torneio  |
 |     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
@@ -108,7 +125,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
-|   **Identificador:**   |  TC-10 Cadastro de Circuito  |
+|   **Identificador:**   |  TC-12 Cadastro de Circuito  |
 |     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
@@ -116,15 +133,8 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
 | **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
-|   **Identificador:**   |  TC-11 Cadastro de Jogos  |
-|     ---      |     ---      |
-| **Prioridade:**   | Média    |
-| **Descrição:**  | DESCRIÇÃO.    |
-| **Pré-condições:**  | PRÉ-CONDICAO.    |
-| **Comportamento esperado:**   | COMPORTAMENTO ESPERADO    |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
 
-|   **Identificador:**   |  TC-12 Ranking  |
+|   **Identificador:**   |  TC-13 Ranking  |
 |     ---      |     ---      |
 | **Prioridade:**   | Média    |
 | **Descrição:**  | DESCRIÇÃO.    |
