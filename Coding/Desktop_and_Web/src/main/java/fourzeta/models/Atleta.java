@@ -18,7 +18,6 @@ import fourzeta.IElement;
 @JsonIgnoreProperties("duplas")
 public class Atleta implements Serializable, IElement{
 
-	
 	@Id
 	@Column()
 	private long cpf;

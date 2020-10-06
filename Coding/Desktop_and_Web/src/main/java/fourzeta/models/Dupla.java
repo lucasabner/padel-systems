@@ -14,7 +14,6 @@ import fourzeta.IElement;
 @Entity
 @JsonIgnoreProperties("torneio")
 public class Dupla implements Serializable, IElement{
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
@@ -39,12 +38,14 @@ public class Dupla implements Serializable, IElement{
 
 	private String ponTotal;
 
+	//@Override
 	public int getId() {
 		return id;
 	}
 
-	public Dupla() {
-	}
+	//Desnecessario pq já vem como padrao,a nao ser q tenha outro
+	// construcotr personalizado
+	
 
 	public void setId(int id) {
 		this.id = id;

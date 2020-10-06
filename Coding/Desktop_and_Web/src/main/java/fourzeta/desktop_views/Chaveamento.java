@@ -26,6 +26,8 @@ public class Chaveamento extends JFrame {
 	private JTable duplasTable;
 	private ChavesTableModel model;
 	private JScrollPane sp;
+	
+	//Campos abaixos comentados
 	private JButton btnVisualizarJogos;
 	private JLabel lblIcon;
 

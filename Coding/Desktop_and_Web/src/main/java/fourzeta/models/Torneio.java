@@ -75,6 +75,7 @@ public class Torneio implements Serializable, IElement {
 		return cCat;
 	}
 
+	// Recebe as duplas do torneio ordenadas por ponto
 	public List<Chave> montarChave(List<Dupla> duplas2) {
 		chaves = new ArrayList<Chave>();
 		List<Dupla> duplas = new ArrayList<Dupla>();
@@ -87,6 +88,7 @@ public class Torneio implements Serializable, IElement {
 
 		// Cria chaves
 		for (int i = 0; i < numChaves; i++) {
+			//criando objetos em loop
 			Chave c = new Chave();
 			c.setNome("Chave " + (i + 1));
 			chaves.add(c);
@@ -239,6 +241,7 @@ public class Torneio implements Serializable, IElement {
 		return distribuicaoJogos;
 	}
 
+	//
 	public void setDistribuicaoJogos(int[] distribuicaoJogos) {
 		this.distribuicaoJogos = distribuicaoJogos;
 	}

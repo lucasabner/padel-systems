@@ -102,6 +102,7 @@ public class Chave implements Serializable, IElement {
 		this.categoria = categoria;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}
