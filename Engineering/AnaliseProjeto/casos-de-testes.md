@@ -99,7 +99,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Descrição:**  | Durante a geração de chaves, os suplentes devem ser removidos da lista de duplas do torneio, para que as chaves sejam criadas corretamente.   |
 | **Pré-condições:**  | Deve-se ter cadastrado pelo menos um torneio e um circuito, estando esses com inscrições fechadas e com um número de duplas que não seja multiplo de três.     |
 | **Comportamento esperado:**   | As duplas suplentes serão removidas da lista de duplas do torneio e as chaves serão geradas e persistidas com três duplas cada.  |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Pós-condições:**   | As chaves do torneio em questão foram geradas com três duplas cada.     |
 
 |   **Identificador:**   |  TC-09 Criação de Jogos  |
 |     ---      |     ---      |
@@ -107,7 +107,7 @@ Neste capítulo, as condições de teste para cada conjunto de recursos são doc
 | **Descrição:**  | Após a geração das chaves, os jogos devem ser criados onde cada uma das três duplas deve jogar uma contra a outra (totalizando dois jogos por dupla), tais jogos devem ser criados pelo sistema e mantidos na lista de jogos da chave.    |
 | **Pré-condições:**  | A chaves devem ter sido montadas e uma lista de jogos deve ser criada. |
 | **Comportamento esperado:**   | Os jogos das chaves serão gerados onde cada dupla joga uma contra a outra (dois jogos por dupla) e a chave juntamente com os seus jogos devem ser persistidos no banco de dados.  |
-| **Pós-condições:**   | PÓS-CONDIÇÃO    |
+| **Pós-condições:**   | Os jogos das chaves foram gerados e distribuídos com sucesso. |
 
    **Identificador:**   |  TC-10 Distribuir Horário dos Jogos  |
 |     ---      |     ---      |
