@@ -99,20 +99,20 @@ public class InscricaoController implements ActionListener {
 
 			dupla.getAtleta2().getRankings().add(rank2);
 			rank2.setAtleta(dupla.getAtleta2());
-			dupla.setPonTotal("" + rank1.getPontos() + rank2.getPontos());
+			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
 			rr.registraRanking(rank1);
 			rr.registraRanking(rank2);
 
 		} else if (encontrado1 == false && encontrado2 == true) {
 			dupla.getAtleta1().getRankings().add(rank1);
 			rank1.setAtleta(dupla.getAtleta1());
-			dupla.setPonTotal("" + rank1.getPontos() + rank2.getPontos());
+			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
 			rr.registraRanking(rank1);
 			ar.registraAtleta(dupla.getAtleta1());
 		} else if (encontrado1 == true && encontrado2 == false) {
 			dupla.getAtleta2().getRankings().add(rank2);
 			rank2.setAtleta(dupla.getAtleta2());
-			dupla.setPonTotal("" + rank1.getPontos() + rank2.getPontos());
+			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
 			rr.registraRanking(rank2);
 			ar.registraAtleta(dupla.getAtleta2());
 		}
