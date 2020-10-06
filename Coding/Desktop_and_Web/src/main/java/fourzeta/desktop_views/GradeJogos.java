@@ -85,33 +85,33 @@ public class GradeJogos extends JFrame {
 		btnVoltar.setBounds(47, 644, 106, 23);
 		getContentPane().add(btnVoltar);
 
-//		comboQuadra = new JComboBox();
-//		comboQuadra.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-//		comboQuadra.addItem("Selecionar");
-//		comboQuadra.addItem("LARANJA");
-//		comboQuadra.addItem("AZUL");
-//		comboQuadra.addItem("VERDE");
-//
-//		comboQuadra.setBounds(138, 147, 124, 22);
-//		getContentPane().add(comboQuadra);
-//		
-//
-//		JButton btnPesquisar = new JButton("Pesquisar");
-//		controller = new PesquisarJogosController(usuario, torneio, this);
-//		btnPesquisar.addActionListener(controller);
-//		btnPesquisar.setFont(new Font("Times New Roman", Font.BOLD, 16));
-//		btnPesquisar.setBounds(274, 146, 157, 23);
-//		getContentPane().add(btnPesquisar);
-//
-//
-//		JLabel lblQuadras = new JLabel("Quadra:");
-//		lblQuadras.setFont(new Font("Times New Roman", Font.BOLD, 16));
-//		lblQuadras.setBounds(47, 148, 132, 18);
-//		getContentPane().add(lblQuadras);
-//
-//		JLabel lblselecione = new JLabel("*Selecione a Quadra que deseja visualizar os Jogos.");
-//		lblselecione.setBounds(47, 172, 494, 58);
-//		getContentPane().add(lblselecione);
+		comboQuadra = new JComboBox();
+		comboQuadra.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboQuadra.addItem("Selecionar");
+		comboQuadra.addItem("LARANJA");
+		comboQuadra.addItem("AZUL");
+		comboQuadra.addItem("VERDE");
+
+		comboQuadra.setBounds(138, 147, 124, 22);
+		getContentPane().add(comboQuadra);
+		
+
+		JButton btnPesquisar = new JButton("Pesquisar");
+		controller = new PesquisarJogosController(usuario, torneio, this);
+		btnPesquisar.addActionListener(controller);
+		btnPesquisar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		btnPesquisar.setBounds(274, 146, 157, 23);
+		getContentPane().add(btnPesquisar);
+
+
+		JLabel lblQuadras = new JLabel("Quadra:");
+		lblQuadras.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		lblQuadras.setBounds(47, 148, 132, 18);
+		getContentPane().add(lblQuadras);
+
+		JLabel lblselecione = new JLabel("*Selecione a Quadra que deseja visualizar os Jogos.");
+		lblselecione.setBounds(47, 172, 494, 58);
+		getContentPane().add(lblselecione);
 	}
 	
 	public void notifySelecioneQuadra() {

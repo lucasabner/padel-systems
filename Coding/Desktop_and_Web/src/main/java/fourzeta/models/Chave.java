@@ -90,10 +90,19 @@ public class Chave implements Serializable, IElement {
 //		return jogo;
 //	}
 //	
+	
 	public void setJogos(List<Jogo> jogos) {
 		this.jogos = jogos;
 	}
 	
+	public Torneio getTorneio() {
+		return torneio;
+	}
+
+	public void setTorneio(Torneio torneio) {
+		this.torneio = torneio;
+	}
+
 	public String getCategoria() {
 		return categoria;
 	}
