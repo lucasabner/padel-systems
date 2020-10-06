@@ -66,14 +66,22 @@ public class EncerrarController implements ActionListener {
 	}
 
 	public void organizarJogos() throws RemoteException {
-
+		//ordenar por horairo
+		//verifica e retira os suplentes da lista e depois ordena por ponto
+		//montaChaves e monta jogos
+       // torneio.montarChave(duplas2)
+		torneio.montarChave();
+		
 		List<Jogo> jogos = new ArrayList<Jogo>();
 
 		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 2
 			Jogo jo1 = new Jogo();
 			if (chave.getDupla1() != null && chave.getDupla2() != null) {
-
 				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+				jo1.setDupla1(chave.getDupla1());
+				jo1.setDupla2(chave.getDupla2());
+				jo1.setCategoria(chave.getCategoria());
+				jo1.setChave(chave);
 			}
 			jogos.add(this.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla2(), jo1));
 			chave.setJogos(jogos);
@@ -86,8 +94,11 @@ public class EncerrarController implements ActionListener {
 		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 3
 			Jogo jo2 = new Jogo();
 			if (chave.getDupla1() != null && chave.getDupla3() != null) {
-
-				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
+				jo2.setDupla1(chave.getDupla1());
+				jo2.setDupla2(chave.getDupla3());
+				jo2.setCategoria(chave.getCategoria());
+				jo2.setChave(chave);
 			}
 			jogos.add(this.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla3(), jo2));
 			chave.setJogos(jogos);
@@ -98,9 +109,12 @@ public class EncerrarController implements ActionListener {
 		}
 		for (Chave chave : torneio.getChaves()) { // Jogos 2 VS 3
 			Jogo jo3 = new Jogo();
-			if (chave.getDupla2() != null && chave.getDupla2() != null) {
-
-				jo3.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+			if (chave.getDupla2() != null && chave.getDupla3() != null) {
+				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());
+				jo3.setDupla1(chave.getDupla2());
+				jo3.setDupla2(chave.getDupla3());
+				jo3.setCategoria(chave.getCategoria());
+				jo3.setChave(chave);
 			}
 			jogos.add(this.distribuirHorarios(chave, chave.getDupla2(), chave.getDupla3(), jo3));
 			chave.setJogos(jogos);
@@ -135,12 +149,12 @@ public class EncerrarController implements ActionListener {
 				break;
 			}
 		}
-		iniciarMataMata(cat1, "PRIMEIRA");
-		iniciarMataMata(cat2, "SEGUNDA");
-		iniciarMataMata(cat3, "TERCEIRA");
-		iniciarMataMata(cat4, "QUARTA");
-		iniciarMataMata(cat5, "QUINTA");
-		iniciarMataMata(cat6, "INICIANTE");
+//		iniciarMataMata(cat1, "PRIMEIRA");
+//		iniciarMataMata(cat2, "SEGUNDA");
+//		iniciarMataMata(cat3, "TERCEIRA");
+//		iniciarMataMata(cat4, "QUARTA");
+//		iniciarMataMata(cat5, "QUINTA");
+//		iniciarMataMata(cat6, "INICIANTE");
 
 	}
 
@@ -786,24 +800,24 @@ public class EncerrarController implements ActionListener {
 		}
 	}
 
-	public List<Chave> gerarListaInscritos()
-			throws ParseException, RemoteException, MalformedURLException, NotBoundException {
-		dr = new DuplaResource();
-		List<Dupla> duplas = (List<Dupla>) dr.listaDuplas();
-		Torneio torneio = new Torneio();
-
-		while (duplas.size() % 3 != 0) {
-			duplas.remove(duplas.size() - 1);
-		}
-		List<Dupla> listaChaveamento = new ArrayList<Dupla>();
-		for (IElement element : duplas) {
-			Dupla d = (Dupla) element;
-			listaChaveamento.add(d);
-		}
-
-		return torneio.montarChave(listaChaveamento);
-
-	}
+//	public List<Chave> gerarListaInscritos()
+//			throws ParseException, RemoteException, MalformedURLException, NotBoundException {
+//		dr = new DuplaResource();
+//		List<Dupla> duplas = (List<Dupla>) dr.listaDuplas();
+//		Torneio torneio = new Torneio();
+//
+//		while (duplas.size() % 3 != 0) {
+//			duplas.remove(duplas.size() - 1);
+//		}
+//		List<Dupla> listaChaveamento = new ArrayList<Dupla>();
+//		for (IElement element : duplas) {
+//			Dupla d = (Dupla) element;
+//			listaChaveamento.add(d);
+//		}
+//
+//		return torneio.montarChave(listaChaveamento);
+//
+//	}
 
 	public Jogo distribuirHorarios(Chave chave, Dupla d1, Dupla d2, Jogo jogo) {
 		List<List<String>> hrs = this.getHorarios();
