@@ -12,7 +12,7 @@ import fourzeta.resources.JogoResource;
 public class GradeJogosTableModel extends AbstractTableModel {
 
 	private List<Jogo> dados = new ArrayList();
-	private String[] colunas = { "HORÁRIO", "CATEGORIA", "DUPLA 1 ", "PLACAR", "DUPLA 2", "Etapa" };
+	private String[] colunas = { "HORÁRIO", "CATEGORIA", "CONFRONTO", "PLACAR", "ETAPA" };
 	private JogoResource jr;
 	private Torneio torneio;
 
@@ -62,7 +62,7 @@ public class GradeJogosTableModel extends AbstractTableModel {
 		case 3:
 			return dados.get(linha).getPlacar();
 		case 4:
-			return dados.get(linha).getDuplas();
+			return dados.get(linha).getEtapa();
 		}
 		return null;
 	}
@@ -100,7 +100,7 @@ public class GradeJogosTableModel extends AbstractTableModel {
 	public void removeRow(int linha) {
 		this.dados.remove(linha);
 
-		// dao.remove(); // Removendo utilizando m�todo da DAO
+		// dao.remove(); // Removendo utilizando metodo da DAO
 		this.fireTableRowsDeleted(linha, linha);
 
 	}
