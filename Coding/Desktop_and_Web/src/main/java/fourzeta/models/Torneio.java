@@ -2,8 +2,8 @@ package fourzeta.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
 import org.hibernate.annotations.Fetch;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import fourzeta.IElement;
 import fourzeta.desktop_views.CadastrarTorneio;
+import fourzeta.resources.ChaveResource;
 
 @Entity
 @JsonIgnoreProperties("circuito")
@@ -80,12 +84,13 @@ public class Torneio implements Serializable, IElement {
 	public void retirarSuplentes() {
 		int numDuplasSemSuplentes = duplas.size() % 3;
 		for (int i = 0; i < numDuplasSemSuplentes; i++) {
-			duplas.remove(duplas.size() - 1);
+			duplas.remove(duplas.size() - 1); // nao salva no banco
 		}
 	}
 
 	// Recebe as duplas do torneio ordenadas por ponto
 	public void montarChave() {
+		retirarSuplentes();
 		List<Dupla> primeira = new ArrayList<Dupla>();
 		List<Dupla> segunda = new ArrayList<Dupla>();
 		List<Dupla> terceira = new ArrayList<Dupla>();
@@ -112,68 +117,70 @@ public class Torneio implements Serializable, IElement {
 			case "SEXTA":
 				sexta.add(d);
 				break;
+			}
 		}
-	}
 
-	primeira.sort(new OrderDuplasPontuacao());
-	segunda.sort(new OrderDuplasPontuacao());
-	terceira.sort(new OrderDuplasPontuacao());
-	quarta.sort(new OrderDuplasPontuacao());
-	quinta.sort(new OrderDuplasPontuacao());
-	sexta.sort(new OrderDuplasPontuacao());
+		primeira.sort(new OrderDuplasPontuacao());
+		segunda.sort(new OrderDuplasPontuacao());
+		terceira.sort(new OrderDuplasPontuacao());
+		quarta.sort(new OrderDuplasPontuacao());
+		quinta.sort(new OrderDuplasPontuacao());
+		sexta.sort(new OrderDuplasPontuacao());
 
-	distribuirChaves(primeira, "PRIMEIRA");
-	distribuirChaves(segunda, "SEGUNDA");
-	distribuirChaves(terceira, "TERCEIRA");
-	distribuirChaves(quarta, "QUARTA");
-	distribuirChaves(quinta, "QUINTA");
-	distribuirChaves(sexta, "SEXTA");
-	
+		distribuirChaves(primeira, "PRIMEIRA");
+		distribuirChaves(segunda, "SEGUNDA");
+		distribuirChaves(terceira, "TERCEIRA");
+		distribuirChaves(quarta, "QUARTA");
+		distribuirChaves(quinta, "QUINTA");
+		distribuirChaves(sexta, "SEXTA");
+
 	}
 
 	private void distribuirChaves(List<Dupla> duplas, String cat) {
 		int numChaves = duplas.size() / 3;
-		
+
 		// Cria chaves
-		for(
-		int i = 0;i<numChaves;i++)
-		{
+		for (int i = 0; i < numChaves; i++) {
 			// criando objetos em loop
 			Chave c = new Chave();
 			c.setNome("Chave");
 			c.setCategoria(cat);
+			c.setTorneio(this);
 			chaves.add(c);
 		}
 
 		// Primeiro linha
 		int numDupla = 0;
-		int aux = 0;for(
-		int i = 0;i<numChaves;i++)
-		{
+		int aux = 0;
+		for (int i = 0; i < numChaves; i++) {
 			chaves.get(aux).setDupla1(duplas.get(numDupla));
 			aux++;
 			numDupla++;
 		}
 
 		// Segunda linha
-		aux--;for(
-		int i = 0;i<numChaves;i++)
-		{
+		aux--;
+		for (int i = 0; i < numChaves; i++) {
 			chaves.get(aux).setDupla2(duplas.get(numDupla));
 			aux--;
 			numDupla++;
 		}
 
 		// Terceira linha
-		aux++;for(
-		int i = 0;i<numChaves;i++)
-		{
-				chaves.get(aux).setDupla3(duplas.get(numDupla));
-				aux++;
-				numDupla++;
-			}
+		aux++;
+		for (int i = 0; i < numChaves; i++) {
+			chaves.get(aux).setDupla3(duplas.get(numDupla));
+			aux++;
+			numDupla++;
+		}
+	   ChaveResource chaver = new ChaveResource();
+		for (Chave c : chaves) {
+			chaver.registraChave(c);
+		}
+		
+		
 	}
-	
+
 	public Torneio bindTorneio(CadastrarTorneio tela) {
 
 		Torneio torneio = new Torneio();
@@ -182,34 +189,28 @@ public class Torneio implements Serializable, IElement {
 		torneio.setDatIniJogos(tela.getTextDataInicio().getText());
 		torneio.setDatFimJogos(tela.getTextDataFim().getText());
 		if (tela.getComboBoxQuadra1().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[0] = converterQuadra(
-					tela.getComboBoxQuadra1().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[0] = converterQuadra(tela.getComboBoxQuadra1().getSelectedItem().toString());
 		}
 		if (tela.getComboBoxQuadra2().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[1] = converterQuadra(
-					tela.getComboBoxQuadra2().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[1] = converterQuadra(tela.getComboBoxQuadra2().getSelectedItem().toString());
 		}
 		if (tela.getComboBoxQuadra3().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[2] = converterQuadra(
-					tela.getComboBoxQuadra3().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[2] = converterQuadra(tela.getComboBoxQuadra3().getSelectedItem().toString());
 		}
 		if (tela.getComboBoxQuadra4().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[3] = converterQuadra(
-					tela.getComboBoxQuadra4().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[3] = converterQuadra(tela.getComboBoxQuadra4().getSelectedItem().toString());
 		}
 		if (tela.getComboBoxQuadra5().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[4] = converterQuadra(
-					tela.getComboBoxQuadra5().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[4] = converterQuadra(tela.getComboBoxQuadra5().getSelectedItem().toString());
 		}
 		if (tela.getComboBoxQuadra6().getSelectedItem().equals("SELECIONAR")) {
-			torneio.getDistribuicaoJogos()[5] = converterQuadra(
-					tela.getComboBoxQuadra6().getSelectedItem().toString());
+			torneio.getDistribuicaoJogos()[5] = converterQuadra(tela.getComboBoxQuadra6().getSelectedItem().toString());
 		}
 
 		return torneio;
 
 	}
-	
+
 	public int converterQuadra(String itemSelecionado) {
 		switch (itemSelecionado) {
 		case "LARANJA":
@@ -221,7 +222,6 @@ public class Torneio implements Serializable, IElement {
 		}
 		return -1;
 	}
-	
 
 	public Torneio() {
 		this.distribuicaoJogos = new int[6];

@@ -41,39 +41,44 @@ public class PesquisarJogosController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		jr = new JogoResource();
 		List<Jogo> jogos = jr.listaJogos();
-		configurarQuadras(jogos);
+//		configurarQuadras(jogos);
 		List<Jogo> selecionados = new ArrayList<Jogo>();
-		
-		switch(this.tela.getComboQuadra().getSelectedItem().toString()) {
-			case "LARANJA": definirQuadraJogo(jogos,selecionados,1);
-				break;
-			case "AZUL": definirQuadraJogo(jogos,selecionados,2);
-				break;
-			case "VERDE": definirQuadraJogo(jogos,selecionados,3);
-			default: this.tela.notifySelecioneQuadra();
+		for (Jogo jogo : jogos) {
+			if(jogo.getChave().getTorneio().getId() == torneio.getId()) {
+				selecionados.add(jogo);
+			}
 		}
-
-		if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("LARANJA")) {
-			for (Jogo j : jogos) {
-				if (j.getQuadra().getNumero() == 1) {
-					selecionados.add(j);
-				}
-			}
-		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("AZUL")) {
-			for (Jogo j : jogos) {
-				if (j.getQuadra().getNumero() == 2) {
-					selecionados.add(j);
-				}
-			}
-		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("VERDE")) {
-			for (Jogo j : jogos) {
-				if (j.getQuadra().getNumero() == 3) {
-					selecionados.add(j);
-				}
-			}
-		} else {
-			this.tela.notifySelecioneQuadra();
-		}
+//		
+//		switch(this.tela.getComboQuadra().getSelectedItem().toString()) {
+//			case "LARANJA": definirQuadraJogo(jogos,selecionados,1);
+//				break;
+//			case "AZUL": definirQuadraJogo(jogos,selecionados,2);
+//				break;
+//			case "VERDE": definirQuadraJogo(jogos,selecionados,3);
+//			default: this.tela.notifySelecioneQuadra();
+//		}
+//
+//		if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("LARANJA")) {
+//			for (Jogo j : jogos) {
+//				if (j.getQuadra().getNumero() == 1) {
+//					selecionados.add(j);
+//				}
+//			}
+//		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("AZUL")) {
+//			for (Jogo j : jogos) {
+//				if (j.getQuadra().getNumero() == 2) {
+//					selecionados.add(j);
+//				}
+//			}
+//		} else if (this.tela.getComboQuadra().getSelectedItem().toString().equalsIgnoreCase("VERDE")) {
+//			for (Jogo j : jogos) {
+//				if (j.getQuadra().getNumero() == 3) {
+//					selecionados.add(j);
+//				}
+//			}
+//		} else {
+//			this.tela.notifySelecioneQuadra();
+//		}
 		GradeJogosTableModel model = (GradeJogosTableModel) tela.getJogosTable().getModel();
 		while (model.getRowCount() > 0) {
 			model.removeRow(0);
