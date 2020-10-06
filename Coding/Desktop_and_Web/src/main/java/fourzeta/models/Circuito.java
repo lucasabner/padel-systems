@@ -111,6 +111,7 @@ public class Circuito implements Serializable, IElement{
 
 		List<Ranking> pontCat = new ArrayList<Ranking>();
 
+	 
 		for (Ranking pontuacao : ranksCat) {
 			if (pontuacao.getCategoria().equals(categoria)) {
 				pontCat.add(pontuacao);
@@ -150,6 +151,7 @@ public class Circuito implements Serializable, IElement{
 		this.torneios = torneios;
 	}
 
+	//Sem anotação @Override
 	public int getId() {
 		return id;
 	}

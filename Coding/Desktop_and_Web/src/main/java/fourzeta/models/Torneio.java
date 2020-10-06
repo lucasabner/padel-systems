@@ -2,6 +2,7 @@ package fourzeta.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,23 +31,23 @@ public class Torneio implements Serializable, IElement {
 	@Column(name = "qtdatletas")
 	private int qtdAtletas;
 	private String valor;
-	
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "torneio",cascade = CascadeType.REMOVE)
+
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Ranking> rankings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio",cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Quadra> quadras;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio",cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Dupla> duplas;
 
 	@ManyToOne()
 	private Circuito circuito;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Chave.class, mappedBy = "torneio",cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Chave.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Chave> chaves; // Lista deve estar SEMPRE ORDENADA por duplas com maiores pontos
 
@@ -76,48 +77,101 @@ public class Torneio implements Serializable, IElement {
 		return cCat;
 	}
 
-	public List<Chave> montarChave(List<Dupla> duplas2) {
-		chaves = new ArrayList<Chave>();
-		List<Dupla> duplas = new ArrayList<Dupla>();
-		for (IElement element : duplas2) {
-			Dupla d = (Dupla) element;
-			duplas.add(d);
+	public void retirarSuplentes() {
+		int numDuplasSemSuplentes = duplas.size() % 3;
+		for (int i = 0; i < numDuplasSemSuplentes; i++) {
+			duplas.remove(duplas.size() - 1);
 		}
+	}
 
+	// Recebe as duplas do torneio ordenadas por ponto
+	public void montarChave() {
+		List<Dupla> primeira = new ArrayList<Dupla>();
+		List<Dupla> segunda = new ArrayList<Dupla>();
+		List<Dupla> terceira = new ArrayList<Dupla>();
+		List<Dupla> quarta = new ArrayList<Dupla>();
+		List<Dupla> quinta = new ArrayList<Dupla>();
+		List<Dupla> sexta = new ArrayList<Dupla>();
+		for (Dupla d : duplas) {
+			switch (d.getCategoria()) {
+			case "PRIMEIRA":
+				primeira.add(d);
+				break;
+			case "SEGUNDA":
+				segunda.add(d);
+				break;
+			case "TERCEIRA":
+				terceira.add(d);
+				break;
+			case "QUARTA":
+				quarta.add(d);
+				break;
+			case "QUINTA":
+				quinta.add(d);
+				break;
+			case "SEXTA":
+				sexta.add(d);
+				break;
+		}
+	}
+
+	primeira.sort(new OrderDuplasPontuacao());
+	segunda.sort(new OrderDuplasPontuacao());
+	terceira.sort(new OrderDuplasPontuacao());
+	quarta.sort(new OrderDuplasPontuacao());
+	quinta.sort(new OrderDuplasPontuacao());
+	sexta.sort(new OrderDuplasPontuacao());
+
+	distribuirChaves(primeira, "PRIMEIRA");
+	distribuirChaves(segunda, "SEGUNDA");
+	distribuirChaves(terceira, "TERCEIRA");
+	distribuirChaves(quarta, "QUARTA");
+	distribuirChaves(quinta, "QUINTA");
+	distribuirChaves(sexta, "SEXTA");
+	
+	}
+
+	private void distribuirChaves(List<Dupla> duplas, String cat) {
 		int numChaves = duplas.size() / 3;
-
+		
 		// Cria chaves
-		for (int i = 0; i < numChaves; i++) {
+		for(
+		int i = 0;i<numChaves;i++)
+		{
+			// criando objetos em loop
 			Chave c = new Chave();
-			c.setNome("Chave " + (i + 1));
+			c.setNome("Chave");
+			c.setCategoria(cat);
 			chaves.add(c);
 		}
 
 		// Primeiro linha
 		int numDupla = 0;
-		int aux = 0;
-		for (int i = 0; i < numChaves; i++) {
+		int aux = 0;for(
+		int i = 0;i<numChaves;i++)
+		{
 			chaves.get(aux).setDupla1(duplas.get(numDupla));
 			aux++;
 			numDupla++;
 		}
 
 		// Segunda linha
-		aux--;
-		for (int i = 0; i < numChaves; i++) {
+		aux--;for(
+		int i = 0;i<numChaves;i++)
+		{
 			chaves.get(aux).setDupla2(duplas.get(numDupla));
 			aux--;
 			numDupla++;
 		}
 
 		// Terceira linha
-		aux++;
-		for (int i = 0; i < numChaves; i++) {
-			chaves.get(aux).setDupla3(duplas.get(numDupla));
-			aux++;
-			numDupla++;
-		}
-		return chaves;
+		aux++;for(
+		int i = 0;i<numChaves;i++)
+		{
+				chaves.get(aux).setDupla3(duplas.get(numDupla));
+				aux++;
+				numDupla++;
+			}
 	}
 	
 	public Torneio bindTorneio(CadastrarTorneio tela) {
@@ -187,7 +241,6 @@ public class Torneio implements Serializable, IElement {
 		return duplas;
 	}
 
-	
 	public List<Ranking> getRankings() {
 		return rankings;
 	}
@@ -215,7 +268,6 @@ public class Torneio implements Serializable, IElement {
 	public String getNome() {
 		return nome;
 	}
-	
 
 	public List<Quadra> getQuadras() {
 		return quadras;
@@ -289,6 +341,7 @@ public class Torneio implements Serializable, IElement {
 		return distribuicaoJogos;
 	}
 
+	//
 	public void setDistribuicaoJogos(int[] distribuicaoJogos) {
 		this.distribuicaoJogos = distribuicaoJogos;
 	}
@@ -300,7 +353,5 @@ public class Torneio implements Serializable, IElement {
 	public void setInscEncerradas(boolean inscEncerradas) {
 		this.inscEncerradas = inscEncerradas;
 	}
-
-	
 
 }

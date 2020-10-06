@@ -64,30 +64,32 @@ public class Chave implements Serializable, IElement {
 		this.jogos = jogos;
 	}
 
-	public List<Jogo> criarJogos(List<Chave> chaves) throws MalformedURLException, RemoteException, NotBoundException {
-		JogoResource jr = new JogoResource();
-		Jogo j1, j2, j3;
-
-		List<Jogo> jogos = new ArrayList<Jogo>(); // jogos gerados
-
-		j1 = new Jogo();
-		j1.setPartida(this.getDupla1().toString() + " / " + this.getDupla2().toString());
-		jogos.add(j1);
-		jr.registraJogo(j1);
-
-		j2 = new Jogo();
-		j2.setPartida(this.getDupla2().toString() + " / " + this.getDupla3().toString());
-		jogos.add(j2);
-		jr.registraJogo(j2);
-
-		j3 = new Jogo();
-		j3.setPartida(this.getDupla1().toString() + " / " + this.getDupla3().toString());
-		jogos.add(j3);
-		jr.registraJogo(j3);
-
-		return jogos;
-	}
-
+//	public List<Jogo> criarJogos(List<Chave> chaves) throws MalformedURLException, RemoteException, NotBoundException {
+//		JogoResource jr = new JogoResource();
+//		Jogo jogo;
+//		int ctrl = 0;
+//
+//		while(ctrl != 3){
+//			jogo = new Jogo();
+//			jogo = montarJogo(ctrl, jogo);
+//			jogos.add(jogo);
+//			jr.registraJogo(jogo);
+//			ctrl++;
+//		}
+//		return jogos;
+//	}
+//	
+//	public Jogo montarJogo(int ctrl, Jogo jogo) {
+//		if(ctrl == 0){
+//			jogo.setPartida(this.getDupla1().toString() + " / " + this.getDupla2().toString());
+//		}else if(ctrl == 1){
+//			jogo.setPartida(this.getDupla2().toString() + " / " + this.getDupla3().toString());
+//		}else{
+//			jogo.setPartida(this.getDupla1().toString() + " / " + this.getDupla3().toString());
+//		}
+//		return jogo;
+//	}
+//	
 	public void setJogos(List<Jogo> jogos) {
 		this.jogos = jogos;
 	}
@@ -100,6 +102,7 @@ public class Chave implements Serializable, IElement {
 		this.categoria = categoria;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}

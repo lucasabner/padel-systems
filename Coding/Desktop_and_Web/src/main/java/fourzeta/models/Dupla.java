@@ -13,8 +13,7 @@ import fourzeta.IElement;
 
 @Entity
 @JsonIgnoreProperties("torneio")
-public class Dupla implements Serializable, IElement{
-
+public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
@@ -37,14 +36,18 @@ public class Dupla implements Serializable, IElement{
 	@OneToOne()
 	private Atleta atleta2;
 
-	private String ponTotal;
+	private long ponTotal;
 
+	//@Override
 	public int getId() {
 		return id;
 	}
 
-	public Dupla() {
-	}
+	//Desnecessario pq já vem como padrao,a nao ser q tenha outro
+	// construcotr personalizado
+	
+	
+	
 
 	public void setId(int id) {
 		this.id = id;
@@ -59,7 +62,7 @@ public class Dupla implements Serializable, IElement{
 	}
 
 
-	public String getPonTotal() {
+	public long getPonTotal() {
 		return ponTotal;
 	}
 	
@@ -72,7 +75,7 @@ public class Dupla implements Serializable, IElement{
 		this.torneio = torneio;
 	}
 
-	public void setPonTotal(String ponTotal) {
+	public void setPonTotal(long ponTotal) {
 		this.ponTotal = ponTotal;
 	}
 
@@ -102,6 +105,15 @@ public class Dupla implements Serializable, IElement{
 
 	public void setImpedimento(String impedimento) {
 		this.impedimento = impedimento;
+	}
+	
+	@Override
+	public int compareTo(Dupla arg0) {
+		boolean maior = arg0.getId() > this.getId();
+		if (maior)
+			return -1;
+		else
+			return 1;
 	}
 
 }
