@@ -22,10 +22,10 @@ public static void main(String[] args) {
 	Dupla d = new Dupla();
 
 	a1.setNome("Edineia Macedo");
-	a1.setCpf("023.360.001-34");
+	a1.setId(0233600013);
 	a1.setSexo("Feminino");
 	a2.setNome("Toninho");
-	a2.setCpf("032.673.912-91");
+	a2.setId(0233610013);
 	a2.setSexo("Masculino");
 	c.setNome("Circuito Luterano de Teste");
 	c.setDescricao("Apenas para teste de Sistema");

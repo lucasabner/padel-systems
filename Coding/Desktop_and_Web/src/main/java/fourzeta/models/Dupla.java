@@ -1,6 +1,12 @@
 package fourzeta.models;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fourzeta.IElement;
+import fourzeta.controllers.desktop.InscricaoController;
+import fourzeta.desktop_views.InscricaoDuplas;
+import fourzeta.resources.AtletaResource;
+import fourzeta.resources.DuplaResource;
 
 @Entity
 @JsonIgnoreProperties("torneio")
@@ -58,12 +68,9 @@ public class Dupla implements Serializable, IElement{
 		this.categoria = categoria.toUpperCase();
 	}
 
-
 	public String getPonTotal() {
 		return ponTotal;
 	}
-	
-
 	public Torneio getTorneio() {
 		return torneio;
 	}
@@ -102,6 +109,57 @@ public class Dupla implements Serializable, IElement{
 
 	public void setImpedimento(String impedimento) {
 		this.impedimento = impedimento;
+	}
+
+	public Dupla bindDupla(InscricaoController inscricaoController, InscricaoDuplas tela)
+			throws ParseException, RemoteException, MalformedURLException, NotBoundException {
+	
+		Atleta atleta1 = new Atleta();
+		Atleta atleta2 = new Atleta();
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
+		atleta1.setNome(tela.getTxtNome1().getText());
+		String cpfTxt = tela.getTxtCpf1().getText().replaceAll(".", "");
+		cpfTxt = tela.getTxtCpf1().getText().replace("-", "");
+		atleta1.setId(Long.parseLong(cpfTxt)); 
+		atleta1.setTel(tela.getTxtTelefone1().getText());
+		atleta1.setEmail(tela.getTxtEmail1().getText());
+		if (tela.getCbxMasc1().isSelected()) {
+			atleta1.setSexo("MASCULINO");
+		} else if (tela.getCbxFem1().isSelected()) {
+			atleta1.setSexo("FEMININO");
+		} else {
+			atleta1.setSexo("OUTRO");
+		}
+	
+		atleta1.setDataNascimento(tela.getTxtDataNascimento1().getText());
+	
+		atleta2.setNome(tela.getTxtNome2().getText());
+		atleta2.setId(Long.parseLong(tela.getTxtCpf2().getText()));
+		atleta2.setTel(tela.getTxtTelefone2().getText());
+		atleta2.setEmail(tela.getTxtEmail2().getText());
+		if (tela.getCbxMasc2().isSelected()) {
+			atleta2.setSexo("MASCULINO");
+		} else if (tela.getCbxFem2().isSelected()) {
+			atleta2.setSexo("FEMININO");
+		} else {
+			atleta2.setSexo("OUTRO");
+	
+		}
+		setImpedimento(inscricaoController.setarImpedimento(tela.getComboImpedimento().getSelectedItem().toString()));
+		setCategoria(tela.getComboCategoria().getSelectedItem().toString());
+		atleta2.setDataNascimento(tela.getTxtDataNascimento2().getText());
+		setAtleta1(atleta1);
+		setAtleta2(atleta2);
+		setTorneio(inscricaoController.torneio);
+	     inscricaoController.verificaCpf.verificarCpf(this);
+		inscricaoController.ar = new AtletaResource();
+		inscricaoController.ar.registraAtleta(getAtleta1());
+		inscricaoController.ar.registraAtleta(getAtleta2());
+		inscricaoController.dr = new DuplaResource();
+		inscricaoController.dr.registraDupla(this);
+	
+		return this;
 	}
 
 }

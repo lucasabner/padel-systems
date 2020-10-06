@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
+import fourzeta.resources.CircuitoResource;
 
 @Entity
 public class Circuito implements Serializable, IElement{
@@ -24,6 +25,10 @@ public class Circuito implements Serializable, IElement{
 	private int id;
 	private String nome;
 	private String descricao;
+	private CircuitoResource cr;
+	private Torneio torneio;
+
+
 
 	// Criou a tabela Circuito_Rankings, ou seja, Um circuito tem varios ranks
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy ="circuito",cascade = CascadeType.ALL)
@@ -68,6 +73,21 @@ public class Circuito implements Serializable, IElement{
 		this.descricao = descricao;
 		this.rankings = rankings;
 		this.torneios = torneios;
+	}
+	
+	//faz get no banco de Dados
+	public Circuito getCircuito() {
+		cr = new CircuitoResource();
+		Circuito circuito = new Circuito();
+
+		for (Circuito c : cr.listaCircuitos()) {
+			for (Torneio t : c.getTorneios()) {
+				if (torneio.getNome().equalsIgnoreCase(t.getNome())) {
+					circuito = c;
+				}
+			}
+		}
+		return circuito;
 	}
 
 	public List<Ranking> getRanksByCategoria(String txtCategoria) {
