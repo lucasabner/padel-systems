@@ -480,7 +480,7 @@ public class EncerrarController implements ActionListener {
 				tr.registraTorneio(torneio);
 				break;
 			case 21:
-				// Verifica de acorco com o doc disponibilizado pelo professor Sam
+				// Verifica de acorco com o doc disponibilizado pel o professor Sam 
 				chave = new Chave();
 				chave.setNome("Oitavas(O1)");
 				chave.setCategoria(cat);

@@ -82,7 +82,7 @@ public class GerarChavesTest {
 			}
 			
 			
-			/* ========== Verificacoes ========== */
+			/* ========= Verificacoes ========= */
 			assertNotEquals(jChave1.getDupla1(), null);
 			
 		}

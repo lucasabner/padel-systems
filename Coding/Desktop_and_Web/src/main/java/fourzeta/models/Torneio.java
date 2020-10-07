@@ -141,7 +141,7 @@ public class Torneio implements Serializable, IElement {
 	public void retirarSuplentes() {
 		int numDuplasSemSuplentes = duplas.size() % 3;
 		for (int i = 0; i < numDuplasSemSuplentes; i++) {
-			duplas.remove(duplas.size() - 1); // nao salva no banco
+			duplas.remove(duplas.size() - 1); // nao salva no banco. 
 		}
 	}
 	
