@@ -20,8 +20,10 @@ import org.hibernate.annotations.Fetch;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import fourzeta.IElement;
+import fourzeta.controllers.desktop.EncerrarController;
 import fourzeta.desktop_views.CadastrarTorneio;
 import fourzeta.resources.ChaveResource;
+import fourzeta.resources.JogoResource;
 
 @Entity
 @JsonIgnoreProperties("circuito")
@@ -80,6 +82,61 @@ public class Torneio implements Serializable, IElement {
 		}
 		return cCat;
 	}
+	
+	public void distribuirJogos() {
+		EncerrarController eC = new EncerrarController();
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		for (Chave chave : this.getChaves()) { // Jogos 1 VS 2
+			Jogo jo1 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla2() != null) {
+				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+				jo1.setDupla1(chave.getDupla1());
+				jo1.setDupla2(chave.getDupla2());
+				jo1.setCategoria(chave.getCategoria());
+				jo1.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla2(), jo1));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo1);
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
+
+		}
+		for (Chave chave : this.getChaves()) { // Jogos 1 VS 3
+			Jogo jo2 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla3() != null) {
+				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
+				jo2.setDupla1(chave.getDupla1());
+				jo2.setDupla2(chave.getDupla3());
+				jo2.setCategoria(chave.getCategoria());
+				jo2.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla3(), jo2));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo2);
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
+		}
+		for (Chave chave : this.getChaves()) { // Jogos 2 VS 3
+			Jogo jo3 = new Jogo();
+			if (chave.getDupla2() != null && chave.getDupla3() != null) {
+				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());
+				jo3.setDupla1(chave.getDupla2());
+				jo3.setDupla2(chave.getDupla3());
+				jo3.setCategoria(chave.getCategoria());
+				jo3.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla2(), chave.getDupla3(), jo3));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo3);
+
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
+		}
+	}
 
 	public void retirarSuplentes() {
 		int numDuplasSemSuplentes = duplas.size() % 3;
@@ -87,6 +144,8 @@ public class Torneio implements Serializable, IElement {
 			duplas.remove(duplas.size() - 1); // nao salva no banco
 		}
 	}
+	
+	
 
 	// Recebe as duplas do torneio ordenadas por ponto
 	public void montarChave() {
