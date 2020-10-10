@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import fourzeta.controllers.desktop.ExcluirTorneioController;
+import fourzeta.controllers.desktop.RetornarInicial;
 import fourzeta.models.Usuario;
 import fourzeta.models.Torneio;
 import fourzeta.resources.TorneioResource;
@@ -24,16 +25,58 @@ public class ExcluirTorneio extends JFrame {
 	private JLabel lblTitulo;
 	private JLabel lblNome;
 	private JButton btnVoltar;
+	private RetornarInicial retorna;
 	private JButton btnExcluir;
 	private JComboBox comboBoxTorneio;
+	private ExcluirTorneioController excluirTorneio;
+	private TorneioResource tr;
 
 	public ExcluirTorneio(Usuario usuario) throws ParseException, IOException, NotBoundException {
 
 		setTitle("Excluir Torneio");
-		this.setSize(SIZE);
-		this.setLocationRelativeTo(null);
+		setSize(SIZE);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
+		criarRotulos();
+
+		botaoExcluir(usuario);
+
+		botaoVoltar(usuario);
+
+		comboBoxTorneio();
+	}
+
+	public void comboBoxTorneio() {
+		tr = new TorneioResource();
+		comboBoxTorneio = new JComboBox();
+		comboBoxTorneio.addItem("Selecionar");
+		for (Torneio torneio : tr.listaTorneios()) {
+			comboBoxTorneio.addItem(torneio.getNome());
+		}
+		comboBoxTorneio.setBounds(22, 86, 301, 24);
+		getContentPane().add(comboBoxTorneio);
+	}
+
+	public void botaoVoltar(Usuario usuario) {
+		btnVoltar = new JButton("Voltar");
+		retorna = new RetornarInicial(usuario, this);
+		btnVoltar.addActionListener(retorna);
+		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		btnVoltar.setBounds(44, 409, 106, 23);
+		getContentPane().add(btnVoltar);
+
+	}
+
+	public void botaoExcluir(Usuario usuario) {
+		btnExcluir = new JButton("Excluir");
+		excluirTorneio = new ExcluirTorneioController(usuario, this);
+		btnExcluir.addActionListener(excluirTorneio);
+		btnExcluir.setBounds(212, 133, 114, 25);
+		getContentPane().add(btnExcluir);
+	}
+
+	public void criarRotulos() {
 		lblTitulo = new JLabel("Excluir Torneio");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 30));
@@ -44,40 +87,6 @@ public class ExcluirTorneio extends JFrame {
 		lblNome.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblNome.setBounds(22, 66, 300, 15);
 		getContentPane().add(lblNome);
-
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				SelecionarTorneio inicio = null;
-				try {
-					inicio = new SelecionarTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicio.setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(22, 133, 114, 25);
-		getContentPane().add(btnVoltar);
-
-		btnExcluir = new JButton("Excluir");
-		ExcluirTorneioController controller = new ExcluirTorneioController(usuario, this);
-		btnExcluir.addActionListener(controller);
-		btnExcluir.setBounds(212, 133, 114, 25);
-		getContentPane().add(btnExcluir);
-
-		TorneioResource tr = new TorneioResource();
-		comboBoxTorneio = new JComboBox();
-		comboBoxTorneio.addItem("Selecionar");
-		for (Torneio torneio : tr.listaTorneios()) {
-			comboBoxTorneio.addItem(torneio.getNome());
-		}
-		comboBoxTorneio.setBounds(22, 86, 301, 24);
-		getContentPane().add(comboBoxTorneio);
 	}
 
 	public JComboBox getComboBoxTorneio() {

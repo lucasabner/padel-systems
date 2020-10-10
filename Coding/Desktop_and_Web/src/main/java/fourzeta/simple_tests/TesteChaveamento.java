@@ -46,7 +46,7 @@ public class TesteChaveamento {
 			pts.setAtleta(atleta);
 
 			atleta.setNome("Nome: " + (i + 1));
-			atleta.setCpf("CPF: " + (i + 1123456));
+			//atleta.setCpf("CPF: " + (i + 1123456));
 			atleta.setRankings(List.of(pts));
 
 			pontuacoes.add(pts);
@@ -73,7 +73,7 @@ public class TesteChaveamento {
 		t1.setNome("Torneio 4 edicao alegrete");
 		t1.setValor(""+10);
 		t1.setDuplas(duplas);
-		chaves = t1.montarChave(duplas);
+	//	chaves = t1.montarChave(duplas);
 		t1.setChaves(chaves);
 
 		List<Torneio> torneios = new ArrayList<>();

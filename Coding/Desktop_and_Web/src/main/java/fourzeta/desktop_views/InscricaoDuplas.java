@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 import fourzeta.controllers.desktop.InscricaoController;
+import fourzeta.controllers.desktop.RetornarInicial;
 import fourzeta.models.Dupla;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
@@ -29,6 +30,7 @@ public class InscricaoDuplas extends JFrame {
 	private final Dimension SIZE = new Dimension(800, 700);
 	private Dupla dupla;
 	private InscricaoController controllerCadastrar;
+	private RetornarInicial retorna;
 	private JTextField txtNome1;
 	private JTextField txtNome2;
 	private JTextField txtCpf1;
@@ -36,7 +38,7 @@ public class InscricaoDuplas extends JFrame {
 	private JTextField txtTelefone1;
 	private JTextField txtTelefone2;
 	private JTextField txtEmail1;
-		private JTextField txtEmail2;
+	private JTextField txtEmail2;
 	private JTextField txtDataNascimento1;
 	private JTextField txtDataNascimento2;
 	private ButtonGroup atletaSexo1;
@@ -52,6 +54,25 @@ public class InscricaoDuplas extends JFrame {
 	private JButton btnInscricao;
 	private JButton btnPdf;
 	private JLabel lblIcon;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel lblAt;
+	private JLabel dataNascimento;
+	private JLabel sexo;
+	private JLabel telefone, email, titulo;
+	private ImageIcon imgLogin;
+	private JLabel cpf;
+	private JLabel nomeCompleto;
+	private JPanel jpanelPrincipal;
+	private JPanel panel;
+	private JLabel lblImpedimento;
+	private JLabel categorial;
+	private JLabel lblDadosDaSua;
+	private JButton btnVoltar;
 
 	public InscricaoDuplas(Usuario usuario, Torneio torneio) throws ParseException {
 		dupla = new Dupla();
@@ -59,158 +80,143 @@ public class InscricaoDuplas extends JFrame {
 		this.setSize(SIZE);
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
-//		MaskFormatter formatoCpf = new MaskFormatter("###.###.###-##");
 		MaskFormatter formatoDataNasc = new MaskFormatter("##/##/####");
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// mudando o icon
-		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
-		setIconImage(imgLogin.getImage());
-		lblIcon = new JLabel(imgLogin);
-		getContentPane().add(lblIcon);
+		setIcone();
 
-		JLabel Titulo = new JLabel("Inscrição");
-		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setBounds(14, 25, 764, 58);
-		Titulo.setFont(new Font("Times New Roman", Font.BOLD, 45));
-		getContentPane().add(Titulo);
+		setRotuloInsricao();
 
-		JPanel jpanelPrincipal = new JPanel();
-		jpanelPrincipal.setBounds(10, 146, 379, 380);
-		getContentPane().add(jpanelPrincipal);
-		jpanelPrincipal.setLayout(null);
+		jpanelPrincipal = setJPanelPrincipal();
 
-		JLabel nomeCompleto = new JLabel("Nome Completo:");
-		nomeCompleto.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		nomeCompleto.setBounds(10, 11, 181, 23);
-		jpanelPrincipal.add(nomeCompleto);
+		setNome1(jpanelPrincipal);
 
-		txtNome1 = new JTextField();
-		txtNome1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtNome1.setBounds(10, 36, 359, 23);
-		jpanelPrincipal.add(txtNome1);
-		txtNome1.setColumns(10);
+		setCpf1(jpanelPrincipal);
 
-		JLabel cpf = new JLabel("CPF:");
-		cpf.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		cpf.setBounds(10, 67, 130, 14);
-		jpanelPrincipal.add(cpf);
+		setTelefone1(jpanelPrincipal);
 
-		txtCpf1 = new JFormattedTextField();
-		txtCpf1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtCpf1.setColumns(10);
-		txtCpf1.setBounds(10, 92, 99, 23);
-		jpanelPrincipal.add(txtCpf1);
+		setEmail1(jpanelPrincipal);
 
-		JLabel telefone = new JLabel("Telefone:");
-		telefone.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		telefone.setBounds(10, 123, 130, 14);
-		jpanelPrincipal.add(telefone);
+		setSexo1(jpanelPrincipal);
 
-		txtTelefone1 = new JTextField();
-		txtTelefone1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtTelefone1.setColumns(10);
-		txtTelefone1.setBounds(10, 148, 181, 23);
-		jpanelPrincipal.add(txtTelefone1);
+		setDataNascimento1(formatoDataNasc, jpanelPrincipal);
 
-		JLabel email = new JLabel("E-mail:");
-		email.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		email.setBounds(10, 179, 130, 14);
-		jpanelPrincipal.add(email);
+		setAtleta1();
 
-		txtEmail1 = new JTextField();
-		txtEmail1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtEmail1.setColumns(10);
-		txtEmail1.setBounds(10, 204, 359, 23);
-		jpanelPrincipal.add(txtEmail1);
+		panel = criandoPainel1();
 
-		JLabel sexo = new JLabel("Sexo:");
-		sexo.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		sexo.setBounds(10, 240, 75, 14);
-		jpanelPrincipal.add(sexo);
+		setNome2(panel);
 
-		cbxMasc1 = new JRadioButton("Masculino");
-		cbxMasc1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		cbxMasc1.setBounds(62, 236, 91, 23);
-		jpanelPrincipal.add(cbxMasc1);
+		setCpf2(panel);
 
-		cbxFem1 = new JRadioButton("Feminino");
-		cbxFem1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		cbxFem1.setBounds(155, 236, 85, 23);
-		jpanelPrincipal.add(cbxFem1);
+		setTelefone2(panel);
 
-		cbxOutro1 = new JRadioButton("Outro");
-		cbxOutro1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		cbxOutro1.setBounds(248, 236, 71, 23);
-		jpanelPrincipal.add(cbxOutro1);
+		setEmail2(panel);
 
-		atletaSexo1 = new ButtonGroup();
-		atletaSexo1.add(cbxMasc1);
-		atletaSexo1.add(cbxFem1);
-		atletaSexo1.add(cbxOutro1);
+		setSexo2(panel);
 
-		JLabel dataNascimento = new JLabel("Data de Nascimento");
-		dataNascimento.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		dataNascimento.setBounds(10, 271, 242, 14);
-		jpanelPrincipal.add(dataNascimento);
+		setDataNascimento2(formatoDataNasc, panel);
 
-		txtDataNascimento1 = new JFormattedTextField(formatoDataNasc);
-		txtDataNascimento1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtDataNascimento1.setBounds(10, 296, 75, 23);
-		jpanelPrincipal.add(txtDataNascimento1);
 
-		JLabel lblAt = new JLabel("Atleta 1");
-		lblAt.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblAt.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAt.setBounds(0, 111, 379, 23);
-		getContentPane().add(lblAt);
+		setBotaoInscricao(torneio);
 
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBounds(399, 148, 379, 378);
-		getContentPane().add(panel);
+		setBotaoPdf();
 
-		txtNome2 = new JTextField();
-		txtNome2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtNome2.setColumns(10);
-		txtNome2.setBounds(10, 36, 359, 23);
-		panel.add(txtNome2);
+		setBotaoVoltar(usuario);
 
-		JLabel label_1 = new JLabel("CPF:");
-		label_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		label_1.setBounds(10, 67, 130, 14);
-		panel.add(label_1);
+		setAtleta2();
 
-		txtCpf2 = new JFormattedTextField();
-		txtCpf2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtCpf2.setColumns(10);
-		txtCpf2.setBounds(10, 92, 99, 23);
-		panel.add(txtCpf2);
+		setComboBoxCategoria();
 
-		JLabel label_2 = new JLabel("Telefone:");
-		label_2.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		label_2.setBounds(10, 123, 130, 14);
-		panel.add(label_2);
+		setComboBoxImpedimento();
 
-		txtTelefone2 = new JTextField();
-		txtTelefone2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtTelefone2.setColumns(10);
-		txtTelefone2.setBounds(10, 148, 181, 23);
-		panel.add(txtTelefone2);
+	}
 
-		JLabel label_3 = new JLabel("E-mail:");
-		label_3.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		label_3.setBounds(10, 170, 130, 23);
-		panel.add(label_3);
+	public void setComboBoxImpedimento() {
+		comboImpedimento = new JComboBox();
+		comboImpedimento.setBounds(205, 562, 181, 22);
+		getContentPane().add(comboImpedimento);
+		comboImpedimento.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboImpedimento.addItem("Nenhum");
+		comboImpedimento.addItem("Quinta-Feira pela Noite");
+		comboImpedimento.addItem("Sexta-Feira pela Noite");
+		comboImpedimento.addItem("Sábado pela Manhã");
 
-		txtEmail2 = new JTextField();
-		txtEmail2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtEmail2.setColumns(10);
-		txtEmail2.setBounds(10, 204, 359, 23);
-		panel.add(txtEmail2);
+		lblImpedimento = new JLabel("Impedimento de Horário");
+		lblImpedimento.setBounds(205, 538, 130, 23);
+		getContentPane().add(lblImpedimento);
+		lblImpedimento.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	}
 
-		JLabel label_4 = new JLabel("Sexo:");
+	public void setComboBoxCategoria() {
+		comboCategoria = new JComboBox();
+		comboCategoria.setBounds(24, 562, 124, 22);
+		getContentPane().add(comboCategoria);
+		comboCategoria.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboCategoria.addItem("Selecionar");
+		comboCategoria.addItem("PRIMEIRA");
+		comboCategoria.addItem("SEGUNDA");
+		comboCategoria.addItem("TERCEIRA");
+		comboCategoria.addItem("QUARTA");
+		comboCategoria.addItem("QUINTA");
+		comboCategoria.addItem("INICIANTE");
+
+		categorial = new JLabel("Categoria");
+		categorial.setBounds(24, 538, 144, 23);
+		getContentPane().add(categorial);
+		categorial.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	}
+
+	public void setAtleta2() {
+		lblDadosDaSua = new JLabel("Atleta 2");
+		lblDadosDaSua.setBounds(399, 111, 379, 23);
+		getContentPane().add(lblDadosDaSua);
+		lblDadosDaSua.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDadosDaSua.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	}
+
+	public void setBotaoVoltar(Usuario usuario) {
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(28, 640, 89, 23);
+		retorna = new RetornarInicial(usuario, this);
+		btnVoltar.addActionListener(retorna);
+		getContentPane().add(btnVoltar);
+
+		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	}
+
+	public void setBotaoPdf() {
+		btnPdf = new JButton("Gerar PDF");
+		btnPdf.setBounds(595, 640, 174, 23);
+		getContentPane().add(btnPdf);
+		btnPdf.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	}
+
+	public void setBotaoInscricao(Torneio torneio) {
+		btnInscricao = new JButton("Inscrever");
+		btnInscricao.setBounds(419, 640, 144, 23);
+		getContentPane().add(btnInscricao);
+		controllerCadastrar = new InscricaoController(torneio, dupla, this);
+		btnInscricao.addActionListener(controllerCadastrar);
+		btnInscricao.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	}
+
+	public void setDataNascimento2(MaskFormatter formatoDataNasc, JPanel panel) {
+		label_5 = new JLabel("Data de Nascimento");
+		label_5.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		label_5.setBounds(10, 271, 207, 14);
+		panel.add(label_5);
+
+		txtDataNascimento2 = new JFormattedTextField(formatoDataNasc);
+		txtDataNascimento2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtDataNascimento2.setBounds(10, 296, 75, 23);
+		panel.add(txtDataNascimento2);
+	}
+
+	public void setSexo2(JPanel panel) {
+		label_4 = new JLabel("Sexo:");
 		label_4.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		label_4.setBounds(10, 240, 46, 14);
 		panel.add(label_4);
@@ -234,92 +240,188 @@ public class InscricaoDuplas extends JFrame {
 		atletaSexo2.add(cbxMasc2);
 		atletaSexo2.add(cbxFem2);
 		atletaSexo2.add(cbxOutro2);
+	}
 
-		JLabel label_5 = new JLabel("Data de Nascimento");
-		label_5.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		label_5.setBounds(10, 271, 207, 14);
-		panel.add(label_5);
+	public void setEmail2(JPanel panel) {
+		label_3 = new JLabel("E-mail:");
+		label_3.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		label_3.setBounds(10, 170, 130, 23);
+		panel.add(label_3);
 
-		txtDataNascimento2 = new JFormattedTextField(formatoDataNasc);
-		txtDataNascimento2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		txtDataNascimento2.setBounds(10, 296, 75, 23);
-		panel.add(txtDataNascimento2);
+		txtEmail2 = new JTextField();
+		txtEmail2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtEmail2.setColumns(10);
+		txtEmail2.setBounds(10, 204, 359, 23);
+		panel.add(txtEmail2);
+	}
 
-		JLabel label = new JLabel("Nome Completo:");
+	public void setTelefone2(JPanel panel) {
+	    label_2 = new JLabel("Telefone:");
+		label_2.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		label_2.setBounds(10, 123, 130, 14);
+		panel.add(label_2);
+
+		txtTelefone2 = new JTextField();
+		txtTelefone2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtTelefone2.setColumns(10);
+		txtTelefone2.setBounds(10, 148, 181, 23);
+		panel.add(txtTelefone2);
+	}
+
+	public void setCpf2(JPanel panel) {
+		label_1 = new JLabel("CPF:");
+		label_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		label_1.setBounds(10, 67, 130, 14);
+		panel.add(label_1);
+
+		txtCpf2 = new JFormattedTextField();
+		txtCpf2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtCpf2.setColumns(10);
+		txtCpf2.setBounds(10, 92, 99, 23);
+		panel.add(txtCpf2);
+	}
+
+	public void setNome2(JPanel panel) {
+		label = new JLabel("Nome Completo:");
 		label.setBounds(0, 12, 191, 23);
 		panel.add(label);
 		label.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		
+		txtNome2 = new JTextField();
+		txtNome2.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtNome2.setColumns(10);
+		txtNome2.setBounds(10, 36, 359, 23);
+		panel.add(txtNome2);
+	}
 
-		btnInscricao = new JButton("Inscrever");
-		btnInscricao.setBounds(419, 640, 144, 23);
-		getContentPane().add(btnInscricao);
-		controllerCadastrar = new InscricaoController(torneio, dupla, this);
-		btnInscricao.addActionListener(controllerCadastrar);
-		btnInscricao.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	public JPanel criandoPainel1() {
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBounds(399, 148, 379, 378);
+		getContentPane().add(panel);
+		return panel;
+	}
 
-		btnPdf = new JButton("Gerar PDF");
-		btnPdf.setBounds(595, 640, 174, 23);
-		getContentPane().add(btnPdf);
-		btnPdf.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	public void setAtleta1() {
+		lblAt = new JLabel("Atleta 1");
+		lblAt.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblAt.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAt.setBounds(0, 111, 379, 23);
+		getContentPane().add(lblAt);
+	}
 
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(28, 640, 89, 23);
-		getContentPane().add(btnVoltar);
+	public void setDataNascimento1(MaskFormatter formatoDataNasc, JPanel jpanelPrincipal) {
+		dataNascimento = new JLabel("Data de Nascimento");
+		dataNascimento.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		dataNascimento.setBounds(10, 271, 242, 14);
+		jpanelPrincipal.add(dataNascimento);
 
-		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		txtDataNascimento1 = new JFormattedTextField(formatoDataNasc);
+		txtDataNascimento1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtDataNascimento1.setBounds(10, 296, 75, 23);
+		jpanelPrincipal.add(txtDataNascimento1);
+	}
 
-		JLabel lblDadosDaSua = new JLabel("Atleta 2");
-		lblDadosDaSua.setBounds(399, 111, 379, 23);
-		getContentPane().add(lblDadosDaSua);
-		lblDadosDaSua.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDadosDaSua.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	public void setSexo1(JPanel jpanelPrincipal) {
+		sexo = new JLabel("Sexo:");
+		sexo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		sexo.setBounds(10, 240, 75, 14);
+		jpanelPrincipal.add(sexo);
 
-		comboCategoria = new JComboBox();
-		comboCategoria.setBounds(24, 562, 124, 22);
-		getContentPane().add(comboCategoria);
-		comboCategoria.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboCategoria.addItem("Selecionar");
-		comboCategoria.addItem("PRIMEIRA");
-		comboCategoria.addItem("SEGUNDA");
-		comboCategoria.addItem("TERCEIRA");
-		comboCategoria.addItem("QUARTA");
-		comboCategoria.addItem("QUINTA");
-		comboCategoria.addItem("INICIANTE");
+		cbxMasc1 = new JRadioButton("Masculino");
+		cbxMasc1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		cbxMasc1.setBounds(62, 236, 91, 23);
+		jpanelPrincipal.add(cbxMasc1);
 
-		JLabel categorial = new JLabel("Categoria");
-		categorial.setBounds(24, 538, 144, 23);
-		getContentPane().add(categorial);
-		categorial.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		cbxFem1 = new JRadioButton("Feminino");
+		cbxFem1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		cbxFem1.setBounds(155, 236, 85, 23);
+		jpanelPrincipal.add(cbxFem1);
 
-		comboImpedimento = new JComboBox();
-		comboImpedimento.setBounds(205, 562, 181, 22);
-		getContentPane().add(comboImpedimento);
-		comboImpedimento.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboImpedimento.addItem("Nenhum");
-		comboImpedimento.addItem("Quinta-Feira pela Noite");
-		comboImpedimento.addItem("Sexta-Feira pela Noite");
-		comboImpedimento.addItem("Sábado pela Manhã");
+		cbxOutro1 = new JRadioButton("Outro");
+		cbxOutro1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		cbxOutro1.setBounds(248, 236, 71, 23);
+		jpanelPrincipal.add(cbxOutro1);
 
-		JLabel lblImpedimento = new JLabel("Impedimento de Horário");
-		lblImpedimento.setBounds(205, 538, 130, 23);
-		getContentPane().add(lblImpedimento);
-		lblImpedimento.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnVoltar.addActionListener(new ActionListener() { // Implementando Voltar
+		atletaSexo1 = new ButtonGroup();
+		atletaSexo1.add(cbxMasc1);
+		atletaSexo1.add(cbxFem1);
+		atletaSexo1.add(cbxOutro1);
+	}
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GerenciarTorneio tela = null;
-				try {
-					tela = new GerenciarTorneio(usuario, torneio);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				tela.setVisible(true);
-			}
-		});
+	public void setEmail1(JPanel jpanelPrincipal) {
+		email = new JLabel("E-mail:");
+		email.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		email.setBounds(10, 179, 130, 14);
+		jpanelPrincipal.add(email);
 
+		txtEmail1 = new JTextField();
+		txtEmail1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtEmail1.setColumns(10);
+		txtEmail1.setBounds(10, 204, 359, 23);
+		jpanelPrincipal.add(txtEmail1);
+	}
+
+	public void setTelefone1(JPanel jpanelPrincipal) {
+	    telefone = new JLabel("Telefone:");
+		telefone.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		telefone.setBounds(10, 123, 130, 14);
+		jpanelPrincipal.add(telefone);
+
+		txtTelefone1 = new JTextField();
+		txtTelefone1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtTelefone1.setColumns(10);
+		txtTelefone1.setBounds(10, 148, 181, 23);
+		jpanelPrincipal.add(txtTelefone1);
+	}
+
+	public void setCpf1(JPanel jpanelPrincipal) {
+		cpf = new JLabel("CPF:");
+		cpf.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		cpf.setBounds(10, 67, 130, 14);
+		jpanelPrincipal.add(cpf);
+
+		txtCpf1 = new JFormattedTextField();
+		txtCpf1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtCpf1.setColumns(10);
+		txtCpf1.setBounds(10, 92, 99, 23);
+		jpanelPrincipal.add(txtCpf1);
+	}
+
+	public void setNome1(JPanel jpanelPrincipal) {
+		nomeCompleto = new JLabel("Nome Completo:");
+		nomeCompleto.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		nomeCompleto.setBounds(10, 11, 181, 23);
+		jpanelPrincipal.add(nomeCompleto);
+
+		txtNome1 = new JTextField();
+		txtNome1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		txtNome1.setBounds(10, 36, 359, 23);
+		jpanelPrincipal.add(txtNome1);
+		txtNome1.setColumns(10);
+	}
+
+	public JPanel setJPanelPrincipal() {
+		jpanelPrincipal = new JPanel();
+		jpanelPrincipal.setBounds(10, 146, 379, 380);
+		getContentPane().add(jpanelPrincipal);
+		jpanelPrincipal.setLayout(null);
+		return jpanelPrincipal;
+	}
+
+	public void setRotuloInsricao() {
+		titulo = new JLabel("Inscrição");
+		titulo.setHorizontalAlignment(SwingConstants.CENTER);
+		titulo.setBounds(14, 25, 764, 58);
+		titulo.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		getContentPane().add(titulo);
+	}
+
+	public void setIcone() {
+		imgLogin = new ImageIcon("assets\\FourZeta.png");
+		setIconImage(imgLogin.getImage());
+		lblIcon = new JLabel(imgLogin);
+		getContentPane().add(lblIcon);
 	}
 
 	public void notifyCriacaoSucesso() {
@@ -500,7 +602,6 @@ public class InscricaoDuplas extends JFrame {
 		this.controllerCadastrar = controllerCadastrar;
 	}
 
-
 	public ButtonGroup getAtletaSexo1() {
 		return atletaSexo1;
 	}
@@ -543,7 +644,6 @@ public class InscricaoDuplas extends JFrame {
 		frame.setVisible(true);
 		frame.setSize(frame.SIZE);
 		frame.setLocationRelativeTo(null);
-		
 
 	}
 }

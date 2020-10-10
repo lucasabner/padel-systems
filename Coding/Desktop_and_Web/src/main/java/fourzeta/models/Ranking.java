@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
 import fourzeta.IElement;
 
 @Entity
@@ -16,37 +19,36 @@ public class Ranking implements Comparable<Ranking>, Serializable, IElement {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
+	
+	@Null()
 	private int pontos;
 
+	@NotNull()
 	@ManyToOne(targetEntity = Atleta.class)
 	private Atleta atleta;
 
 	@ManyToOne
+	@NotNull()
 	private Circuito circuito;
-	
+
 	@ManyToOne
+	@NotNull()
 	private Torneio torneio;
 
-//	@Enumerated(EnumType.ORDINAL)
+	@NotNull()
 	private String categoria;
 
 	public int getId() {
 		return id;
 	}
-	
-	
 
 	public Torneio getTorneio() {
 		return torneio;
 	}
 
-
-
 	public void setTorneio(Torneio torneio) {
 		this.torneio = torneio;
 	}
-
-
 
 	public Atleta getAtleta() {
 		return atleta;
@@ -64,16 +66,6 @@ public class Ranking implements Comparable<Ranking>, Serializable, IElement {
 		this.circuito = circuito;
 	}
 
-	// public Atleta getAtleta() {
-//		return atleta;
-//	}
-//
-//
-//	public void setAtleta(Atleta atleta) {
-//		this.atleta = atleta;
-//	}
-	
-	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -102,5 +94,7 @@ public class Ranking implements Comparable<Ranking>, Serializable, IElement {
 		else
 			return 1;
 	}
+	
+	
 
 }

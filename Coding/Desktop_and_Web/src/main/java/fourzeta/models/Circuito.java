@@ -14,10 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
-import fourzeta.desktop_views.CadastrarCircuito;
 
 @Entity
-public class Circuito implements Serializable, IElement{
+public class Circuito implements Serializable, IElement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,18 +25,17 @@ public class Circuito implements Serializable, IElement{
 	private String nome;
 	private String descricao;
 
-	// Criou a tabela Circuito_Rankings, ou seja, Um circuito tem varios ranks
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy ="circuito",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "circuito", cascade = CascadeType.ALL)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Ranking> rankings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy ="circuito",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy = "circuito", cascade = CascadeType.ALL)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Torneio> torneios;
-	
+
 	@ManyToOne()
 	private Usuario usuario;
-	
+
 	public List<Ranking> getRankings() {
 		return rankings;
 	}
@@ -70,48 +68,15 @@ public class Circuito implements Serializable, IElement{
 		this.rankings = rankings;
 		this.torneios = torneios;
 	}
-	
-	public Circuito bindCircuito(CadastrarCircuito tela) {
-
-		Circuito circuito = new Circuito();
-		circuito.setNome(tela.getTextNomeCircuito().getText());
-		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
-
-		return circuito;
-
-	}
 
 	public List<Ranking> getRanksByCategoria(String txtCategoria) {
-		String categoria = txtCategoria.toUpperCase();
-//		switch (txtCategoria) {
-//		case "PRIMEIRA":
-//			categoria = "PRIMEIRA";
-//			break;
-//		case "SEGUNDA":
-//			categoria = "SEGUNDA";
-//			break;
-//		case "TERCEIRA":
-//			categoria = "TERCEIRA";
-//			break;
-//		case "QUARTA":
-//			categoria = "QUARTA";
-//			break;
-//		case "QUINTA":
-//			categoria = "QUINTA";
-//			break;
-//		case "INICIANTE":
-//			categoria = "INICIANTE";
-//			break;
-//		default:
-//			categoria = "INICIANTE";
-//		}
+		String categoria = this.getTxtCategoria(txtCategoria);
 
 		List<Ranking> ranksCat = new ArrayList<Ranking>();
 		ranksCat = this.getPontuacoes();
 
 		List<Ranking> pontCat = new ArrayList<Ranking>();
 
-	 
 		for (Ranking pontuacao : ranksCat) {
 			if (pontuacao.getCategoria().equals(categoria)) {
 				pontCat.add(pontuacao);
@@ -120,6 +85,33 @@ public class Circuito implements Serializable, IElement{
 		pontCat.sort(new OrderPontuacaoDecrescente());
 
 		return pontCat;
+	}
+
+	public String getTxtCategoria(String txtCategoria) {
+		String categoria = txtCategoria.toUpperCase();
+		switch (txtCategoria) {
+		case "PRIMEIRA":
+			categoria = "PRIMEIRA";
+			break;
+		case "SEGUNDA":
+			categoria = "SEGUNDA";
+			break;
+		case "TERCEIRA":
+			categoria = "TERCEIRA";
+			break;
+		case "QUARTA":
+			categoria = "QUARTA";
+			break;
+		case "QUINTA":
+			categoria = "QUINTA";
+			break;
+		case "INICIANTE":
+			categoria = "INICIANTE";
+			break;
+		default:
+			categoria = "INICIANTE";
+		}
+		return categoria;
 	}
 
 	public Torneio getTorneio(int id) {
@@ -151,7 +143,7 @@ public class Circuito implements Serializable, IElement{
 		this.torneios = torneios;
 	}
 
-	//Sem anotação @Override
+	// Sem anotação @Override
 	public int getId() {
 		return id;
 	}
@@ -167,6 +159,5 @@ public class Circuito implements Serializable, IElement{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 }
