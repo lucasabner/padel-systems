@@ -30,20 +30,24 @@ public class CadastrarCircuito extends JFrame {
 	private TextField textDescricaoCircuito;
 
 	public CadastrarCircuito(Usuario usuario) throws ParseException, IOException {
+		this.configFrame();
+		this.getContentPane().add(configLblCadastrar());
+		this.getContentPane().add(configLblNome());
+		this.getContentPane().add(configTxtNome());	
+		this.getContentPane().add(configLblDescricao());
+		this.getContentPane().add(configBtnVoltar(usuario));
+		this.getContentPane().add(configBtnCadastrar(usuario));
+		this.getContentPane().add(configTxtDescricao());
+	}
+
+	private void configFrame() {
 		this.setTitle("Cadastrar Circuito");
 		this.setSize(SIZE);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
-		getContentPane().add(configLblCadastrar());
-		getContentPane().add(configLblNome());
-		getContentPane().add(configTxtNome());	
-		getContentPane().add(configLblDescricao());
-		getContentPane().add(configBtnVoltar(usuario));
-		getContentPane().add(configBtnCadastrar(usuario));
-		getContentPane().add(configTxtDescricao());
+		this.getContentPane().setLayout(null);
 	}
-
-	public JLabel configLblCadastrar() {
+	
+	private JLabel configLblCadastrar() {
 		this.lblCadastrar = new JLabel("Cadastrar Circuito");
 		this.lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblCadastrar.setFont(new Font(this.FONTE, Font.BOLD, 30));
@@ -51,35 +55,35 @@ public class CadastrarCircuito extends JFrame {
 		return this.lblCadastrar;
 	}
 	
-	public JLabel configLblNome() {
+	private JLabel configLblNome() {
 		this.lblNome = new JLabel("Nome:");
 		this.lblNome.setFont(new Font(this.FONTE, Font.BOLD, 14));
 		this.lblNome.setBounds(22, 50, 66, 15);
 		return this.lblNome;
 	}
 	
-	public JTextField configTxtNome() {
+	private JTextField configTxtNome() {
 		this.textNomeCircuito = new JTextField();
 		this.textNomeCircuito.setBounds(22, 74, 300, 19);
 		this.textNomeCircuito.setColumns(10);
 		return this.textNomeCircuito;
 	}
 	
-	public JLabel configLblDescricao() {
+	private JLabel configLblDescricao() {
 		this.lblDescricao = new JLabel("Descrição:");
 		this.lblDescricao.setFont(new Font(this.FONTE, Font.BOLD, 14));
 		this.lblDescricao.setBounds(22, 104, 90, 15);
 		return this.lblDescricao;
 	}
 	
-	public TextField configTxtDescricao() {
+	private TextField configTxtDescricao() {
 		this.textDescricaoCircuito = new TextField();
 		this.textDescricaoCircuito.setBounds(22, 128, 300, 115);
 		this.textDescricaoCircuito.setColumns(10);
 		return this.textDescricaoCircuito;
 	}
 	
-	public JButton configBtnVoltar(Usuario usuario) {
+	private JButton configBtnVoltar(Usuario usuario) {
 		this.btnVoltar = new JButton("Voltar");
 		this.btnVoltar.addActionListener(new ActionListener() {
 			@Override
@@ -99,17 +103,12 @@ public class CadastrarCircuito extends JFrame {
 		return this.btnVoltar;
 	}
 	
-	public JButton configBtnCadastrar(Usuario usuario) {
+	private JButton configBtnCadastrar(Usuario usuario) {
 		this.btnCadastrar = new JButton("Cadastrar");
 		CadastrarCircuitoController cadCircuito = new CadastrarCircuitoController(usuario, this);
 		this.btnCadastrar.addActionListener(cadCircuito);
 		this.btnCadastrar.setBounds(208, 275, 114, 25);
 		return this.btnCadastrar;
-	}
-	
-	public JTextField configTxtNomeCircuito (JTextField textNomeCircuito) {
-		
-		return textNomeCircuito;
 	}
 	
 	public JTextField getTextNomeCircuito() {
