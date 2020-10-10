@@ -22,33 +22,43 @@ import fourzeta.resources.TorneioResource;
 public class Editar extends JFrame {
 
 	private final Dimension SIZE = new Dimension(350, 200);
+	private final String FONTE = "Dialog";
 	private JLabel lblCadastrar;
 	private JLabel lblNome;
 	private JButton btnVoltar;
-	private JButton btnCadastrar;
-	private JComboBox comboBox;
+	private JButton btnEditar;
+	private JComboBox<String> comboBox;
 
 	public Editar(Usuario usuario, String nomeEdit) throws ParseException, IOException, NotBoundException {
-
-		setTitle(nomeEdit);
+		this.setTitle(nomeEdit);
 		this.setSize(SIZE);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
+		this.getContentPane().setLayout(null);
+		this.getContentPane().add(configLblCadastrar(nomeEdit));
+		this.getContentPane().add(configLblNome(nomeEdit));
+		this.getContentPane().add(configBtnVoltar(usuario));
+		this.getContentPane().add(configBtnEditar());
+		this.getContentPane().add(configCombobox(nomeEdit));
+	}
 
-		lblCadastrar = new JLabel("Editar " + nomeEdit);
-		lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCadastrar.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblCadastrar.setBounds(12, 12, 321, 26);
-		getContentPane().add(lblCadastrar);
-
-		lblNome = new JLabel("Selecione um " + nomeEdit + ": ");
-		lblNome.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNome.setBounds(22, 66, 300, 15);
-		getContentPane().add(lblNome);
-
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-
+	private JLabel configLblCadastrar(String nomeEdit) {
+		this.lblCadastrar = new JLabel("Editar " + nomeEdit);
+		this.lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblCadastrar.setFont(new Font(this.FONTE, Font.BOLD, 30));
+		this.lblCadastrar.setBounds(12, 12, 321, 26);
+		return this.lblCadastrar;		
+	}
+	
+	private JLabel configLblNome(String nomeEdit) {
+		this.lblNome = new JLabel("Selecione um " + nomeEdit + ": ");
+		this.lblNome.setFont(new Font(this.FONTE, Font.BOLD, 14));
+		this.lblNome.setBounds(22, 66, 300, 15);
+		return this.lblNome;
+	}
+	
+	private JButton configBtnVoltar(Usuario usuario) {
+		this.btnVoltar = new JButton("Voltar");
+		this.btnVoltar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				SelecionarTorneio inicio = null;
@@ -62,40 +72,38 @@ public class Editar extends JFrame {
 				inicio.setVisible(true);
 			}
 		});
-		btnVoltar.setBounds(22, 133, 114, 25);
-		getContentPane().add(btnVoltar);
-
-		btnCadastrar = new JButton("Editar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		this.btnVoltar.setBounds(22, 133, 114, 25);
+		return this.btnVoltar;
+	}
+	
+	private JButton configBtnEditar() {
+		this.btnEditar = new JButton("Editar");
+		this.btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnCadastrar.setBounds(212, 133, 114, 25);
-		getContentPane().add(btnCadastrar);
-
-		if (nomeEdit == "Circuito") {
-			CircuitoResource cr = new CircuitoResource();
-			comboBox = new JComboBox();
-			comboBox.setBounds(22, 86, 301, 24);
-			comboBox.addItem("Selecionar");
-			for (Circuito circuito : cr.listaCircuitos()) {
-				comboBox.addItem(circuito.getNome());
-			}
-
-			getContentPane().add(comboBox);
-		} else {
-			TorneioResource tr = new TorneioResource();
-			comboBox = new JComboBox();
-			comboBox.setBounds(22, 86, 301, 24);
-			comboBox.addItem("Selecionar");
-			for (Torneio torneio : tr.listaTorneios()) {
-				comboBox.addItem(torneio.getNome());
-			}
-
-			getContentPane().add(comboBox);
-		}
+		this.btnEditar.setBounds(212, 133, 114, 25);
+		return this.btnEditar;
 	}
-
+	
+	private JComboBox configCombobox(String nomeEdit) {
+		this.comboBox = new JComboBox<String>();
+		this.comboBox.setBounds(22, 86, 301, 24);
+		this.comboBox.addItem("Selecionar");
+		if(nomeEdit == "Circuito") {
+			CircuitoResource cr = new CircuitoResource();
+			for (Circuito circuito : cr.listaCircuitos()) {
+				this.comboBox.addItem(circuito.getNome());
+			}
+		}else {
+			TorneioResource tr = new TorneioResource();
+			for (Torneio torneio : tr.listaTorneios()) {
+				this.comboBox.addItem(torneio.getNome());
+			}
+		}
+		return this.comboBox;
+	}
+	
 	public void notifyCampoIncompleto() {
 		JOptionPane.showMessageDialog(null, "Você não preencheu todos os Campos!");
 	}
@@ -107,7 +115,7 @@ public class Editar extends JFrame {
 	public static void main(String[] args) throws IOException, ParseException, NotBoundException {
 		Usuario g = new Usuario();
 		g.setNome("Teste");
-		Editar frame = new Editar(g, "");
+		Editar frame = new Editar(g, "Circuito");
 		frame.setVisible(true);
 		frame.setSize(frame.SIZE);
 		frame.setLocationRelativeTo(null);
