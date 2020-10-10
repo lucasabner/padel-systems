@@ -25,10 +25,13 @@ public class Quadra implements Serializable, IElement{
 		this.numero = numero;
 	}
 	
+<<<<<<< HEAD
 	// Sem constructor padrao
 	public Quadra() {
 		
 	}
+=======
+>>>>>>> parent of d72ccd7... Refatorações na controller
 
 	public Torneio getTorneio() {
 		return torneio;

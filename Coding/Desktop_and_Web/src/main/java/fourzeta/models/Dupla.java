@@ -62,7 +62,11 @@ public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 	}
 
 
+<<<<<<< HEAD
 	public long getPonTotal() {
+=======
+	public String getPonTotal() {
+>>>>>>> parent of d72ccd7... Refatorações na controller
 		return ponTotal;
 	}
 	

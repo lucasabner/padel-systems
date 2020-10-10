@@ -47,6 +47,10 @@ public class EncerrarController implements ActionListener {
 		this.torneio = torneio;
 	}
 
+	public EncerrarController() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (!this.torneio.isInscEncerradas()) {
@@ -71,84 +75,32 @@ public class EncerrarController implements ActionListener {
 		//montaChaves e monta jogos
        // torneio.montarChave(duplas2)
 		torneio.montarChave();
-		
-		List<Jogo> jogos = new ArrayList<Jogo>();
-
-		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 2
-			Jogo jo1 = new Jogo();
-			if (chave.getDupla1() != null && chave.getDupla2() != null) {
-				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
-				jo1.setDupla1(chave.getDupla1());
-				jo1.setDupla2(chave.getDupla2());
-				jo1.setCategoria(chave.getCategoria());
-				jo1.setChave(chave);
-			}
-			jogos.add(this.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla2(), jo1));
-			chave.setJogos(jogos);
-			jr = new JogoResource();
-			jr.registraJogo(jo1);
-			chaver = new ChaveResource();
-			chaver.registraChave(chave);
-
-		}
-		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 3
-			Jogo jo2 = new Jogo();
-			if (chave.getDupla1() != null && chave.getDupla3() != null) {
-				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
-				jo2.setDupla1(chave.getDupla1());
-				jo2.setDupla2(chave.getDupla3());
-				jo2.setCategoria(chave.getCategoria());
-				jo2.setChave(chave);
-			}
-			jogos.add(this.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla3(), jo2));
-			chave.setJogos(jogos);
-			jr = new JogoResource();
-			jr.registraJogo(jo2);
-			chaver = new ChaveResource();
-			chaver.registraChave(chave);
-		}
-		for (Chave chave : torneio.getChaves()) { // Jogos 2 VS 3
-			Jogo jo3 = new Jogo();
-			if (chave.getDupla2() != null && chave.getDupla3() != null) {
-				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());
-				jo3.setDupla1(chave.getDupla2());
-				jo3.setDupla2(chave.getDupla3());
-				jo3.setCategoria(chave.getCategoria());
-				jo3.setChave(chave);
-			}
-			jogos.add(this.distribuirHorarios(chave, chave.getDupla2(), chave.getDupla3(), jo3));
-			chave.setJogos(jogos);
-			jr = new JogoResource();
-			jr.registraJogo(jo3);
-
-			chaver = new ChaveResource();
-			chaver.registraChave(chave);
-		}
-		int cat1 = 0, cat2 = 0, cat3 = 0, cat4 = 0, cat5 = 0, cat6 = 0;
-		for (Chave chave : torneio.getChaves()) {
-			switch (chave.getCategoria()) {
-			case "PRIMEIRA":
-				cat1++;
-				break;
-			case "SEGUNDA":
-				cat2++;
-				break;
-			case "TERCEIRA":
-				cat3++;
-				break;
-			case "QUARTA":
-				cat4++;
-				break;
-			case "QUINTA":
-				cat5++;
-				break;
-			case "SEXTA":
-				cat6++;
-				break;
-			default:
-				break;
-			}
-		}
+		torneio.distribuirJogos();
+//		int cat1 = 0, cat2 = 0, cat3 = 0, cat4 = 0, cat5 = 0, cat6 = 0;
+//		for (Chave chave : torneio.getChaves()) {
+//			switch (chave.getCategoria()) {
+//			case "PRIMEIRA":
+//				cat1++;
+//				break;
+//			case "SEGUNDA":
+//				cat2++;
+//				break;
+//			case "TERCEIRA":
+//				cat3++;
+//				break;
+//			case "QUARTA":
+//				cat4++;
+//				break;
+//			case "QUINTA":
+//				cat5++;
+//				break;
+//			case "SEXTA":
+//				cat6++;
+//				break;
+//			default:
+//				break;
+//			}
+//		}
 //		iniciarMataMata(cat1, "PRIMEIRA");
 //		iniciarMataMata(cat2, "SEGUNDA");
 //		iniciarMataMata(cat3, "TERCEIRA");
@@ -157,6 +109,7 @@ public class EncerrarController implements ActionListener {
 //		iniciarMataMata(cat6, "INICIANTE");
 
 	}
+
 
 	private void registraJogoChave(Jogo jogo, Chave chave) {
 		chave.getJogos().addAll((List.of(jogo)));
@@ -527,7 +480,7 @@ public class EncerrarController implements ActionListener {
 				tr.registraTorneio(torneio);
 				break;
 			case 21:
-				// Verifica de acorco com o doc disponibilizado pelo professor Sam
+				// Verifica de acorco com o doc disponibilizado pel o professor Sam 
 				chave = new Chave();
 				chave.setNome("Oitavas(O1)");
 				chave.setCategoria(cat);
