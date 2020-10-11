@@ -29,9 +29,14 @@ import fourzeta.table.RankingTableModel;
 public class RankingView extends JFrame {
 
 	private static final Dimension SIZE = new Dimension(800, 550);
-	private JLabel titulo;
+	private final String FONTE = "Times New Roman";
+	private ImageIcon imgLogin;
+	private JLabel lblTitulo;
+	private JLabel lblCircuito;
+	private JLabel lblCategoria;
 	private PesquisarRankingController pesquisarController;
 	private JButton btnVoltar;
+	private JButton btnPesquisar;
 	private JTable rankingsTable;
 	private RankingTableModel model;
 	private JScrollPane sp;
@@ -39,35 +44,54 @@ public class RankingView extends JFrame {
 	private JComboBox comboCategoria;
 	private JLabel lblIcon;
 
-	public RankingView(Usuario usuario)
-			throws ParseException, RemoteException, MalformedURLException, NotBoundException {
-		getContentPane().setLayout(null);
-		setTitle("Sistema de Gerenciamento de Padel");
+	public RankingView(Usuario usuario)	throws ParseException, RemoteException, MalformedURLException, NotBoundException {
+		this.configFrame();
+		this.getContentPane().add(configTblRanking());
+		this.getContentPane().add(configIcon());
+		this.getContentPane().add(configLblTitulo());
+		this.getContentPane().add(configBtnVoltar(usuario));
+		this.getContentPane().add(configComboCategoria());
+		this.getContentPane().add(configComboCircuito());
+		this.getContentPane().add(configLblCircuito());
+		this.getContentPane().add(configLblCategoria());
+		this.getContentPane().add(configBtnPesquisar());
+	}
+	
+	private void configFrame() {
+		this.getContentPane().setLayout(null);
+		this.setTitle("Sistema de Gerenciamento de Padel");
 		this.setSize(SIZE);
 		this.setLocationRelativeTo(null);
-		model = new RankingTableModel();
-		rankingsTable = new JTable(model);
-		rankingsTable.setBounds(53, 100, 402, 150);
-		sp = new JScrollPane(rankingsTable);
-		sp.setLocation(36, 140);
-		sp.setBounds(56, 83, 688, 318);
-		getContentPane().add(sp);
-
-		// mudando o icon
-		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
-		setIconImage(imgLogin.getImage());
-		lblIcon = new JLabel(imgLogin);
-		getContentPane().add(lblIcon);
-
-		titulo = new JLabel("Ranking");
-		titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		titulo.setBounds(0, 11, 784, 58);
-		titulo.setFont(new Font("Times New Roman", Font.BOLD, 45));
-		getContentPane().add(titulo);
-
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() { // Implementando Voltar
-
+	}
+	
+	private JScrollPane configTblRanking() {
+		this.model = new RankingTableModel();
+		this.rankingsTable = new JTable(model);
+		this.rankingsTable.setBounds(53, 100, 402, 150);
+		this.sp = new JScrollPane(rankingsTable);
+		this.sp.setLocation(36, 140);
+		this.sp.setBounds(56, 83, 688, 318);
+		return this.sp;
+	}
+	
+	private JLabel configIcon() {
+		this.imgLogin = new ImageIcon("assets\\FourZeta.png");
+		setIconImage(this.imgLogin.getImage());
+		this.lblIcon = new JLabel(this.imgLogin);
+		return this.lblIcon;
+	}
+	
+	private JLabel configLblTitulo() {
+		this.lblTitulo = new JLabel("Ranking");
+		this.lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblTitulo.setBounds(0, 11, 784, 58);
+		this.lblTitulo.setFont(new Font(this.FONTE, Font.BOLD, 45));
+		return this.lblTitulo;
+	}
+	
+	private JButton configBtnVoltar(Usuario usuario) {
+		this.btnVoltar = new JButton("Voltar");
+		this.btnVoltar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Inicial inicial = null;
@@ -81,56 +105,62 @@ public class RankingView extends JFrame {
 				inicial.setVisible(true);
 			}
 		});
-		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnVoltar.setBounds(56, 429, 106, 23);
-		getContentPane().add(btnVoltar);
-
-		comboCategoria = new JComboBox();
-		comboCategoria.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboCategoria.addItem("Selecionar");
-		comboCategoria.addItem("PRIMEIRA");
-		comboCategoria.addItem("SEGUNDA");
-		comboCategoria.addItem("TERCEIRA");
-		comboCategoria.addItem("QUARTA");
-		comboCategoria.addItem("QUINTA");
-		comboCategoria.addItem("INICIANTE");
-
-		comboCategoria.setBounds(490, 429, 124, 22);
-		getContentPane().add(comboCategoria);
-
-		CircuitoResource cr = new CircuitoResource();
-		comboCircuito = new JComboBox();
-		comboCircuito.setBounds(315, 429, 165, 22);
-		comboCircuito.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboCircuito.addItem("Selecionar");
-		for (Circuito circuito : cr.listaCircuitos()) {
-
-			comboCircuito.addItem(circuito.getNome());
-		}
-
-		getContentPane().add(comboCircuito);
-		JLabel circuitoLbl = new JLabel("Circuito");
-		circuitoLbl.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		circuitoLbl.setBounds(315, 412, 144, 15);
-		getContentPane().add(circuitoLbl);
-
-		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		lblCategoria.setBounds(490, 410, 132, 18);
-		getContentPane().add(lblCategoria);
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		pesquisarController = new PesquisarRankingController(this);
-		btnPesquisar.addActionListener(pesquisarController);
-		btnPesquisar.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnPesquisar.setBounds(624, 430, 106, 23);
-		getContentPane().add(btnPesquisar);
-
+		this.btnVoltar.setFont(new Font(this.FONTE, Font.BOLD, 16));
+		this.btnVoltar.setBounds(56, 429, 106, 23);
+		return this.btnVoltar;
 	}
+	
+	private JComboBox configComboCategoria() {
+		this.comboCategoria = new JComboBox();
+		this.comboCategoria.setFont(new Font(this.FONTE, Font.PLAIN, 14));
+		this.comboCategoria.addItem("Selecionar");
+		this.comboCategoria.addItem("PRIMEIRA");
+		this.comboCategoria.addItem("SEGUNDA");
+		this.comboCategoria.addItem("TERCEIRA");
+		this.comboCategoria.addItem("QUARTA");
+		this.comboCategoria.addItem("QUINTA");
+		this.comboCategoria.addItem("INICIANTE");
+		this.comboCategoria.setBounds(490, 429, 124, 22);
+		return this.comboCategoria;
+	}
+	
+	private JComboBox configComboCircuito() {
+		CircuitoResource cr = new CircuitoResource();
+		this.comboCircuito = new JComboBox();
+		this.comboCircuito.setBounds(315, 429, 165, 22);
+		this.comboCircuito.setFont(new Font(this.FONTE, Font.PLAIN, 14));
+		this.comboCircuito.addItem("Selecionar");
+		for (Circuito circuito : cr.listaCircuitos()) {
+			this.comboCircuito.addItem(circuito.getNome());
+		}
+		return this.comboCircuito;
+	}
+	
+	private JLabel configLblCircuito() {
+		this.lblCircuito = new JLabel("Circuito");
+		this.lblCircuito.setFont(new Font(this.FONTE, Font.BOLD, 16));
+		this.lblCircuito.setBounds(315, 412, 144, 15);
+		return this.lblCircuito;
+	}
+	
+	private JLabel configLblCategoria() {
+		this.lblCategoria = new JLabel("Categoria");
+		this.lblCategoria.setFont(new Font(this.FONTE, Font.BOLD, 16));
+		this.lblCategoria.setBounds(490, 410, 132, 18);
+		return this.lblCategoria;
+	}
+	
+	private JButton configBtnPesquisar() {
+		this.btnPesquisar = new JButton("Pesquisar");
+		this.pesquisarController = new PesquisarRankingController(this);
+		this.btnPesquisar.addActionListener(this.pesquisarController);
+		this.btnPesquisar.setFont(new Font(this.FONTE, Font.BOLD, 16));
+		this.btnPesquisar.setBounds(624, 430, 106, 23);
+		return this.btnPesquisar;
+	}	
 
 	public void notifyCriacaoSucesso() {
 		JOptionPane.showMessageDialog(this, ":)");
-
 	}
 
 	public JButton getBtnInscricao() {
@@ -170,7 +200,6 @@ public class RankingView extends JFrame {
 	}
 
 	public void readTable(List<Ranking> rankings) { // Método para ler FINDALL
-
 		RankingTableModel rankingsModel = new RankingTableModel();
 		this.rankingsTable.setModel(rankingsModel);
 
@@ -178,5 +207,13 @@ public class RankingView extends JFrame {
 			rankingsModel.addRow(ranking);
 		}
 
+	}
+	
+	public static void main(String[] args) throws IOException, ParseException, NotBoundException {
+		Usuario g = new Usuario();
+		g.setNome("Teste");
+		RankingView frame = new RankingView(g);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 	}
 }
