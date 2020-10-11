@@ -61,8 +61,8 @@ public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 		this.categoria = categoria.toUpperCase();
 	}
 
-	public long getPonTotal() {
 
+	public long getPonTotal() {
 		return ponTotal;
 	}
 	

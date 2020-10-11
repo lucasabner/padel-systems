@@ -25,6 +25,10 @@ public class Quadra implements Serializable, IElement {
 		this.numero = numero;
 	}
 
+	public Quadra() {
+		
+	}
+
 	public Torneio getTorneio() {
 		return torneio;
 	}
