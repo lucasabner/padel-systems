@@ -42,13 +42,14 @@ public class GradeJogos extends JFrame {
 	private JLabel lblselecione;
 
 	public GradeJogos(Usuario usuario, Torneio torneio) throws ParseException {		
+		this.controller = new PesquisarJogosController(usuario, torneio, this);
 		this.getContentPane().add(configIcon());		
 		this.configFrame();
 		this.getContentPane().add(configTblJogos(torneio));
 		this.getContentPane().add(configLblTitulo());
 		this.getContentPane().add(configBtnVoltar(usuario, torneio));
 		this.getContentPane().add(configComboQuadra());
-		this.getContentPane().add(configBtnPesquisar(usuario, torneio));
+		this.getContentPane().add(configBtnPesquisar());
 		this.getContentPane().add(configLblQuadras());
 		this.getContentPane().add(configLblSelecione());
 	}
@@ -88,19 +89,8 @@ public class GradeJogos extends JFrame {
 	
 	private JButton configBtnVoltar(Usuario usuario, Torneio torneio) {
 		this.btnVoltar = new JButton("Voltar");
-		this.btnVoltar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GerenciarTorneio tela = null;
-				try {
-					tela = new GerenciarTorneio(usuario, torneio);
-				} catch (ParseException | IOException e) {
-					e.printStackTrace();
-				}
-				setVisible(false);
-				tela.setVisible(true);
-			}
-		});
+		this.btnVoltar.setName("btnVoltar");
+		this.btnVoltar.addActionListener(this.controller);
 		this.btnVoltar.setFont(new Font(this.FONTE, Font.BOLD, 16));
 		this.btnVoltar.setBounds(47, 644, 106, 23);
 		return this.btnVoltar;
@@ -117,10 +107,10 @@ public class GradeJogos extends JFrame {
 		return this.comboQuadra;
 	}
 	
-	private JButton configBtnPesquisar(Usuario usuario, Torneio torneio) {
+	private JButton configBtnPesquisar() {
 		this.btnPesquisar = new JButton("Pesquisar");
-		this.controller = new PesquisarJogosController(usuario, torneio, this);
-		this.btnPesquisar.addActionListener(controller);
+		this.btnPesquisar.setName("btnPesquisar");
+		this.btnPesquisar.addActionListener(this.controller);
 		this.btnPesquisar.setFont(new Font(this.FONTE, Font.BOLD, 16));
 		this.btnPesquisar.setBounds(274, 146, 157, 23);
 		return this.btnPesquisar;
