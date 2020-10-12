@@ -3,25 +3,25 @@ package fourzeta.desktop_views;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 import fourzeta.controllers.desktop.LoginController;
 
 public class Login extends JFrame {
 
 	private final Dimension SIZE = new Dimension(480, 250);
+	LoginController loginController = new LoginController(this);
 	private JLabel lblIcon;
 	private JLabel lblImagem;
 	private JLabel lblSenha;
@@ -32,13 +32,28 @@ public class Login extends JFrame {
 	private JButton btnSair;
 
 	public Login() throws ParseException, IOException {
+		this.configFrame();
+		this.configLblImagem();
+		this.configLblIcon();
+		this.confiLblUsuario();
+		this.configTxtUsuario();
+		this.confiLblSenha();
+		this.configTxSenha();
+		this.configBtnEntrar();
+		this.configBtnSair();
 
+	}
+
+	public void configFrame() {
 		setTitle("Login");
 		this.setSize(SIZE);
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
 
+	// Setando Imagem
+	private JLabel configLblImagem() throws IOException {
 		lblImagem = new JLabel("");
 		lblImagem.setBounds(43, 33, 154, 146);
 		getContentPane().add(lblImagem);
@@ -49,52 +64,70 @@ public class Login extends JFrame {
 		ImageIcon imagemZeta = new ImageIcon(
 				img.getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_SMOOTH));
 		lblImagem.setIcon(imagemZeta);
+		return lblImagem;
 
-		// mudando o icon
+	}
+
+	// Setando Icon
+	private JLabel configLblIcon() {
 		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
 		setIconImage(imgLogin.getImage());
 		lblIcon = new JLabel(imgLogin);
 		getContentPane().add(lblIcon);
+		return lblIcon;
 
+	}
+
+	public JLabel confiLblUsuario() {
 		lblUsurio = new JLabel("Usuário:");
 		lblUsurio.setBounds(221, 33, 66, 15);
 		lblUsurio.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		getContentPane().add(lblUsurio);
+		return lblUsurio;
+	}
 
+	public JTextField configTxtUsuario() {
 		txtUsuario = new JTextField();
 		txtUsuario.setColumns(10);
 		txtUsuario.setBounds(221, 54, 200, 19);
 		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		getContentPane().add(txtUsuario);
+		return txtUsuario;
+	}
 
+	public JLabel confiLblSenha() {
 		lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(221, 85, 66, 15);
 		lblSenha.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		getContentPane().add(lblSenha);
+		return lblSenha;
 
+	}
+
+	public JTextField configTxSenha() {
 		txtSenha = new JPasswordField();
 		txtSenha.setColumns(10);
 		txtSenha.setBounds(221, 106, 200, 19);
 		txtSenha.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		getContentPane().add(txtSenha);
+		return txtSenha;
 
+	}
+
+	private JButton configBtnEntrar() {
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(221, 154, 89, 25);
 		btnEntrar.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		getContentPane().add(btnEntrar);
-		LoginController loginController = new LoginController(this);
 		btnEntrar.addActionListener(loginController);
+		return btnEntrar;
+	}
 
+	private JButton configBtnSair() {
 		btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		btnSair.setBounds(332, 154, 89, 25);
-		btnSair.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		getContentPane().add(btnSair);
+		getContentPane().add(loginController.btnSair(btnSair));
 
+		return btnSair;
 	}
 
 	public static void main(String[] args) throws IOException, ParseException {
@@ -102,16 +135,6 @@ public class Login extends JFrame {
 		frame.setVisible(true);
 		frame.setSize(frame.SIZE);
 		frame.setLocationRelativeTo(null);
-	}
-
-	public void notifyCampoVazio() {
-		JOptionPane.showMessageDialog(null, "Preencha todos Campos para Entrar!");
-
-	}
-
-	public void notifyUsuarioIncorreto() {
-		JOptionPane.showMessageDialog(null, "Usuário e(ou) Senha Incorreto! \nDigite novamente!");
-
 	}
 
 	public JLabel getLblIcon() {
