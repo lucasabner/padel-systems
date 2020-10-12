@@ -21,7 +21,7 @@ public class CadastrarCircuito extends JFrame {
 
 	private final Dimension SIZE = new Dimension(350, 350);
 	private final String FONTE = "Dialog";
-	CadastrarCircuitoController ctrlCircuito;
+	private CadastrarCircuitoController ctrlCircuito;
 	private JTextField textNomeCircuito;
 	private JLabel lblCadastrar;
 	private JLabel lblNome;

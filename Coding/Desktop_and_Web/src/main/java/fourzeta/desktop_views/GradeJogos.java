@@ -47,7 +47,7 @@ public class GradeJogos extends JFrame {
 		this.configFrame();
 		this.getContentPane().add(configTblJogos(torneio));
 		this.getContentPane().add(configLblTitulo());
-		this.getContentPane().add(configBtnVoltar(usuario, torneio));
+		this.getContentPane().add(configBtnVoltar());
 		this.getContentPane().add(configComboQuadra());
 		this.getContentPane().add(configBtnPesquisar());
 		this.getContentPane().add(configLblQuadras());
@@ -87,7 +87,7 @@ public class GradeJogos extends JFrame {
 		return this.sp;
 	}
 	
-	private JButton configBtnVoltar(Usuario usuario, Torneio torneio) {
+	private JButton configBtnVoltar() {
 		this.btnVoltar = new JButton("Voltar");
 		this.btnVoltar.setName("btnVoltar");
 		this.btnVoltar.addActionListener(this.controller);
