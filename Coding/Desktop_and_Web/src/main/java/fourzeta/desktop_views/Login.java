@@ -32,15 +32,15 @@ public class Login extends JFrame {
 	private JButton btnSair;
 
 	public Login() throws ParseException, IOException {
-		this.configFrame();
-		this.configLblImagem();
-		this.configLblIcon();
-		this.confiLblUsuario();
-		this.configTxtUsuario();
-		this.confiLblSenha();
-		this.configTxSenha();
-		this.configBtnEntrar();
-		this.configBtnSair();
+		configFrame();
+		this.getContentPane().add(configLblImagem());
+		this.getContentPane().add(configLblIcon());
+		this.getContentPane().add(confiLblUsuario());
+		this.getContentPane().add(configTxtUsuario());
+		this.getContentPane().add(confiLblSenha());
+		this.getContentPane().add(configTxSenha());
+		this.getContentPane().add(configBtnEntrar());
+		this.getContentPane().add(configBtnSair());
 
 	}
 
