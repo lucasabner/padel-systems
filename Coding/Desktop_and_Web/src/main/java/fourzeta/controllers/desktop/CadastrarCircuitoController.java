@@ -27,12 +27,12 @@ public class CadastrarCircuitoController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (circuito.bindCircuito(tela).getNome().isEmpty() || circuito.bindCircuito(tela).getDescricao().isEmpty()) {
+		if (this.bindCircuito(tela).getNome().isEmpty() || this.bindCircuito(tela).getDescricao().isEmpty()) {
 			tela.notifyCampoIncompleto();
 		} else {
 			try {
 				cr = new CircuitoResource();
-				cr.registraCircuito(circuito.bindCircuito(tela));
+				cr.registraCircuito(this.bindCircuito(tela));
 				tela.notifyCadastroRealizado();
 				tela.setVisible(false);
 				SelecionarTorneio gerenciar = new SelecionarTorneio(usuario);
@@ -44,4 +44,13 @@ public class CadastrarCircuitoController implements ActionListener {
 		}
 	}
 
+	public Circuito bindCircuito(CadastrarCircuito tela) {
+
+		Circuito circuito = new Circuito();
+		circuito.setNome(tela.getTextNomeCircuito().getText());
+		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
+
+		return circuito;
+
+	}
 }

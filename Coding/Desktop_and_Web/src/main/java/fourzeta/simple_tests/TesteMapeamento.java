@@ -57,7 +57,7 @@ public class TesteMapeamento {
 			pts.setAtleta(atleta);
 
 			atleta.setNome("Nome: " + (i + 1));
-			atleta.setCpf("CPF: " + (i + 1123456));
+		//	atleta.setCpf("CPF: " + (i + 1123456));
 			atleta.setRankings(List.of(pts));
 
 			pontuacoes.add(pts);

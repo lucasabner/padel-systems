@@ -16,7 +16,7 @@ import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
 
 @Entity
-public class Circuito implements Serializable, IElement{
+public class Circuito implements Serializable, IElement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,18 +25,17 @@ public class Circuito implements Serializable, IElement{
 	private String nome;
 	private String descricao;
 
-	// Criou a tabela Circuito_Rankings, ou seja, Um circuito tem varios ranks
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy ="circuito",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "circuito", cascade = CascadeType.ALL)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Ranking> rankings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy ="circuito",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy = "circuito", cascade = CascadeType.ALL)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Torneio> torneios;
-	
+
 	@ManyToOne()
 	private Usuario usuario;
-	
+
 	public List<Ranking> getRankings() {
 		return rankings;
 	}
@@ -69,66 +68,15 @@ public class Circuito implements Serializable, IElement{
 		this.rankings = rankings;
 		this.torneios = torneios;
 	}
-<<<<<<< HEAD
-	
-	public Circuito bindCircuito(CadastrarCircuito tela) {
-	
-	//faz get no banco de Dados
-	public Circuito getCircuito() {
-		cr = new CircuitoResource();
-		Circuito circuito = new Circuito();
-
-		Circuito circuito = new Circuito();
-		circuito.setNome(tela.getTextNomeCircuito().getText());
-		circuito.setDescricao(tela.getTextDescricaoCircuito().getText());
-
-		return circuito;
-
-	}
-
-		for (Circuito c : cr.listaCircuitos()) {
-			for (Torneio t : c.getTorneios()) {
-				if (torneio.getNome().equalsIgnoreCase(t.getNome())) {
-					circuito = c;
-				}
-			}
-		}
-		return circuito;
-	}
-=======
->>>>>>> parent of d72ccd7... Refatorações na controller
 
 	public List<Ranking> getRanksByCategoria(String txtCategoria) {
-		String categoria = txtCategoria.toUpperCase();
-//		switch (txtCategoria) {
-//		case "PRIMEIRA":
-//			categoria = "PRIMEIRA";
-//			break;
-//		case "SEGUNDA":
-//			categoria = "SEGUNDA";
-//			break;
-//		case "TERCEIRA":
-//			categoria = "TERCEIRA";
-//			break;
-//		case "QUARTA":
-//			categoria = "QUARTA";
-//			break;
-//		case "QUINTA":
-//			categoria = "QUINTA";
-//			break;
-//		case "INICIANTE":
-//			categoria = "INICIANTE";
-//			break;
-//		default:
-//			categoria = "INICIANTE";
-//		}
+		String categoria = this.getTxtCategoria(txtCategoria);
 
 		List<Ranking> ranksCat = new ArrayList<Ranking>();
 		ranksCat = this.getPontuacoes();
 
 		List<Ranking> pontCat = new ArrayList<Ranking>();
 
-	 
 		for (Ranking pontuacao : ranksCat) {
 			if (pontuacao.getCategoria().equals(categoria)) {
 				pontCat.add(pontuacao);
@@ -137,6 +85,33 @@ public class Circuito implements Serializable, IElement{
 		pontCat.sort(new OrderPontuacaoDecrescente());
 
 		return pontCat;
+	}
+
+	public String getTxtCategoria(String txtCategoria) {
+		String categoria = txtCategoria.toUpperCase();
+		switch (txtCategoria) {
+		case "PRIMEIRA":
+			categoria = "PRIMEIRA";
+			break;
+		case "SEGUNDA":
+			categoria = "SEGUNDA";
+			break;
+		case "TERCEIRA":
+			categoria = "TERCEIRA";
+			break;
+		case "QUARTA":
+			categoria = "QUARTA";
+			break;
+		case "QUINTA":
+			categoria = "QUINTA";
+			break;
+		case "INICIANTE":
+			categoria = "INICIANTE";
+			break;
+		default:
+			categoria = "INICIANTE";
+		}
+		return categoria;
 	}
 
 	public Torneio getTorneio(int id) {
@@ -168,7 +143,7 @@ public class Circuito implements Serializable, IElement{
 		this.torneios = torneios;
 	}
 
-	//Sem anotação @Override
+	// Sem anotação @Override
 	public int getId() {
 		return id;
 	}
@@ -184,6 +159,5 @@ public class Circuito implements Serializable, IElement{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 }
