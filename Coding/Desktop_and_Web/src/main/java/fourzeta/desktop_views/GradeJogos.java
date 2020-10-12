@@ -100,9 +100,7 @@ public class GradeJogos extends JFrame {
 		this.comboQuadra = new JComboBox();
 		this.comboQuadra.setFont(new Font(this.FONTE, Font.PLAIN, 14));
 		this.comboQuadra.addItem("Selecionar");
-		this.comboQuadra.addItem("LARANJA");
-		this.comboQuadra.addItem("AZUL");
-		this.comboQuadra.addItem("VERDE");
+		this.comboQuadra.setEnabled(false);
 		this.comboQuadra.setBounds(138, 147, 124, 22);
 		return this.comboQuadra;
 	}
