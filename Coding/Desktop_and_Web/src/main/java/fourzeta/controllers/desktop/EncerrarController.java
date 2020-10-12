@@ -3,13 +3,12 @@ package fourzeta.controllers.desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import fourzeta.IElement;
+
+import javax.swing.JOptionPane;
+
 import fourzeta.desktop_views.GerenciarTorneio;
 import fourzeta.models.Chave;
 import fourzeta.models.Dupla;
@@ -59,21 +58,31 @@ public class EncerrarController implements ActionListener {
 			tr.registraTorneio(this.torneio);
 			try {
 				organizarJogos();
-				this.tela.notifyEncerramentoSucesso();
+				this.notifyEncerramentoSucesso();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			this.tela.notifyInscricoesJaEncerradas();
+			this.notifyInscricoesJaEncerradas();
 		}
 
 	}
 
+	public void notifyEncerramentoSucesso() {
+		JOptionPane.showMessageDialog(null, "Inscrições encerradas com sucesso!!");
+
+	}
+
+	public void notifyInscricoesJaEncerradas() {
+		JOptionPane.showMessageDialog(null, "As Inscrições já foram encerradas.");
+
+	}
+
 	public void organizarJogos() throws RemoteException {
-		//ordenar por horairo
-		//verifica e retira os suplentes da lista e depois ordena por ponto
-		//montaChaves e monta jogos
-       // torneio.montarChave(duplas2)
+		// ordenar por horairo
+		// verifica e retira os suplentes da lista e depois ordena por ponto
+		// montaChaves e monta jogos
+		// torneio.montarChave(duplas2)
 		torneio.montarChave();
 		torneio.distribuirJogos();
 //		int cat1 = 0, cat2 = 0, cat3 = 0, cat4 = 0, cat5 = 0, cat6 = 0;
@@ -109,7 +118,6 @@ public class EncerrarController implements ActionListener {
 //		iniciarMataMata(cat6, "INICIANTE");
 
 	}
-
 
 	private void registraJogoChave(Jogo jogo, Chave chave) {
 		chave.getJogos().addAll((List.of(jogo)));
@@ -480,7 +488,7 @@ public class EncerrarController implements ActionListener {
 				tr.registraTorneio(torneio);
 				break;
 			case 21:
-				// Verifica de acorco com o doc disponibilizado pel o professor Sam 
+				// Verifica de acorco com o doc disponibilizado pel o professor Sam
 				chave = new Chave();
 				chave.setNome("Oitavas(O1)");
 				chave.setCategoria(cat);
@@ -751,6 +759,7 @@ public class EncerrarController implements ActionListener {
 				break;
 			}
 		}
+
 	}
 
 //	public List<Chave> gerarListaInscritos()

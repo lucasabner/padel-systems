@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import fourzeta.controllers.desktop.LoginController;
+
 
 public class Login extends JFrame {
 
@@ -69,16 +68,15 @@ public class Login extends JFrame {
 	}
 
 	// Setando Icon
-	private JLabel configLblIcon() {
+	public JLabel configLblIcon() {
 		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
 		setIconImage(imgLogin.getImage());
 		lblIcon = new JLabel(imgLogin);
 		getContentPane().add(lblIcon);
 		return lblIcon;
-
 	}
 
-	public JLabel confiLblUsuario() {
+	private JLabel confiLblUsuario() {
 		lblUsurio = new JLabel("Usuário:");
 		lblUsurio.setBounds(221, 33, 66, 15);
 		lblUsurio.setFont(new Font("Times New Roman", Font.BOLD, 14));
