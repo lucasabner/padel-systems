@@ -21,6 +21,7 @@ public class CadastrarCircuito extends JFrame {
 
 	private final Dimension SIZE = new Dimension(350, 350);
 	private final String FONTE = "Dialog";
+	CadastrarCircuitoController ctrlCircuito;
 	private JTextField textNomeCircuito;
 	private JLabel lblCadastrar;
 	private JLabel lblNome;
@@ -30,13 +31,14 @@ public class CadastrarCircuito extends JFrame {
 	private TextField textDescricaoCircuito;
 
 	public CadastrarCircuito(Usuario usuario) throws ParseException, IOException {
+		this.ctrlCircuito = new CadastrarCircuitoController(usuario, this);
 		this.configFrame();
 		this.getContentPane().add(configLblCadastrar());
 		this.getContentPane().add(configLblNome());
 		this.getContentPane().add(configTxtNome());	
 		this.getContentPane().add(configLblDescricao());
-		this.getContentPane().add(configBtnVoltar(usuario));
-		this.getContentPane().add(configBtnCadastrar(usuario));
+		this.getContentPane().add(configBtnVoltar());
+		this.getContentPane().add(configBtnCadastrar());
 		this.getContentPane().add(configTxtDescricao());
 	}
 
@@ -83,30 +85,18 @@ public class CadastrarCircuito extends JFrame {
 		return this.textDescricaoCircuito;
 	}
 	
-	private JButton configBtnVoltar(Usuario usuario) {
+	private JButton configBtnVoltar() {
 		this.btnVoltar = new JButton("Voltar");
-		this.btnVoltar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				SelecionarTorneio inicio = null;
-				try {
-					inicio = new SelecionarTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicio.setVisible(true);
-			}
-		});
+		this.btnVoltar.setName("btnVoltar");
+		this.btnVoltar.addActionListener(this.ctrlCircuito);
 		this.btnVoltar.setBounds(22, 275, 114, 25);
 		return this.btnVoltar;
 	}
 	
-	private JButton configBtnCadastrar(Usuario usuario) {
+	private JButton configBtnCadastrar() {
 		this.btnCadastrar = new JButton("Cadastrar");
-		CadastrarCircuitoController cadCircuito = new CadastrarCircuitoController(usuario, this);
-		this.btnCadastrar.addActionListener(cadCircuito);
+		this.btnCadastrar.setName("btnCadastrar");
+		this.btnCadastrar.addActionListener(this.ctrlCircuito);
 		this.btnCadastrar.setBounds(208, 275, 114, 25);
 		return this.btnCadastrar;
 	}

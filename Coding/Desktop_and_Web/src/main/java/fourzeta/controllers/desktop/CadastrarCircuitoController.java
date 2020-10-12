@@ -7,6 +7,10 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
+
+import javax.swing.JButton;
+
+import antlr.debug.Event;
 import fourzeta.desktop_views.CadastrarCircuito;
 import fourzeta.desktop_views.SelecionarTorneio;
 import fourzeta.models.Circuito;
@@ -27,23 +31,43 @@ public class CadastrarCircuitoController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (this.bindCircuito(tela).getNome().isEmpty() || this.bindCircuito(tela).getDescricao().isEmpty()) {
-			tela.notifyCampoIncompleto();
-		} else {
-			try {
-				cr = new CircuitoResource();
-				cr.registraCircuito(this.bindCircuito(tela));
-				tela.notifyCadastroRealizado();
-				tela.setVisible(false);
-				SelecionarTorneio gerenciar = new SelecionarTorneio(usuario);
-				gerenciar.setVisible(true);
-			} catch (IOException | ParseException | NotBoundException e) {
-				e.printStackTrace();
+		JButton source = (JButton) arg0.getSource();
+		if(source.getName() == "btnCadastrar") {
+			if (this.bindCircuito(tela).getNome().isEmpty() || this.bindCircuito(tela).getDescricao().isEmpty()) {
+				tela.notifyCampoIncompleto();
+			} else {
+				actionCadastrarCircuito();
 			}
-
+		}else {
+			actionVoltar();
 		}
 	}
 
+	private void actionCadastrarCircuito() {
+		try {
+			cr = new CircuitoResource();
+			cr.registraCircuito(this.bindCircuito(tela));
+			tela.notifyCadastroRealizado();
+			tela.setVisible(false);
+			SelecionarTorneio gerenciar = new SelecionarTorneio(usuario);
+			gerenciar.setVisible(true);
+		} catch (IOException | ParseException | NotBoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void actionVoltar() {
+		SelecionarTorneio inicio = null;
+		try {
+			inicio = new SelecionarTorneio(usuario);
+		} catch (ParseException | IOException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tela.setVisible(false);
+		inicio.setVisible(true);
+	}
+	
 	public Circuito bindCircuito(CadastrarCircuito tela) {
 
 		Circuito circuito = new Circuito();
