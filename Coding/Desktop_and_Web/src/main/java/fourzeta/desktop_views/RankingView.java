@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import fourzeta.controllers.desktop.PesquisarRankingController;
+import fourzeta.models.Categoria;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
 import fourzeta.models.Ranking;
@@ -103,12 +104,10 @@ public class RankingView extends JFrame {
 		this.comboCategoria = new JComboBox();
 		this.comboCategoria.setFont(new Font(this.FONTE, Font.PLAIN, 14));
 		this.comboCategoria.addItem("Selecionar");
-		this.comboCategoria.addItem("PRIMEIRA");
-		this.comboCategoria.addItem("SEGUNDA");
-		this.comboCategoria.addItem("TERCEIRA");
-		this.comboCategoria.addItem("QUARTA");
-		this.comboCategoria.addItem("QUINTA");
-		this.comboCategoria.addItem("INICIANTE");
+		Categoria[] catEnums = Categoria.values();
+		for(int i = 0; i < catEnums.length; i++) {
+			this.comboCategoria.addItem(catEnums[i]);
+		}
 		this.comboCategoria.setBounds(490, 429, 124, 22);
 		return this.comboCategoria;
 	}
