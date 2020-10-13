@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import fourzeta.controllers.desktop.PesquisarRankingController;
+import fourzeta.models.Categoria;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
 import fourzeta.models.Ranking;
@@ -45,6 +46,7 @@ public class RankingView extends JFrame {
 	private JLabel lblIcon;
 
 	public RankingView(Usuario usuario)	throws ParseException, RemoteException, MalformedURLException, NotBoundException {
+		this.pesquisarController = new PesquisarRankingController(usuario, this);
 		this.configFrame();
 		this.getContentPane().add(configTblRanking());
 		this.getContentPane().add(configIcon());
@@ -91,20 +93,8 @@ public class RankingView extends JFrame {
 	
 	private JButton configBtnVoltar(Usuario usuario) {
 		this.btnVoltar = new JButton("Voltar");
-		this.btnVoltar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Inicial inicial = null;
-				try {
-					inicial = new Inicial(usuario);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
+		this.btnVoltar.setName("btnVoltar");
+		this.btnVoltar.addActionListener(this.pesquisarController);
 		this.btnVoltar.setFont(new Font(this.FONTE, Font.BOLD, 16));
 		this.btnVoltar.setBounds(56, 429, 106, 23);
 		return this.btnVoltar;
@@ -114,12 +104,10 @@ public class RankingView extends JFrame {
 		this.comboCategoria = new JComboBox();
 		this.comboCategoria.setFont(new Font(this.FONTE, Font.PLAIN, 14));
 		this.comboCategoria.addItem("Selecionar");
-		this.comboCategoria.addItem("PRIMEIRA");
-		this.comboCategoria.addItem("SEGUNDA");
-		this.comboCategoria.addItem("TERCEIRA");
-		this.comboCategoria.addItem("QUARTA");
-		this.comboCategoria.addItem("QUINTA");
-		this.comboCategoria.addItem("INICIANTE");
+		Categoria[] catEnums = Categoria.values();
+		for(int i = 0; i < catEnums.length; i++) {
+			this.comboCategoria.addItem(catEnums[i]);
+		}
 		this.comboCategoria.setBounds(490, 429, 124, 22);
 		return this.comboCategoria;
 	}
@@ -152,7 +140,7 @@ public class RankingView extends JFrame {
 	
 	private JButton configBtnPesquisar() {
 		this.btnPesquisar = new JButton("Pesquisar");
-		this.pesquisarController = new PesquisarRankingController(this);
+		this.btnPesquisar.setName("btnPesquisar");
 		this.btnPesquisar.addActionListener(this.pesquisarController);
 		this.btnPesquisar.setFont(new Font(this.FONTE, Font.BOLD, 16));
 		this.btnPesquisar.setBounds(624, 430, 106, 23);

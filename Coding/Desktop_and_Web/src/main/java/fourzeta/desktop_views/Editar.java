@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import fourzeta.controllers.desktop.EditarController;
 import fourzeta.models.Circuito;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
@@ -23,74 +25,68 @@ public class Editar extends JFrame {
 
 	private final Dimension SIZE = new Dimension(350, 200);
 	private final String FONTE = "Dialog";
+	private EditarController controller;
 	private JLabel lblCadastrar;
 	private JLabel lblNome;
+	private String nomeEdit;
 	private JButton btnVoltar;
 	private JButton btnEditar;
 	private JComboBox<String> comboBox;
 
 	public Editar(Usuario usuario, String nomeEdit) throws ParseException, IOException, NotBoundException {
-		this.setTitle(nomeEdit);
+		this.nomeEdit = nomeEdit;
+		this.controller = new EditarController(usuario, nomeEdit,this);
+		this.configFrame();
+		this.getContentPane().add(configLblCadastrar());
+		this.getContentPane().add(configLblNome());
+		this.getContentPane().add(configBtnVoltar());
+		this.getContentPane().add(configBtnEditar());
+		this.getContentPane().add(configCombobox());
+	}
+	
+	private void configFrame() {
+		this.setTitle(this.nomeEdit);
 		this.setSize(SIZE);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setLayout(null);
-		this.getContentPane().add(configLblCadastrar(nomeEdit));
-		this.getContentPane().add(configLblNome(nomeEdit));
-		this.getContentPane().add(configBtnVoltar(usuario));
-		this.getContentPane().add(configBtnEditar());
-		this.getContentPane().add(configCombobox(nomeEdit));
 	}
 
-	private JLabel configLblCadastrar(String nomeEdit) {
-		this.lblCadastrar = new JLabel("Editar " + nomeEdit);
+	private JLabel configLblCadastrar() {
+		this.lblCadastrar = new JLabel("Editar " + this.nomeEdit);
 		this.lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblCadastrar.setFont(new Font(this.FONTE, Font.BOLD, 30));
 		this.lblCadastrar.setBounds(12, 12, 321, 26);
 		return this.lblCadastrar;		
 	}
 	
-	private JLabel configLblNome(String nomeEdit) {
-		this.lblNome = new JLabel("Selecione um " + nomeEdit + ": ");
+	private JLabel configLblNome() {
+		this.lblNome = new JLabel("Selecione um " + this.nomeEdit + ": ");
 		this.lblNome.setFont(new Font(this.FONTE, Font.BOLD, 14));
 		this.lblNome.setBounds(22, 66, 300, 15);
 		return this.lblNome;
 	}
 	
-	private JButton configBtnVoltar(Usuario usuario) {
+	private JButton configBtnVoltar() {
 		this.btnVoltar = new JButton("Voltar");
-		this.btnVoltar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				SelecionarTorneio inicio = null;
-				try {
-					inicio = new SelecionarTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicio.setVisible(true);
-			}
-		});
+		this.btnVoltar.setName("btnVoltar");
+		this.btnVoltar.addActionListener(this.controller);
 		this.btnVoltar.setBounds(22, 133, 114, 25);
 		return this.btnVoltar;
 	}
 	
 	private JButton configBtnEditar() {
 		this.btnEditar = new JButton("Editar");
-		this.btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		this.btnEditar.setName("btnEditar");
+		this.btnEditar.addActionListener(this.controller);
 		this.btnEditar.setBounds(212, 133, 114, 25);
 		return this.btnEditar;
 	}
 	
-	private JComboBox configCombobox(String nomeEdit) {
+	private JComboBox configCombobox() {
 		this.comboBox = new JComboBox<String>();
 		this.comboBox.setBounds(22, 86, 301, 24);
 		this.comboBox.addItem("Selecionar");
-		if(nomeEdit == "Circuito") {
+		if(this.nomeEdit == "Circuito") {
 			CircuitoResource cr = new CircuitoResource();
 			for (Circuito circuito : cr.listaCircuitos()) {
 				this.comboBox.addItem(circuito.getNome());
@@ -108,8 +104,8 @@ public class Editar extends JFrame {
 		JOptionPane.showMessageDialog(null, "Você não preencheu todos os Campos!");
 	}
 
-	public void notifyEdicaoRealizada(String nomeEdit) {
-		JOptionPane.showMessageDialog(null, nomeEdit + " Editado com Sucesso!");
+	public void notifyEdicaoRealizada() {
+		JOptionPane.showMessageDialog(null, this.nomeEdit + " Editado com Sucesso!");
 	}
 
 	public static void main(String[] args) throws IOException, ParseException, NotBoundException {
