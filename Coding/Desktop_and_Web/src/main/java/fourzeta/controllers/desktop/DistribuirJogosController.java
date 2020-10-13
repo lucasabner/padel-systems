@@ -2,8 +2,10 @@ package fourzeta.controllers.desktop;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.List;
 import fourzeta.desktop_views.DistribuirJogos;
+import fourzeta.desktop_views.GradeJogos;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;
 import fourzeta.models.Torneio;
@@ -13,16 +15,17 @@ import fourzeta.resources.JogoResource;
 public class DistribuirJogosController implements ActionListener {
 
 	private DistribuirJogos tela;
+	private GradeJogos grade;
 	private Usuario usuario;
 	private Torneio torneio;
 	private JogoResource jr;
+	private ActionListener arg0;
 
 	public DistribuirJogosController(Usuario usuario, Torneio torneio, DistribuirJogos tela) {
 		this.tela = tela;
 		this.usuario = usuario;
 		this.torneio = torneio;
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -34,14 +37,13 @@ public class DistribuirJogosController implements ActionListener {
 		}
 		Quadra quadra = null;
 		configurarCorQuadra(quadra);
-		
+
 		jr = new JogoResource();
 		List<Jogo> jogos = jr.listaJogos();
 		configurarQuadras(jogos, quadra, this.tela.getComboBoxCategoria().getSelectedItem().toString());
 		this.tela.notifySucesso();
 	}
-	
-	
+
 	public Quadra configurarCorQuadra(Quadra quadra) {
 		switch (this.tela.getComboBoxQuadra().getSelectedItem().toString()) {
 		case "LARANJA":
@@ -64,6 +66,19 @@ public class DistribuirJogosController implements ActionListener {
 				jr.registraJogo(j);
 			}
 		}
+	}
+
+	public ActionListener actionPerformedVoltar() {
+		try {
+			grade = new GradeJogos(usuario, torneio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.tela.setVisible(false);
+		this.grade.setVisible(false);
+
+		return null;
+
 	}
 
 }

@@ -2,18 +2,20 @@ package fourzeta.desktop_views;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
 import fourzeta.controllers.desktop.DistribuirJogosController;
-import fourzeta.models.Usuario;
+import fourzeta.controllers.desktop.GradeJogosController;
+import fourzeta.models.Categoria;
 import fourzeta.models.Torneio;
+import fourzeta.models.Usuario;
 
 public class DistribuirJogos extends JFrame {
 	private final Dimension SIZE = new Dimension(350, 320);
@@ -21,70 +23,30 @@ public class DistribuirJogos extends JFrame {
 	private Torneio torneio;
 	private JLabel lblDistribirJogos;
 	private JLabel lblCategoria;
-	private JComboBox<String> comboBoxCategoria;
-	private JComboBox<String> comboBoxQuadra;
+	private JComboBox comboBoxCategoria;
+	private JComboBox comboBoxQuadra;
 	private DistribuirJogosController controller;
+	private GradeJogosController gradeJogosController;
 	private JLabel lblQuadra;
 	private JButton btnVoltar;
 	private JButton btnDistribuir;
 
-	public DistribuirJogos(Usuario usuario, Torneio torneio) {
+	public DistribuirJogos(Usuario usuario, Torneio torneio) throws ParseException {
 		configFrame();
 		this.getContentPane().add(configLblDistribuirJogos());
 		this.getContentPane().add(configLblCategoria());
+		this.getContentPane().add(configComboCategoria());
 		this.getContentPane().add(configLblQuadra());
-		this.getContentPane().add(configBtnDistribuir());
+		this.getContentPane().add(configBtnDistribuir(usuario, torneio));
 		this.getContentPane().add(configLblNotify());
 		this.getContentPane().add(configComboQuadra());
-		//this.getContentPane().add(configLblCategoria());
-	
-//		private JComboBox configComboCategoria() {
-//			comboBoxCategoria = new JComboBox();
-//			comboBoxCategoria.addItem("SELECIONAR");
-//			comboBoxCategoria.setBounds(22, 98, 300, 24);
-//			comboBoxCategoria.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//			categoria[] catEn
-//
-//
-//return comboBoxCategoria;
-//		}
+		this.getContentPane().add(configBtnVoltar(usuario, torneio));
 
-		comboBoxCategoria.addItem("PRIMEIRA");
-		comboBoxCategoria.addItem("SEGUNDA");
-		comboBoxCategoria.addItem("TERCEIRA");
-		comboBoxCategoria.addItem("QUARTA");
-		comboBoxCategoria.addItem("QUINTA");
-		comboBoxCategoria.addItem("INICIANTES");
-		getContentPane().add(comboBoxCategoria);
-		getContentPane().add(comboBoxCategoria);
-
-		
-	
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GradeJogos gj = null;
-				try {
-					gj = new GradeJogos(usuario, torneio);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				gj.setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(22, 215, 114, 25);
-		getContentPane().add(btnVoltar);
-
-		
-
-		
 	}
 
 	private void configFrame() {
+		this.usuario = usuario;
+		this.torneio = torneio;
 		setTitle("Distribuir Jogos");
 		this.setSize(SIZE);
 		this.setLocationRelativeTo(null);
@@ -119,9 +81,10 @@ public class DistribuirJogos extends JFrame {
 
 	}
 
-	private JButton configBtnDistribuir() {
+	private JButton configBtnDistribuir(Usuario usuario, Torneio torneio) {
 		btnDistribuir = new JButton("Distribuir");
 		btnDistribuir.setBounds(208, 215, 114, 25);
+		btnDistribuir.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		controller = new DistribuirJogosController(usuario, torneio, this);
 		btnDistribuir.addActionListener(controller);
 		getContentPane().add(btnDistribuir);
@@ -130,7 +93,7 @@ public class DistribuirJogos extends JFrame {
 
 	private JLabel configLblNotify() {
 		JLabel lblselecioneACategoria = new JLabel("*Distribuir jogos por categoria na quadra desejada");
-		lblselecioneACategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblselecioneACategoria.setFont(new Font("Times new Roman", Font.PLAIN, 12));
 		lblselecioneACategoria.setBounds(22, 249, 311, 43);
 		getContentPane().add(lblselecioneACategoria);
 		return lblselecioneACategoria;
@@ -143,9 +106,32 @@ public class DistribuirJogos extends JFrame {
 		comboBoxQuadra.addItem("AZUL");
 		comboBoxQuadra.addItem("VERDE");
 		getContentPane().add(comboBoxQuadra);
+		comboBoxQuadra.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		comboBoxQuadra.setBounds(22, 173, 300, 24);
 		getContentPane().add(comboBoxQuadra);
 		return comboBoxQuadra;
+	}
+
+	private JComboBox configComboCategoria() {
+		comboBoxCategoria = new JComboBox();
+		comboBoxCategoria.addItem("SELECIONAR");
+		Categoria[] catEnums = Categoria.values();
+		for (int i = 0; i < catEnums.length; i++) {
+			comboBoxCategoria.addItem(catEnums[i]);
+		}
+		comboBoxCategoria.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		comboBoxCategoria.setBounds(22, 98, 300, 24);
+		return this.comboBoxCategoria;
+	}
+
+	private JButton configBtnVoltar(Usuario usuario, Torneio torneio) throws ParseException {
+		btnVoltar = new JButton("Voltar");
+		DistribuirJogosController controller = new DistribuirJogosController(usuario, torneio, this);
+		btnVoltar.addActionListener(controller.actionPerformedVoltar());
+		btnVoltar.setBounds(22, 215, 114, 25);
+		getContentPane().add(btnVoltar);
+
+		return btnVoltar;
 	}
 
 	public Usuario getUsuario() {
@@ -239,7 +225,7 @@ public class DistribuirJogos extends JFrame {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		Usuario g = new Usuario();
 		g.setNome("Wagner");
 		Torneio t = new Torneio();
