@@ -39,8 +39,9 @@ public class CadastrarTorneioController implements ActionListener {
 			}
 		}
 
-		if (torneio.bindTorneio(tela).getNome().isEmpty() || torneio.bindTorneio(tela).getDescricao().isEmpty()
-				|| torneio.bindTorneio(tela).getDatIniJogos().isEmpty() || torneio.bindTorneio(tela).getDatFimJogos().isEmpty()) {
+		if (this.bindTorneio(tela).getNome().isEmpty() || this.bindTorneio(tela).getDescricao().isEmpty()
+				|| this.bindTorneio(tela).getDatIniJogos().isEmpty()
+				|| this.bindTorneio(tela).getDatFimJogos().isEmpty()) {
 			tela.notifyCampoIncompleto();
 		} else {
 			realizarCadastro();
@@ -48,11 +49,11 @@ public class CadastrarTorneioController implements ActionListener {
 		}
 
 	}
-	
+
 	public void realizarCadastro() {
 		TorneioResource tr = new TorneioResource();
 		List<Torneio> torneios = new ArrayList<Torneio>();
-		torneio = torneio.bindTorneio(tela);
+		torneio = this.bindTorneio(tela);
 		torneios.add(torneio);
 		torneio.setCircuito(circuito);
 		tr.registraTorneio(torneio);
@@ -68,5 +69,47 @@ public class CadastrarTorneioController implements ActionListener {
 			e.printStackTrace();
 		}
 		gerenciar.setVisible(true);
+	}
+
+	public Torneio bindTorneio(CadastrarTorneio tela) {
+
+		Torneio torneio = new Torneio();
+		torneio.setNome(tela.getTextNomeTorneio().getText());
+		torneio.setDescricao(tela.getTextDescricaoTorneio().getText());
+		torneio.setDatIniJogos(tela.getTextDataInicio().getText());
+		torneio.setDatFimJogos(tela.getTextDataFim().getText());
+		if (tela.getComboBoxQuadra1().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[0] = converterQuadra(tela.getComboBoxQuadra1().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra2().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[1] = converterQuadra(tela.getComboBoxQuadra2().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra3().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[2] = converterQuadra(tela.getComboBoxQuadra3().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra4().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[3] = converterQuadra(tela.getComboBoxQuadra4().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra5().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[4] = converterQuadra(tela.getComboBoxQuadra5().getSelectedItem().toString());
+		}
+		if (tela.getComboBoxQuadra6().getSelectedItem().equals("SELECIONAR")) {
+			torneio.getDistribuicaoJogos()[5] = converterQuadra(tela.getComboBoxQuadra6().getSelectedItem().toString());
+		}
+
+		return torneio;
+
+	}
+
+	public int converterQuadra(String itemSelecionado) {
+		switch (itemSelecionado) {
+		case "LARANJA":
+			return 1;
+		case "AZUL":
+			return 2;
+		case "VERDE":
+			return 3;
+		}
+		return -1;
 	}
 }

@@ -29,7 +29,7 @@ public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 //	@Enumerated(EnumType.STRING)
 	private String impedimento;
 
-	// Com o mappedBy aqui criou a tabela Atleta_dupla
+	// Cria a tabela Atleta_dupla
 	@OneToOne()
 	private Atleta atleta1;
 	
@@ -42,12 +42,6 @@ public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 	public int getId() {
 		return id;
 	}
-
-	//Desnecessario pq já vem como padrao,a nao ser q tenha outro
-	// construcotr personalizado
-	
-	
-	
 
 	public void setId(int id) {
 		this.id = id;
