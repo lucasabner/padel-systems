@@ -3,11 +3,10 @@ package fourzeta.desktop_views;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -17,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import fourzeta.controllers.desktop.CadastrarCircuitoController;
 import fourzeta.controllers.desktop.CadastrarTorneioController;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
@@ -30,6 +31,8 @@ public class CadastrarTorneio extends JFrame {
 	private JLabel lblNome;
 	private JLabel lblDescrio;
 	private JButton btnVoltar;
+	CadastrarTorneioController cadTorneio;
+	private CadastrarCircuitoController ctrlCircuito;
 	private JButton btnCadastrar;
 	private JLabel lblInicio;
 	private JLabel lblFim;
@@ -38,6 +41,7 @@ public class CadastrarTorneio extends JFrame {
 	private JComboBox comboBoxCircuito;
 	private TextField textDescricaoTorneio;
 	private JLabel lblDistribirJogos;
+	private JLabel lblCircuito;
 	private JComboBox comboBoxQuadra1;
 	private JComboBox comboBoxQuadra2;
 	private JComboBox comboBoxQuadra3;
@@ -46,224 +50,294 @@ public class CadastrarTorneio extends JFrame {
 	private JComboBox comboBoxQuadra6;
 	private MaskFormatter formatoData = new MaskFormatter("##/##/####");
 	private JLabel lblQuadra;
-	private JLabel lblCategoria;
+	private JLabel lblCategoria_1;
 	private JLabel lblCategoria_2;
 	private JLabel lblCategoria_3;
 	private JLabel lblCategoria_4;
+	private JLabel lblCategoria_5;
+	private JLabel lblselecioneACategoria;
 	private JLabel lblIniciantes;
+	private final String SELECIONAR_QUADRA = "SELECIONAR";
+	private final String QUADRA_1 = "LARANJA";
+	private final String QUADRA_2 = "AZUL";
+	private final String QUADRA_3 = "VERDE";
 
 	public CadastrarTorneio(Usuario usuario) throws ParseException, IOException, NotBoundException {
+		cadTorneio = new CadastrarTorneioController(usuario, this);
+		ctrlCircuito = new CadastrarCircuitoController();
+		configFrame();
+		connfigLblCadastrar();
+		configLbl();
+		configTxt();
+		configComboBox();
+	}
 
-		setTitle("Cadastrar Torneio");
-		this.setSize(SIZE);
-		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
+	private void configComboBox() {
+		configComboBoxCircuito();
+		configComboBoxQuadra1();
+		configComboBoxQuadra2();
+		configComboBoxQuadra3();
+		configComboBoxQuadra4();
+		configComboBoxQuadra5();
+		configComboBoxQuadra6();
+	}
 
-		lblCadastrar = new JLabel("Cadastrar Torneio");
-		lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCadastrar.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblCadastrar.setBounds(12, 12, 321, 26);
-		getContentPane().add(lblCadastrar);
+	private void configTxt() {
+		configTxtDataInicio();
+		configTxtDataFim();
+		configTxtNomeTorneio();
+		configTxtDescricaoTorneio();
+	}
 
-		lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNome.setBounds(22, 50, 66, 15);
-		getContentPane().add(lblNome);
+	private void configLbl() {
+		configLblNome();
+		configLblFim();
+		configLblCircuito();
+		configLbldescricao();
+		configBtnVoltar();
+		configBtnCadastrar();
+		configlblInicio();
+		configLblDistribuirJogos();
+		configLblSelecioneACategoria();
+		configLblCategoria_1();
+		configLblQuadra();
+		configLblCategoria_2();
+		configLblCategoria_3();
+		configLblCategoria_4();
+		configLblCategoria_5();
+		configLblIniciantes();
+	}
 
-		textNomeTorneio = new JTextField();
-		textNomeTorneio.setBounds(22, 74, 300, 19);
-		getContentPane().add(textNomeTorneio);
-		textNomeTorneio.setColumns(10);
-
-		lblDescrio = new JLabel("Descrição:");
-		lblDescrio.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblDescrio.setBounds(22, 104, 90, 15);
-		getContentPane().add(lblDescrio);
-
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				SelecionarTorneio inicio = null;
-				try {
-					inicio = new SelecionarTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicio.setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(22, 538, 114, 25);
-		getContentPane().add(btnVoltar);
-
-		btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(208, 538, 114, 25);
-		CadastrarTorneioController cadTorneio = new CadastrarTorneioController(usuario, this);
-		btnCadastrar.addActionListener(cadTorneio);
-		getContentPane().add(btnCadastrar);
-
-		lblInicio = new JLabel("Início:");
-		lblInicio.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblInicio.setBounds(22, 227, 66, 15);
-		getContentPane().add(lblInicio);
-
-		textDataInicio = new JFormattedTextField(formatoData);
-		textDataInicio.setColumns(10);
-		textDataInicio.setBounds(22, 251, 114, 19);
-		getContentPane().add(textDataInicio);
-
-		textDataFim = new JFormattedTextField(formatoData);
-		textDataFim.setColumns(10);
-		textDataFim.setBounds(208, 251, 114, 19);
-		getContentPane().add(textDataFim);
-
-		JLabel lblFim = new JLabel("Fim:");
-		lblFim.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblFim.setBounds(208, 227, 66, 15);
-		getContentPane().add(lblFim);
-
-		JLabel lblCircuito = new JLabel("Circuito:");
-		lblCircuito.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCircuito.setBounds(22, 175, 70, 15);
-		getContentPane().add(lblCircuito);
-
-		CircuitoResource cr = new CircuitoResource();
+	private void configComboBoxCircuito() {
 		comboBoxCircuito = new JComboBox();
 		comboBoxCircuito.addItem("Selecionar");
-		for (Circuito circuito : cr.listaCircuitos()) {
+		for (Circuito circuito : ctrlCircuito.listarCircuitos()) {
 			comboBoxCircuito.addItem(circuito.getNome());
 		}
-		comboBoxCircuito.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				for (Circuito circuito : cr.listaCircuitos()) {
-					if (circuito.getNome().equalsIgnoreCase(comboBoxCircuito.getSelectedItem().toString())) {
-						while (circuito.getNome().isEmpty()) {
-							comboBoxCircuito.addItem(circuito.getNome());
-						}
-					}
-				}
-			}
-		});
-		getContentPane().add(comboBoxCircuito);
 		comboBoxCircuito.setBounds(22, 195, 300, 24);
 		getContentPane().add(comboBoxCircuito);
+	}
 
-		textDescricaoTorneio = new TextField();
-		textDescricaoTorneio.setBounds(22, 124, 300, 40);
-		getContentPane().add(textDescricaoTorneio);
-		
+	private void configLblSelecioneACategoria() {
+		lblselecioneACategoria = new JLabel("*Distribuir jogos por categoria na quadra desejada");
+		lblselecioneACategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblselecioneACategoria.setBounds(22, 503, 311, 43);
+		getContentPane().add(lblselecioneACategoria);
+	}
+
+	private void configLblQuadra() {
+		lblQuadra = new JLabel("QUADRA");
+		lblQuadra.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblQuadra.setBounds(195, 328, 114, 15);
+		getContentPane().add(lblQuadra);
+	}
+
+	private void configLblCategoria_1() {
+		lblCategoria_1 = new JLabel("1ª Categoria");
+		lblCategoria_1.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCategoria_1.setBounds(56, 349, 100, 15);
+		getContentPane().add(lblCategoria_1);
+	}
+
+	private void configLblCategoria_2() {
+		lblCategoria_2 = new JLabel("2ª Categoria");
+		lblCategoria_2.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCategoria_2.setBounds(56, 377, 100, 15);
+		getContentPane().add(lblCategoria_2);
+	}
+
+	private void configLblCategoria_3() {
+		lblCategoria_3 = new JLabel("3ª Categoria");
+		lblCategoria_3.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCategoria_3.setBounds(56, 404, 100, 15);
+		getContentPane().add(lblCategoria_3);
+	}
+
+	private void configLblCategoria_4() {
+		lblCategoria_4 = new JLabel("4ª Categoria");
+		lblCategoria_4.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCategoria_4.setBounds(56, 431, 100, 15);
+		getContentPane().add(lblCategoria_4);
+	}
+
+	private void configLblCategoria_5() {
+		lblCategoria_5 = new JLabel("5ª Categoria");
+		lblCategoria_5.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCategoria_5.setBounds(56, 457, 100, 15);
+		getContentPane().add(lblCategoria_5);
+	}
+
+	private void configLblIniciantes() {
+		lblIniciantes = new JLabel("Iniciantes");
+		lblIniciantes.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblIniciantes.setBounds(66, 482, 100, 15);
+		getContentPane().add(lblIniciantes);
+	}
+
+	private void configComboBoxQuadra6() {
+		comboBoxQuadra6 = new JComboBox();
+		comboBoxQuadra6.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra6.addItem(QUADRA_1);
+		comboBoxQuadra6.addItem(QUADRA_2);
+		comboBoxQuadra6.addItem(QUADRA_3);
+		comboBoxQuadra6.setEnabled(false);
+		comboBoxQuadra6.setBounds(174, 477, 114, 24);
+		getContentPane().add(comboBoxQuadra6);
+	}
+
+	private void configComboBoxQuadra5() {
+		comboBoxQuadra5 = new JComboBox();
+		comboBoxQuadra5.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra5.addItem(QUADRA_1);
+		comboBoxQuadra5.addItem(QUADRA_2);
+		comboBoxQuadra5.addItem(QUADRA_3);
+		comboBoxQuadra5.setEnabled(false);
+		comboBoxQuadra5.setBounds(174, 452, 114, 24);
+		getContentPane().add(comboBoxQuadra5);
+	}
+
+	private void configComboBoxQuadra4() {
+		comboBoxQuadra4 = new JComboBox();
+		comboBoxQuadra4.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra4.addItem(QUADRA_1);
+		comboBoxQuadra4.addItem(QUADRA_2);
+		comboBoxQuadra4.addItem(QUADRA_3);
+		comboBoxQuadra4.setEnabled(false);
+		comboBoxQuadra4.setBounds(174, 426, 114, 24);
+		getContentPane().add(comboBoxQuadra4);
+	}
+
+	private void configComboBoxQuadra3() {
+		comboBoxQuadra3 = new JComboBox();
+		comboBoxQuadra3.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra3.addItem(QUADRA_1);
+		comboBoxQuadra3.addItem(QUADRA_2);
+		comboBoxQuadra3.addItem(QUADRA_3);
+		comboBoxQuadra3.setEnabled(false);
+		comboBoxQuadra3.setBounds(174, 399, 114, 24);
+		getContentPane().add(comboBoxQuadra3);
+	}
+
+	private void configComboBoxQuadra2() {
+		comboBoxQuadra2 = new JComboBox();
+		comboBoxQuadra2.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra2.addItem(QUADRA_1);
+		comboBoxQuadra2.addItem(QUADRA_2);
+		comboBoxQuadra2.addItem(QUADRA_3);
+		comboBoxQuadra2.setEnabled(false);
+		comboBoxQuadra2.setBounds(174, 372, 114, 24);
+		getContentPane().add(comboBoxQuadra2);
+	}
+
+	private void configComboBoxQuadra1() {
+		comboBoxQuadra1 = new JComboBox();
+		comboBoxQuadra1.addItem(SELECIONAR_QUADRA);
+		comboBoxQuadra1.addItem(QUADRA_1);
+		comboBoxQuadra1.addItem(QUADRA_2);
+		comboBoxQuadra1.addItem(QUADRA_3);
+		comboBoxQuadra1.setEnabled(false);
+		comboBoxQuadra1.setBounds(174, 344, 114, 24);
+		getContentPane().add(comboBoxQuadra1);
+	}
+
+	private void configLblDistribuirJogos() {
 		lblDistribirJogos = new JLabel("Distribuir Jogos");
 		lblDistribirJogos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDistribirJogos.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblDistribirJogos.setBounds(12, 282, 321, 35);
 		getContentPane().add(lblDistribirJogos);
+	}
 
-		comboBoxQuadra1 = new JComboBox();
-		comboBoxQuadra1.addItem("SELECIONAR");	
-		comboBoxQuadra1.addItem("LARANJA");
-		comboBoxQuadra1.addItem("AZUL");
-		comboBoxQuadra1.addItem("VERDE");
+	private void configTxtDescricaoTorneio() {
+		textDescricaoTorneio = new TextField();
+		textDescricaoTorneio.setBounds(22, 124, 300, 40);
+		getContentPane().add(textDescricaoTorneio);
+	}
 
-		comboBoxQuadra1.setBounds(174, 344, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra1);
-		
-		comboBoxQuadra2 = new JComboBox();
-		comboBoxQuadra2.addItem("SELECIONAR");	
-		comboBoxQuadra2.addItem("LARANJA");
-		comboBoxQuadra2.addItem("AZUL");
-		comboBoxQuadra2.addItem("VERDE");
+	private void configLblCircuito() {
+		lblCircuito = new JLabel("Circuito:");
+		lblCircuito.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCircuito.setBounds(22, 175, 70, 15);
+		getContentPane().add(lblCircuito);
+	}
 
-		comboBoxQuadra2.setBounds(174, 372, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra2);
-		
-		comboBoxQuadra3 = new JComboBox();
-		comboBoxQuadra3.addItem("SELECIONAR");	
-		comboBoxQuadra3.addItem("LARANJA");
-		comboBoxQuadra3.addItem("AZUL");
-		comboBoxQuadra3.addItem("VERDE");
+	private void configLblFim() {
+		lblFim = new JLabel("Fim:");
+		lblFim.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblFim.setBounds(208, 227, 66, 15);
+		getContentPane().add(lblFim);
+	}
 
-		comboBoxQuadra3.setBounds(174, 399, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra3);
-		
-		comboBoxQuadra4 = new JComboBox();
-		comboBoxQuadra4.addItem("SELECIONAR");	
-		comboBoxQuadra4.addItem("LARANJA");
-		comboBoxQuadra4.addItem("AZUL");
-		comboBoxQuadra4.addItem("VERDE");
+	private void configTxtDataFim() {
+		textDataFim = new JFormattedTextField(formatoData);
+		textDataFim.setColumns(10);
+		textDataFim.setBounds(208, 251, 114, 19);
+		getContentPane().add(textDataFim);
+	}
 
-		comboBoxQuadra4.setBounds(174, 426, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra4);
-		
-		comboBoxQuadra5 = new JComboBox();
-		comboBoxQuadra5.addItem("SELECIONAR");	
-		comboBoxQuadra5.addItem("LARANJA");
-		comboBoxQuadra5.addItem("AZUL");
-		comboBoxQuadra5.addItem("VERDE");
+	private void configTxtDataInicio() {
+		textDataInicio = new JFormattedTextField(formatoData);
+		textDataInicio.setColumns(10);
+		textDataInicio.setBounds(22, 251, 114, 19);
+		getContentPane().add(textDataInicio);
+	}
 
-		comboBoxQuadra5.setBounds(174, 452, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra5);
-		
-		comboBoxQuadra6 = new JComboBox();
-		comboBoxQuadra6.addItem("SELECIONAR");	
-		comboBoxQuadra6.addItem("LARANJA");
-		comboBoxQuadra6.addItem("AZUL");
-		comboBoxQuadra6.addItem("VERDE");
+	private void configlblInicio() {
+		lblInicio = new JLabel("Início:");
+		lblInicio.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblInicio.setBounds(22, 227, 66, 15);
+		getContentPane().add(lblInicio);
+	}
 
-		comboBoxQuadra6.setBounds(174, 477, 114, 24);
-	
-		getContentPane().add(comboBoxQuadra6);
-		
-		JLabel lblselecioneACategoria = new JLabel("*Distribuir jogos por categoria na quadra desejada");
-		lblselecioneACategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblselecioneACategoria.setBounds(22, 503, 311, 43);
-		getContentPane().add(lblselecioneACategoria);
-		
-		JLabel lblCategoria_1 = new JLabel("1ª Categoria");
-		lblCategoria_1.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria_1.setBounds(56, 349, 100, 15);
-		getContentPane().add(lblCategoria_1);
-		
-		lblQuadra = new JLabel("QUADRA");
-		lblQuadra.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblQuadra.setBounds(195, 328, 114, 15);
-		getContentPane().add(lblQuadra);
-		
-		lblCategoria = new JLabel("2ª Categoria");
-		lblCategoria.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria.setBounds(56, 377, 100, 15);
-		getContentPane().add(lblCategoria);
-		
-		lblCategoria_2 = new JLabel("3ª Categoria");
-		lblCategoria_2.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria_2.setBounds(56, 404, 100, 15);
-		getContentPane().add(lblCategoria_2);
-		
-		lblCategoria_3 = new JLabel("4ª Categoria");
-		lblCategoria_3.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria_3.setBounds(56, 431, 100, 15);
-		getContentPane().add(lblCategoria_3);
-		
-		lblCategoria_4 = new JLabel("5ª Categoria");
-		lblCategoria_4.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria_4.setBounds(56, 457, 100, 15);
-		getContentPane().add(lblCategoria_4);
-		
-		lblIniciantes = new JLabel("Iniciantes");
-		lblIniciantes.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblIniciantes.setBounds(66, 482, 100, 15);
-		getContentPane().add(lblIniciantes);
-		
-		
+	private void configBtnCadastrar() {
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(208, 538, 114, 25);
+		btnCadastrar.addActionListener(this.cadTorneio);
+		getContentPane().add(btnCadastrar);
+	}
 
+	private void configBtnVoltar() {
+		this.btnVoltar = new JButton("Voltar");
+		this.btnVoltar.setName("btnVoltar");
+		this.btnVoltar.addActionListener(this.cadTorneio);
+		this.btnVoltar.setBounds(22, 538, 114, 25);
+		getContentPane().add(btnVoltar);
+	}
+
+	private void configLbldescricao() {
+		lblDescrio = new JLabel("Descrição:");
+		lblDescrio.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblDescrio.setBounds(22, 104, 90, 15);
+		getContentPane().add(lblDescrio);
+	}
+
+	private void configTxtNomeTorneio() {
+		textNomeTorneio = new JTextField();
+		textNomeTorneio.setBounds(22, 74, 300, 19);
+		getContentPane().add(textNomeTorneio);
+		textNomeTorneio.setColumns(10);
+	}
+
+	private void configLblNome() {
+		lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNome.setBounds(22, 50, 66, 15);
+		getContentPane().add(lblNome);
+	}
+
+	private void connfigLblCadastrar() {
+		lblCadastrar = new JLabel("Cadastrar Torneio");
+		lblCadastrar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCadastrar.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblCadastrar.setBounds(12, 12, 321, 26);
+		getContentPane().add(lblCadastrar);
+	}
+
+	private void configFrame() {
+		setTitle("Cadastrar Torneio");
+		this.setSize(SIZE);
+		this.setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 	}
 
 	public JComboBox getComboBoxCircuito() {
@@ -333,17 +407,17 @@ public class CadastrarTorneio extends JFrame {
 	public void notifyCadastroRealizado() {
 		JOptionPane.showMessageDialog(null, "Torneio Cadastrado com Sucesso!");
 	}
-	
+
 	public void notifyInformarQuadra() {
 		JOptionPane.showMessageDialog(this, "Informe uma Quadra.");
 
 	}
-	
+
 	public void notifyInformarCategoria() {
 		JOptionPane.showMessageDialog(this, "Informe uma Categoria.");
 
 	}
-	
+
 	public void notifySucesso() {
 		JOptionPane.showMessageDialog(this, "Jogos distribuidos com Sucesso!!");
 

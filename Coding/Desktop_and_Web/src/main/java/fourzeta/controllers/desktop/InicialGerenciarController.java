@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.text.ParseException;
+
+import javax.swing.JButton;
+
 import fourzeta.desktop_views.Inicial;
 import fourzeta.desktop_views.SelecionarTorneio;
 import fourzeta.models.Usuario;
@@ -21,15 +24,19 @@ public class InicialGerenciarController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
-		try {
-			telaGerenciar = new SelecionarTorneio(usuario);
-		} catch (ParseException | IOException | NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		JButton source = (JButton) arg0.getSource();
+		if (source.getName() == "btnGerenciar") {
+			try {
+				telaGerenciar = new SelecionarTorneio(usuario);
+			} catch (ParseException | IOException | NotBoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.tela.setVisible(false);
+			telaGerenciar.setVisible(true);
+		} else {
+			System.exit(0);
 		}
-		this.tela.setVisible(false);
-		telaGerenciar.setVisible(true);
 
 	}
 }

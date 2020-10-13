@@ -36,88 +36,120 @@ public class Inicial extends JFrame {
 	private JLabel lblMenu;
 	private JLabel lblUserNull = null;
 	private Usuario usuario;
+	private JLabel titulo;
+	private ImageIcon imgLogin;
 
 	public Inicial(Usuario usuario) throws ParseException, IOException {
-		this.usuario = usuario;
-		setTitle("Sistema de Gerenciamento de Padel");
-		this.setSize(SIZE);
-		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
-
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		lblImage = new JLabel();
-		lblImage.setBounds(70, 27, 235, 213);
-
-		BufferedImage img = ImageIO.read(new File("assets/FourZeta_Transparente.png"));
-		img.getScaledInstance(10, 10, 10);
-
-		ImageIcon imagemZeta = new ImageIcon(
-				img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH));
-		lblImage.setIcon(imagemZeta);
-
-		getContentPane().add(lblImage);
-
-		// mudando o icon
-		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
-		setIconImage(imgLogin.getImage());
-		lblIcon = new JLabel(imgLogin);
-		getContentPane().add(lblIcon);
-
-		JLabel Titulo = new JLabel("Four Zeta");
-		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setBounds(40, 246, 290, 36);
-		Titulo.setFont(new Font("Dialog", Font.BOLD, 30));
-		getContentPane().add(Titulo);
-
-		btnRanking = new JButton("Ver Ranking");
 		controllerRanking = new MostrarRankingController(usuario, this);
-		btnRanking.addActionListener(controllerRanking);
-		btnRanking.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnRanking.setBounds(359, 177, 207, 23);
-		getContentPane().add(btnRanking);
-
-		btnGerenciar = new JButton("Gerenciar Circuitos");
+		controllerCreditos = new MostrarCreditosController(this);
 		controllerGerenciar = new InicialGerenciarController(usuario, this);
-		btnGerenciar.addActionListener(controllerGerenciar);
+		configFrame();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		configImgLogin();
+		configTitulo();
+		configBtn();
+		configLbl();
+	}
+
+	private void configLbl() throws IOException {
+		connfigLblImage();
+		configLblMenu();
+		configLblNomeUsuario();
+		configLblUserNull();
+	}
+
+	private void configBtn() {
+		configBtnSair();
+		configBtnRanking();
+		configBtnGerenciar();
+		configBtnCreditos();
+	}
+
+	private void configBtnSair() {
+		btnSair = new JButton("Sair");
+		btnSair.setFont(new Font("Dialog", Font.BOLD, 16));
+		btnSair.setBounds(359, 257, 207, 23);
+		btnSair.addActionListener(this.controllerGerenciar);
+		getContentPane().add(btnSair);
+	}
+
+	private void configBtnGerenciar() {
+		btnGerenciar = new JButton("Gerenciar Circuitos");
+		btnGerenciar.setName("btnGerenciar");
+		btnGerenciar.addActionListener(this.controllerGerenciar);
 		btnGerenciar.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnGerenciar.setBounds(359, 136, 207, 23);
 		getContentPane().add(btnGerenciar);
+	}
 
+	private void configBtnRanking() {
+		btnRanking = new JButton("Ver Ranking");
+		btnRanking.addActionListener(this.controllerRanking);
+		btnRanking.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		btnRanking.setBounds(359, 177, 207, 23);
+		getContentPane().add(btnRanking);
+	}
+
+	private void configLblNomeUsuario() {
+		lblNomeUsuario = new JLabel("Usuario: " + usuario.getNome());
+		lblNomeUsuario.setBounds(36, 280, 247, 30);
+		getContentPane().add(lblNomeUsuario);
+	}
+
+	private void configLblUserNull() {
+		lblUserNull = new JLabel("");
+		lblUserNull.setBounds(131, 295, 66, 15);
+		getContentPane().add(lblUserNull);
+	}
+
+	private void configLblMenu() {
+		lblMenu = new JLabel("MENU");
+		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenu.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblMenu.setBounds(393, 15, 153, 30);
+		getContentPane().add(lblMenu);
+	}
+
+	private void configBtnCreditos() {
 		btnCreditos = new JButton("Creditos");
 		controllerCreditos = new MostrarCreditosController(this);
 		btnCreditos.addActionListener(controllerCreditos);
 		btnCreditos.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnCreditos.setBounds(359, 217, 207, 23);
 		getContentPane().add(btnCreditos);
+	}
 
-		lblMenu = new JLabel("MENU");
-		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMenu.setFont(new Font("Dialog", Font.BOLD, 25));
-		lblMenu.setBounds(393, 15, 153, 30);
-		getContentPane().add(lblMenu);
+	private void configTitulo() {
+		titulo = new JLabel("Four Zeta");
+		titulo.setHorizontalAlignment(SwingConstants.CENTER);
+		titulo.setBounds(40, 246, 290, 36);
+		titulo.setFont(new Font("Dialog", Font.BOLD, 30));
+		getContentPane().add(titulo);
+	}
 
-		btnSair = new JButton("Sair");
-		btnSair.setFont(new Font("Dialog", Font.BOLD, 16));
-		btnSair.setBounds(359, 257, 207, 23);
+	private void configImgLogin() {
+		imgLogin = new ImageIcon("assets\\FourZeta.png");
+		setIconImage(imgLogin.getImage());
+		lblIcon = new JLabel(imgLogin);
+		getContentPane().add(lblIcon);
+	}
 
-		btnSair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+	private void connfigLblImage() throws IOException {
+		lblImage = new JLabel();
+		lblImage.setBounds(70, 27, 235, 213);
+		BufferedImage img = ImageIO.read(new File("assets/FourZeta_Transparente.png"));
+		img.getScaledInstance(10, 10, 10);
+		ImageIcon imagemZeta = new ImageIcon(
+				img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH));
+		lblImage.setIcon(imagemZeta);
+		getContentPane().add(lblImage);
+	}
 
-				System.exit(0);
-
-			}
-		});
-		getContentPane().add(btnSair);
-
-		lblNomeUsuario = new JLabel("Usuario: " + usuario.getNome());
-		lblNomeUsuario.setBounds(36, 280, 247, 30);
-		getContentPane().add(lblNomeUsuario);
-
-		lblUserNull = new JLabel("");
-		lblUserNull.setBounds(131, 295, 66, 15);
-		getContentPane().add(lblUserNull);
-
+	private void configFrame() {
+		setTitle("Sistema de Gerenciamento de Padel");
+		this.setSize(SIZE);
+		this.setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 	}
 
 	public JLabel getLblUserNull() {
