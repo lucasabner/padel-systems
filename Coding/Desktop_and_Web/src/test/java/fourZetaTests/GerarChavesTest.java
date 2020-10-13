@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fourzeta.controllers.desktop.DistribuirChavesController;
+import fourzeta.controllers.desktop.DistribuirJogosController;
 import fourzeta.controllers.desktop.EncerrarController;
 import fourzeta.models.Atleta;
 import fourzeta.models.Chave;
@@ -39,13 +41,18 @@ public class GerarChavesTest {
 	Dupla dupla;
 	DuplaResource dR;
 	EncerrarController ec;
+	DistribuirChavesController dc;
+	DistribuirJogosController jc;
 	Chave ch;
-	Torneio torneio = new Torneio();
+	Torneio torneio;
 
 	@Before
 	public void setUp() throws Exception {
 		torneio = new Torneio();
+		u = new Usuario();
 		tR = new TorneioResource();
+		dc = new DistribuirChavesController(u, t, null);
+		jc = new DistribuirJogosController(u, t);
 		tR.listaTorneios();
 
 		for (Torneio t : tR.listaTorneios()) {
@@ -58,7 +65,7 @@ public class GerarChavesTest {
 	@Test
 	public void testGerarChaves() throws Exception {
 		/* ========== Execucao ========== */
-			torneio.montarChave();
+			dc.montarChave();
 			/* ========== Verificacoes ========== */
 			assertNotEquals(torneio.getChaves(), null);
 			assertEquals(torneio.getChaves().size(), 2);
@@ -67,9 +74,9 @@ public class GerarChavesTest {
 	
 	@Test
 	public void testGerarJogos() throws Exception {
-		torneio.montarChave();
+		dc.montarChave();
 		/* ========== Execucao ========== */
-			torneio.montarJogos();
+			jc.montarJogos();
 			JogoResource jR =  new JogoResource();
 			List<Jogo> jogos = new ArrayList<>();
 			jogos = jR.listaJogos();

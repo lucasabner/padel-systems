@@ -85,7 +85,7 @@ public class DistribuirJogos extends JFrame {
 		btnDistribuir = new JButton("Distribuir");
 		btnDistribuir.setBounds(208, 215, 114, 25);
 		btnDistribuir.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		controller = new DistribuirJogosController(usuario, torneio, this);
+		controller = new DistribuirJogosController(usuario, this);
 		btnDistribuir.addActionListener(controller);
 		getContentPane().add(btnDistribuir);
 		return btnDistribuir;
@@ -126,7 +126,7 @@ public class DistribuirJogos extends JFrame {
 
 	private JButton configBtnVoltar(Usuario usuario, Torneio torneio) throws ParseException {
 		btnVoltar = new JButton("Voltar");
-		DistribuirJogosController controller = new DistribuirJogosController(usuario, torneio, this);
+		DistribuirJogosController controller = new DistribuirJogosController(usuario, torneio);
 		btnVoltar.addActionListener(controller.actionPerformedVoltar());
 		btnVoltar.setBounds(22, 215, 114, 25);
 		getContentPane().add(btnVoltar);

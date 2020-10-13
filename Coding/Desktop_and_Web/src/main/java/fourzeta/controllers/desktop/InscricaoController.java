@@ -38,10 +38,6 @@ public class InscricaoController implements ActionListener {
 		this.torneio = torneio;
 	}
 
-	public InscricaoController() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
