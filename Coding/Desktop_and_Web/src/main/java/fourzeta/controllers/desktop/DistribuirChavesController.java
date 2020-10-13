@@ -20,6 +20,7 @@ public class DistribuirChavesController {
 	private JFrame tela;
 	private List<Dupla> duplas;
 	private List<Chave> chaves;
+	
 
 
 	public DistribuirChavesController(Usuario usuario, Torneio torneio,
@@ -27,11 +28,13 @@ public class DistribuirChavesController {
 		this.usuario = usuario;
 		this.torneio = torneio;
 		this.tela = tela;
-
+		duplas = torneio.getDuplas();
+		chaves = new ArrayList<Chave>();
 
 	}
 
 	public void montarChave() {
+		
 		retirarSuplentes();
 		List<Dupla> primeira = new ArrayList<Dupla>();
 		List<Dupla> segunda = new ArrayList<Dupla>();
@@ -40,7 +43,7 @@ public class DistribuirChavesController {
 		List<Dupla> quinta = new ArrayList<Dupla>();
 		List<Dupla> sexta = new ArrayList<Dupla>();
 		
-		for (Dupla d : duplas ) {
+		for (Dupla d : duplas) {
 			switch (d.getCategoria()) {
 			case "PRIMEIRA":
 				primeira.add(d);

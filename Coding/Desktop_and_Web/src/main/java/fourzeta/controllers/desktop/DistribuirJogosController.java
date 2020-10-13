@@ -27,7 +27,6 @@ public class DistribuirJogosController implements ActionListener {
 	public DistribuirJogosController(Usuario usuario,  DistribuirJogos tela) {
 		this.tela = tela;
 		this.usuario = usuario;
-		this.torneio = torneio;
 	}
 	
 	public DistribuirJogosController(Usuario usuario, Torneio torneio) {

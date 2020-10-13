@@ -64,54 +64,54 @@ public class InscricaoController implements ActionListener {
 				}
 			}
 		}
-
-		rank1.setCategoria(tela.getComboCategoria().getSelectedItem().toString());
-		rank1.setCircuito(circuito);
-		rank1.setPontos(0);
-
-		rank2.setCategoria(tela.getComboCategoria().getSelectedItem().toString());
-		rank2.setCircuito(circuito);
-		rank2.setPontos(0);
+//
+//		rank1.setCategoria(tela.getComboCategoria().getSelectedItem().toString());
+//		rank1.setCircuito(circuito);
+//		rank1.setPontos(0);
+//
+//		rank2.setCategoria(tela.getComboCategoria().getSelectedItem().toString());
+//		rank2.setCircuito(circuito);
+//		rank2.setPontos(0);
 
 		boolean encontrado1 = false, encontrado2 = false;
 
 		ar = new AtletaResource();
 		for (Atleta a : ar.listaAtletas()) {
 			if (a.getId() == dupla.getAtleta1().getId()) {
-				dupla.getAtleta1().getRankings().add(this.getRankingAtleta(a));
+//				dupla.getAtleta1().getRankings().add(this.getRankingAtleta(a));
 				dupla.setAtleta1(a);
 				encontrado1 = true;
 
 			} else if (a.getId() == dupla.getAtleta2().getId()) {
 				dupla.setAtleta2(a);
-				dupla.getAtleta2().getRankings().add(this.getRankingAtleta(a));
+//				dupla.getAtleta2().getRankings().add(this.getRankingAtleta(a));
 				encontrado2 = true;
 			}
 		}
-		rr = new RankingResource();
-		if (encontrado1 == false && encontrado2 == false) {
-			dupla.getAtleta1().getRankings().add(rank1);
-			rank1.setAtleta(dupla.getAtleta1());
-
-			dupla.getAtleta2().getRankings().add(rank2);
-			rank2.setAtleta(dupla.getAtleta2());
-			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
-			rr.registraRanking(rank1);
-			rr.registraRanking(rank2);
-
-		} else if (encontrado1 == false && encontrado2 == true) {
-			dupla.getAtleta1().getRankings().add(rank1);
-			rank1.setAtleta(dupla.getAtleta1());
-			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
-			rr.registraRanking(rank1);
-			ar.registraAtleta(dupla.getAtleta1());
-		} else if (encontrado1 == true && encontrado2 == false) {
-			dupla.getAtleta2().getRankings().add(rank2);
-			rank2.setAtleta(dupla.getAtleta2());
-			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
-			rr.registraRanking(rank2);
-			ar.registraAtleta(dupla.getAtleta2());
-		}
+//		rr = new RankingResource();
+//		if (encontrado1 == false && encontrado2 == false) {
+//			dupla.getAtleta1().getRankings().add(rank1);
+//			rank1.setAtleta(dupla.getAtleta1());
+//
+//			dupla.getAtleta2().getRankings().add(rank2);
+//			rank2.setAtleta(dupla.getAtleta2());
+//			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
+//			rr.registraRanking(rank1);
+//			rr.registraRanking(rank2);
+//
+//		} else if (encontrado1 == false && encontrado2 == true) {
+//			dupla.getAtleta1().getRankings().add(rank1);
+//			rank1.setAtleta(dupla.getAtleta1());
+//			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
+//			rr.registraRanking(rank1);
+//			ar.registraAtleta(dupla.getAtleta1());
+//		} else if (encontrado1 == true && encontrado2 == false) {
+//			dupla.getAtleta2().getRankings().add(rank2);
+//			rank2.setAtleta(dupla.getAtleta2());
+//			dupla.setPonTotal(rank1.getPontos() + rank2.getPontos());
+//			rr.registraRanking(rank2);
+//			ar.registraAtleta(dupla.getAtleta2());
+//		}
 
 		return true;
 	}
