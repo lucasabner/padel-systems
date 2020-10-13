@@ -46,7 +46,7 @@ public class Torneio implements Serializable, IElement {
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Quadra> quadras;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.ALL)
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Dupla> duplas;
 

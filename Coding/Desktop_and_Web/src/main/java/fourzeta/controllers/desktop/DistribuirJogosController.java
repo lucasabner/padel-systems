@@ -76,8 +76,16 @@ public class DistribuirJogosController implements ActionListener {
 	}
 	public void montarJogos() {
 		EncerrarController eC = new EncerrarController(usuario,torneio,tela);
+		List<Chave> chaves = new ArrayList<Chave>();
 		List<Jogo> jogos = new ArrayList<Jogo>();
-		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 2
+		ChaveResource cR = new ChaveResource();
+		for (Chave c : cR.listaChaves()) {
+			if(c.getTorneio().getId() == torneio.getId()) {
+				chaves.add(c);
+			}
+		}
+		
+		for (Chave chave : chaves) { // Jogos 1 VS 2
 			Jogo jo1 = new Jogo();
 			if (chave.getDupla1() != null && chave.getDupla2() != null) {
 				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
@@ -90,11 +98,9 @@ public class DistribuirJogosController implements ActionListener {
 			chave.setJogos(jogos);
 			JogoResource jr = new JogoResource();
 			jr.registraJogo(jo1);
-			ChaveResource chaver = new ChaveResource();
-			chaver.registraChave(chave);
 
 		}
-		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 3
+		for (Chave chave : chaves) { // Jogos 1 VS 3
 			Jogo jo2 = new Jogo();
 			if (chave.getDupla1() != null && chave.getDupla3() != null) {
 				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
@@ -110,7 +116,7 @@ public class DistribuirJogosController implements ActionListener {
 			ChaveResource chaver = new ChaveResource();
 			chaver.registraChave(chave);
 		}
-		for (Chave chave : torneio.getChaves()) { // Jogos 2 VS 3
+		for (Chave chave : chaves) { // Jogos 2 VS 3
 			Jogo jo3 = new Jogo();
 			if (chave.getDupla2() != null && chave.getDupla3() != null) {
 				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());

@@ -15,7 +15,7 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private int id;
 	
