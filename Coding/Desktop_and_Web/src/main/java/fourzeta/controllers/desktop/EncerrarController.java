@@ -31,6 +31,9 @@ public class EncerrarController implements ActionListener {
 	private JogoResource jr;
 	private Usuario usuario;
 	private Torneio torneio;
+	private DistribuirChavesController distribuirChavesController;
+	private DistribuirJogosController distribuirJogosController;
+	
 	private List<String> horariosQuinta = new ArrayList<String>();
 	private List<String> horariosSexta = new ArrayList<String>();
 	private List<String> horariosSabadoManha = new ArrayList<String>();
@@ -83,8 +86,8 @@ public class EncerrarController implements ActionListener {
 		// verifica e retira os suplentes da lista e depois ordena por ponto
 		// montaChaves e monta jogos
 		// torneio.montarChave(duplas2)
-		torneio.montarChave();
-		torneio.distribuirJogos();
+		distribuirChavesController.montarChave();
+		distribuirJogosController.montarJogos();
 //		int cat1 = 0, cat2 = 0, cat3 = 0, cat4 = 0, cat5 = 0, cat6 = 0;
 //		for (Chave chave : torneio.getChaves()) {
 //			switch (chave.getCategoria()) {

@@ -3,13 +3,16 @@ package fourzeta.controllers.desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import fourzeta.desktop_views.DistribuirJogos;
 import fourzeta.desktop_views.GradeJogos;
+import fourzeta.models.Chave;
 import fourzeta.models.Jogo;
 import fourzeta.models.Quadra;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
+import fourzeta.resources.ChaveResource;
 import fourzeta.resources.JogoResource;
 
 public class DistribuirJogosController implements ActionListener {
@@ -21,7 +24,7 @@ public class DistribuirJogosController implements ActionListener {
 	private JogoResource jr;
 	private ActionListener arg0;
 
-	public DistribuirJogosController(Usuario usuario, Torneio torneio, DistribuirJogos tela) {
+	public DistribuirJogosController(Usuario usuario, Torneio torneio,  DistribuirJogos tela) {
 		this.tela = tela;
 		this.usuario = usuario;
 		this.torneio = torneio;
@@ -65,6 +68,60 @@ public class DistribuirJogosController implements ActionListener {
 				j.setQuadra(quadra);
 				jr.registraJogo(j);
 			}
+		}
+	}
+	public void montarJogos() {
+		EncerrarController eC = new EncerrarController();
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 2
+			Jogo jo1 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla2() != null) {
+				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+				jo1.setDupla1(chave.getDupla1());
+				jo1.setDupla2(chave.getDupla2());
+				jo1.setCategoria(chave.getCategoria());
+				jo1.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla2(), jo1));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo1);
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
+
+		}
+		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 3
+			Jogo jo2 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla3() != null) {
+				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
+				jo2.setDupla1(chave.getDupla1());
+				jo2.setDupla2(chave.getDupla3());
+				jo2.setCategoria(chave.getCategoria());
+				jo2.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla1(), chave.getDupla3(), jo2));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo2);
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
+		}
+		for (Chave chave : torneio.getChaves()) { // Jogos 2 VS 3
+			Jogo jo3 = new Jogo();
+			if (chave.getDupla2() != null && chave.getDupla3() != null) {
+				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());
+				jo3.setDupla1(chave.getDupla2());
+				jo3.setDupla2(chave.getDupla3());
+				jo3.setCategoria(chave.getCategoria());
+				jo3.setChave(chave);
+			}
+			jogos.add(eC.distribuirHorarios(chave, chave.getDupla2(), chave.getDupla3(), jo3));
+			chave.setJogos(jogos);
+			JogoResource jr = new JogoResource();
+			jr.registraJogo(jo3);
+
+			ChaveResource chaver = new ChaveResource();
+			chaver.registraChave(chave);
 		}
 	}
 
