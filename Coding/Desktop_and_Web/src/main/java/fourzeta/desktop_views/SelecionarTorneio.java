@@ -83,6 +83,7 @@ public class SelecionarTorneio extends JFrame {
 	private void configBtnExcluirTorneio() {
 		btnExcluirTorneio = new JButton("Excluir Torneio");
 		btnExcluirTorneio.setName("btnExcluirTorneio");
+		btnExcluirTorneio.setEnabled(false);
 		btnExcluirTorneio.addActionListener(controller);
 		btnExcluirTorneio.setBounds(221, 198, 138, 25);
 		getContentPane().add(btnExcluirTorneio);
@@ -91,6 +92,7 @@ public class SelecionarTorneio extends JFrame {
 	private void configBtnEditarTorneio() {
 		btnEditarTorneio = new JButton("Editar Torneio");
 		btnEditarTorneio.setName("btnEditarTorneio");
+		btnEditarTorneio.setEnabled(false);
 		btnEditarTorneio.addActionListener(controller);
 		btnEditarTorneio.setBounds(221, 149, 138, 25);
 		getContentPane().add(btnEditarTorneio);
@@ -99,6 +101,7 @@ public class SelecionarTorneio extends JFrame {
 	private void configBtnExcluirCircuito() {
 		btnExcluirCircuito = new JButton("Excluir Circuito");
 		btnExcluirCircuito.setName("btnExcluirCircuito");
+		btnExcluirCircuito.setEnabled(false);
 		btnExcluirCircuito.addActionListener(controller);
 		btnExcluirCircuito.setBounds(26, 198, 138, 25);
 		getContentPane().add(btnExcluirCircuito);
@@ -107,6 +110,7 @@ public class SelecionarTorneio extends JFrame {
 	private void configBtnEditarCircuito() {
 		btnEditarCircuito = new JButton("Editar Circuito");
 		btnEditarCircuito.setName("btnEditarCircuito");
+		btnEditarCircuito.setEnabled(false);
 		btnEditarCircuito.addActionListener(controller);
 		btnEditarCircuito.setBounds(26, 149, 138, 25);
 		getContentPane().add(btnEditarCircuito);
