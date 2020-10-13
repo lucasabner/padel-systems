@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -28,6 +30,10 @@ public class CadastrarCircuitoController implements ActionListener {
 		this.tela = tela;
 		this.usuario = usuario;
 	}
+	
+	public CadastrarCircuitoController() {
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -41,6 +47,15 @@ public class CadastrarCircuitoController implements ActionListener {
 		}else {
 			actionVoltar();
 		}
+	}
+	
+	public List<Circuito> listarCircuitos() {
+		List<Circuito> c = new ArrayList<Circuito>();
+		cr = new CircuitoResource();
+		for (Circuito circuito : cr.listaCircuitos()) {
+			c.add(circuito);
+		}
+		return c;
 	}
 
 	private void actionCadastrarCircuito() {

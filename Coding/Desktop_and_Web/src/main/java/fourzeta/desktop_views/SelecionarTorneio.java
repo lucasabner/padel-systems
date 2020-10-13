@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import fourzeta.controllers.desktop.CadastrarCircuitoController;
 import fourzeta.controllers.desktop.SelecionarTorneioController;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
@@ -28,6 +30,7 @@ public class SelecionarTorneio extends JFrame {
 	private JComboBox comboCircuito;
 	private JComboBox comboTorneio;
 	private JLabel lblIcon;
+	private CadastrarCircuitoController ctrlCircuito;
 	private JButton btnNovoCircuto;
 	private JButton btnNovoTorneio;
 	private JButton btnEditarCircuito;
@@ -37,227 +40,187 @@ public class SelecionarTorneio extends JFrame {
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
 	private JScrollPane scrollPane_2;
-	private Usuario usuario;
-
+	private JLabel lblselecioneOCircuito;
+	private JButton btnVoltar;
+	private JLabel lblTorneio;
+	private JLabel lblCircuito;
+	private JLabel titulo;
+	private ImageIcon imgLogin;
+	
 	public SelecionarTorneio(Usuario usuario) throws ParseException, IOException, NotBoundException {
-		this.usuario = usuario;
-		setTitle("Sistema de Gerenciamento de Padel");
-		this.setSize(SIZE);
-		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
-
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		// mudando o icon
-		ImageIcon imgLogin = new ImageIcon("assets\\FourZeta.png");
-		setIconImage(imgLogin.getImage());
-		lblIcon = new JLabel(imgLogin);
-		getContentPane().add(lblIcon);
-
-		JLabel Titulo = new JLabel("Gerenciar");
-		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setBounds(0, 12, 600, 58);
-		Titulo.setFont(new Font("Times New Roman", Font.BOLD, 45));
-		getContentPane().add(Titulo);
-
-		CircuitoResource cr = new CircuitoResource();
-		comboCircuito = new JComboBox();
-		comboCircuito.setBounds(404, 99, 165, 22);
-		comboCircuito.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		comboTorneio = new JComboBox();
-		comboTorneio.setBounds(404, 150, 165, 22);
-		comboTorneio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-
-		comboCircuito.addItem("Selecionar");
-		comboTorneio.addItem("Selecionar");
-		for (Circuito circuito : cr.listaCircuitos()) {
-			comboCircuito.addItem(circuito.getNome());
-		}
-		comboCircuito.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				comboTorneio.removeAllItems();
-				comboTorneio.addItem("Selecionar");
-				for (Circuito circuito : cr.listaCircuitos()) {
-					if (circuito.getNome().equalsIgnoreCase(comboCircuito.getSelectedItem().toString())) {
-						for (int i = 0; i < circuito.getTorneios().size(); i++) {
-							comboTorneio.addItem(circuito.getTorneios().get(i).getNome());
-						}
-					}
-				}
-			}
-		});
-		getContentPane().add(comboCircuito);
-		getContentPane().add(comboTorneio);
-
-		btnSelecionar = new JButton("Selecionar");
 		controller = new SelecionarTorneioController(usuario, this);
+		ctrlCircuito = new CadastrarCircuitoController();
+		configFrame();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		configImgLogin();
+		configTitulo();
+		configBtnSelecionar();
+		configBtnVoltar();
+		configCircuito();
+		configTorneio();
+		configScroolPane();
+		configScroolPane_1();
+		configScroolPane_2();
+	}
+
+	private void configTorneio() {
+		configComboTorneio();
+		configLblTorneio();
+		configBtnNovoTorneio();
+		configBtnEditarTorneio();
+		configBtnExcluirTorneio();
+	}
+
+	private void configCircuito() {
+		configComboCircuito();
+		configLblSelecioneOCircuito();
+		configLblCircuito();
+		configBtnNovoCircuito();
+		configBtnEditarCircuito();
+		configBtnExcluirCircuito();
+	}
+
+	private void configBtnExcluirTorneio() {
+		btnExcluirTorneio = new JButton("Excluir Torneio");
+		btnExcluirTorneio.setName("btnExcluirTorneio");
+		btnExcluirTorneio.addActionListener(controller);
+		btnExcluirTorneio.setBounds(221, 198, 138, 25);
+		getContentPane().add(btnExcluirTorneio);
+	}
+
+	private void configBtnEditarTorneio() {
+		btnEditarTorneio = new JButton("Editar Torneio");
+		btnEditarTorneio.setName("btnEditarTorneio");
+		btnEditarTorneio.addActionListener(controller);
+		btnEditarTorneio.setBounds(221, 149, 138, 25);
+		getContentPane().add(btnEditarTorneio);
+	}
+
+	private void configBtnExcluirCircuito() {
+		btnExcluirCircuito = new JButton("Excluir Circuito");
+		btnExcluirCircuito.setName("btnExcluirCircuito");
+		btnExcluirCircuito.addActionListener(controller);
+		btnExcluirCircuito.setBounds(26, 198, 138, 25);
+		getContentPane().add(btnExcluirCircuito);
+	}
+
+	private void configBtnEditarCircuito() {
+		btnEditarCircuito = new JButton("Editar Circuito");
+		btnEditarCircuito.setName("btnEditarCircuito");
+		btnEditarCircuito.addActionListener(controller);
+		btnEditarCircuito.setBounds(26, 149, 138, 25);
+		getContentPane().add(btnEditarCircuito);
+	}
+
+	private void configBtnNovoTorneio() {
+		btnNovoTorneio = new JButton("Novo Torneio");
+		btnNovoTorneio.setName("btnNovoTorneio");
+		btnNovoTorneio.addActionListener(controller);
+		btnNovoTorneio.setBounds(221, 98, 138, 25);
+		getContentPane().add(btnNovoTorneio);
+	}
+
+	private void configBtnNovoCircuito() {
+		btnNovoCircuto = new JButton("Novo Circuito");
+		btnNovoCircuto.setName("btnNovoCircuito");
+		btnNovoCircuto.addActionListener(controller);
+		btnNovoCircuto.setBounds(26, 98, 138, 25);
+		getContentPane().add(btnNovoCircuto);
+	}
+
+	private void configLblSelecioneOCircuito() {
+		lblselecioneOCircuito = new JLabel("*Selecione o Circuito e o Torneio que deseja gerenciar.");
+		lblselecioneOCircuito.setBounds(12, 269, 494, 58);
+		getContentPane().add(lblselecioneOCircuito);
+	}
+
+	private void configBtnVoltar() {
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setName("btnVoltar");
+		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		btnVoltar.addActionListener(controller);
+		btnVoltar.setBounds(480, 286, 89, 23);
+		getContentPane().add(btnVoltar);
+	}
+
+	private void configLblTorneio() {
+		lblTorneio = new JLabel("Torneio");
+		lblTorneio.setBounds(404, 133, 66, 15);
+		getContentPane().add(lblTorneio);
+	}
+
+	private void configLblCircuito() {
+		lblCircuito = new JLabel("Circuito");
+		lblCircuito.setBounds(404, 82, 66, 15);
+		getContentPane().add(lblCircuito);
+	}
+
+	private void configBtnSelecionar() {
+		btnSelecionar = new JButton("Selecionar");
+		btnSelecionar.setName("btnSelecionar");
 		btnSelecionar.addActionListener(controller);
 		btnSelecionar.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnSelecionar.setBounds(404, 198, 165, 23);
 		getContentPane().add(btnSelecionar);
+	}
 
-		JLabel lblCircuito = new JLabel("Circuito");
-		lblCircuito.setBounds(404, 82, 66, 15);
-		getContentPane().add(lblCircuito);
+	private void configComboTorneio() {
+		comboTorneio = new JComboBox();
+		comboTorneio.setBounds(404, 150, 165, 22);
+		comboTorneio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		getContentPane().add(comboTorneio);
+	}
 
-		JLabel lblTorneio = new JLabel("Torneio");
-		lblTorneio.setBounds(404, 133, 66, 15);
-		getContentPane().add(lblTorneio);
+	private void configComboCircuito() {
+		comboCircuito = new JComboBox();
+		comboCircuito.setBounds(404, 99, 165, 22);
+		comboCircuito.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		comboCircuito.addItem("Selecionar");
+		for (Circuito circuito : ctrlCircuito.listarCircuitos()) {
+			comboCircuito.addItem(circuito.getNome());
+		}
+		comboCircuito.addActionListener(controller);
+		getContentPane().add(comboCircuito);
+	}
 
-		JButton btnVoltar = new JButton("Voltar");
-
-		btnVoltar.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnVoltar.addActionListener(new ActionListener() { // Implementando Voltar
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Inicial inicial = null;
-				try {
-					inicial = new Inicial(usuario);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(480, 286, 89, 23);
-		getContentPane().add(btnVoltar);
-
-		JLabel lblselecioneOCircuito = new JLabel("*Selecione o Circuito e o Torneio que deseja gerenciar.");
-		lblselecioneOCircuito.setBounds(12, 269, 494, 58);
-		getContentPane().add(lblselecioneOCircuito);
-
-		btnNovoCircuto = new JButton("Novo Circuito");
-		btnNovoCircuto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CadastrarCircuito inicial = null;
-				try {
-					inicial = new CadastrarCircuito(usuario);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnNovoCircuto.setBounds(26, 98, 138, 25);
-		getContentPane().add(btnNovoCircuto);
-
-		btnNovoTorneio = new JButton("Novo Torneio");
-		btnNovoTorneio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				CadastrarTorneio inicial = null;
-				try {
-					inicial = new CadastrarTorneio(usuario);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-
-			}
-		});
-		btnNovoTorneio.setBounds(221, 98, 138, 25);
-		getContentPane().add(btnNovoTorneio);
-
-		btnEditarCircuito = new JButton("Editar Circuito");
-		btnEditarCircuito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Editar inicial = null;
-				try {
-					inicial = new Editar(usuario, "Circuito");
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnEditarCircuito.setBounds(26, 149, 138, 25);
-		getContentPane().add(btnEditarCircuito);
-
-		btnExcluirCircuito = new JButton("Excluir Circuito");
-		btnExcluirCircuito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ExcluirCircuito inicial = null;
-				try {
-					inicial = new ExcluirCircuito(usuario);
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnExcluirCircuito.setBounds(26, 198, 138, 25);
-		getContentPane().add(btnExcluirCircuito);
-
-		btnEditarTorneio = new JButton("Editar Torneio");
-		btnEditarTorneio.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Editar inicial = null;
-				try {
-					inicial = new Editar(usuario, "Torneio");
-				} catch (ParseException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnEditarTorneio.setBounds(221, 149, 138, 25);
-		getContentPane().add(btnEditarTorneio);
-
-		btnExcluirTorneio = new JButton("Excluir Torneio");
-		btnExcluirTorneio.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ExcluirTorneio inicial = null;
-				try {
-					inicial = new ExcluirTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicial.setVisible(true);
-			}
-		});
-		btnExcluirTorneio.setBounds(221, 198, 138, 25);
-		getContentPane().add(btnExcluirTorneio);
-
+	private void configScroolPane() {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 79, 148, 167);
 		getContentPane().add(scrollPane);
+	}
 
+	private void configScroolPane_1() {
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(217, 79, 148, 167);
 		getContentPane().add(scrollPane_1);
+	}
 
+	private void configScroolPane_2() {
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(400, 79, 175, 167);
 		getContentPane().add(scrollPane_2);
+	}
 
+	private void configTitulo() {
+		titulo = new JLabel("Gerenciar");
+		titulo.setHorizontalAlignment(SwingConstants.CENTER);
+		titulo.setBounds(0, 12, 600, 58);
+		titulo.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		getContentPane().add(titulo);
+	}
+
+	private void configImgLogin() {
+		imgLogin = new ImageIcon("assets\\FourZeta.png");
+		setIconImage(imgLogin.getImage());
+		lblIcon = new JLabel(imgLogin);
+		getContentPane().add(lblIcon);
+	}
+
+	private void configFrame() {
+		setTitle("Sistema de Gerenciamento de Padel");
+		this.setSize(SIZE);
+		this.setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 	}
 
 	public void notifyEncerrarInscricaoCircuito() {

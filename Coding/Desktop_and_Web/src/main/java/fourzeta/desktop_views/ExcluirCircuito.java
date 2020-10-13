@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import fourzeta.controllers.desktop.CadastrarCircuitoController;
 import fourzeta.controllers.desktop.ExcluirCircuitoController;
 import fourzeta.models.Circuito;
 import fourzeta.models.Usuario;
@@ -24,63 +26,67 @@ public class ExcluirCircuito extends JFrame {
 	private JLabel lblTitulo;
 	private JLabel lblNomeCircuito;
 	private JButton btnVoltar;
+	private CadastrarCircuitoController ctrlCircuito;
 	private JButton btnExcluir;
 	private JComboBox comboBoxCircuito;
-	private Circuito circuito;
+	private ExcluirCircuitoController controller;
 
 	public ExcluirCircuito(Usuario usuario) throws ParseException, IOException, NotBoundException {
+		controller = new ExcluirCircuitoController(usuario, this);
+		ctrlCircuito = new CadastrarCircuitoController();
+		configFrame();
+		configLblTitulo();
+		configLblNomeCircuito();
+		configBtnVoltar();
+		configBtnExcluir();
+		configComboBoxCircuito();
+	}
 
-		setTitle("Excluir Circuito");
-		this.setSize(SIZE);
-		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
+	private void configBtnVoltar() {
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(controller);
+		btnVoltar.setBounds(22, 133, 114, 25);
+		getContentPane().add(btnVoltar);
+	}
 
+	private void configComboBoxCircuito() {
+		comboBoxCircuito = new JComboBox();
+		comboBoxCircuito.setBounds(22, 90, 300, 24);
+		comboBoxCircuito.addItem("Selecionar");
+		for (Circuito circuito : ctrlCircuito.listarCircuitos()) {
+			comboBoxCircuito.addItem(circuito.getNome());
+		}
+		getContentPane().add(comboBoxCircuito);
+	}
+
+	private void configBtnExcluir() {
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setName("btnExcluir");
+		btnExcluir.addActionListener(this.controller);
+		btnExcluir.setBounds(209, 133, 114, 25);
+		getContentPane().add(btnExcluir);
+	}
+
+	private void configLblNomeCircuito() {
+		lblNomeCircuito = new JLabel("Selecione um circuito:");
+		lblNomeCircuito.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNomeCircuito.setBounds(22, 66, 300, 15);
+		getContentPane().add(lblNomeCircuito);
+	}
+
+	private void configLblTitulo() {
 		lblTitulo = new JLabel("Excluir Circuito");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 30));
 		lblTitulo.setBounds(12, 12, 321, 26);
 		getContentPane().add(lblTitulo);
+	}
 
-		lblNomeCircuito = new JLabel("Selecione um circuito:");
-		lblNomeCircuito.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNomeCircuito.setBounds(22, 66, 300, 15);
-		getContentPane().add(lblNomeCircuito);
-
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				SelecionarTorneio inicio = null;
-				try {
-					inicio = new SelecionarTorneio(usuario);
-				} catch (ParseException | IOException | NotBoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				setVisible(false);
-				inicio.setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(22, 133, 114, 25);
-		getContentPane().add(btnVoltar);
-
-		btnExcluir = new JButton("Excluir");
-		ExcluirCircuitoController controller = new ExcluirCircuitoController(usuario, this);
-		btnExcluir.addActionListener(controller);
-		getContentPane().add(btnExcluir);
-		btnExcluir.setBounds(209, 133, 114, 25);
-
-		CircuitoResource cr = new CircuitoResource();
-		comboBoxCircuito = new JComboBox();
-		comboBoxCircuito.setBounds(22, 90, 300, 24);
-		comboBoxCircuito.addItem("Selecionar");
-		for (Circuito circuito : cr.listaCircuitos()) {
-			comboBoxCircuito.addItem(circuito.getNome());
-		}
-
-		getContentPane().add(comboBoxCircuito);
-
+	private void configFrame() {
+		setTitle("Excluir Circuito");
+		this.setSize(SIZE);
+		this.setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 	}
 
 	public JButton getBtnVoltar() {
