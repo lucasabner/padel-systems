@@ -11,6 +11,7 @@ import fourzeta.models.OrderDuplasPontuacao;
 import fourzeta.models.Torneio;
 import fourzeta.models.Usuario;
 import fourzeta.resources.ChaveResource;
+import fourzeta.resources.DuplaResource;
 
 public class DistribuirChavesController {
 	private Usuario usuario;
@@ -29,12 +30,20 @@ public class DistribuirChavesController {
 		this.torneio = torneio;
 		this.tela = tela;
 		duplas = torneio.getDuplas();
+		DuplaResource dR = new DuplaResource();
+		List<Dupla> duplass = new ArrayList<Dupla>();
+		for (Dupla d : dR.listaDuplas()) {
+			if(d.getTorneio().getId() == torneio.getId()) {
+				duplass.add(d);
+			}
+		}
+		
+		duplas = duplass;
 		chaves = new ArrayList<Chave>();
 
 	}
 
 	public void montarChave() {
-		
 		retirarSuplentes();
 		List<Dupla> primeira = new ArrayList<Dupla>();
 		List<Dupla> segunda = new ArrayList<Dupla>();
@@ -128,8 +137,10 @@ public class DistribuirChavesController {
 
 	public void retirarSuplentes() {
 		int numDuplasSemSuplentes = duplas.size() % 3;
+		System.out.println("saporitico  " + numDuplasSemSuplentes);
 		for (int i = 0; i < numDuplasSemSuplentes; i++) {
-			duplas.remove(duplas.size() - 1); // nao salva no banco.
+			System.out.println("saporitico "+ duplas.get(duplas.size()-1).getId());
+			duplas.remove(duplas.size() - 1);
 		}
 	}
 }
