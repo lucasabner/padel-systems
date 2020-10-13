@@ -69,7 +69,7 @@ public class GerarChavesTest {
 	public void testGerarJogos() throws Exception {
 		torneio.montarChave();
 		/* ========== Execucao ========== */
-			torneio.distribuirJogos();
+			torneio.montarJogos();
 			JogoResource jR =  new JogoResource();
 			List<Jogo> jogos = new ArrayList<>();
 			jogos = jR.listaJogos();
