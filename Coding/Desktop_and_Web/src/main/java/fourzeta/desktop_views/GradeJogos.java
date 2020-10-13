@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+
+import fourzeta.controllers.desktop.GradeJogosController;
 import fourzeta.controllers.desktop.PesquisarJogosController;
 import fourzeta.models.Jogo;
 import fourzeta.models.Torneio;
@@ -32,6 +34,7 @@ public class GradeJogos extends JFrame {
 	private JButton btnPesquisar;
 	private JTable jogosTable;
 	private GradeJogosTableModel model;
+	private GradeJogosController gjController;
 	private PesquisarJogosController controller;
 	private JComboBox comboCategoria;
 	private JComboBox comboQuadra;
@@ -43,6 +46,7 @@ public class GradeJogos extends JFrame {
 
 	public GradeJogos(Usuario usuario, Torneio torneio) throws ParseException {		
 		this.controller = new PesquisarJogosController(usuario, torneio, this);
+		this.gjController = new GradeJogosController(usuario, torneio, this);
 		this.getContentPane().add(configIcon());		
 		this.configFrame();
 		this.getContentPane().add(configTblJogos(torneio));
@@ -90,7 +94,7 @@ public class GradeJogos extends JFrame {
 	private JButton configBtnVoltar() {
 		this.btnVoltar = new JButton("Voltar");
 		this.btnVoltar.setName("btnVoltar");
-		this.btnVoltar.addActionListener(this.controller);
+		this.btnVoltar.addActionListener(this.gjController);
 		this.btnVoltar.setFont(new Font(this.FONTE, Font.BOLD, 16));
 		this.btnVoltar.setBounds(47, 644, 106, 23);
 		return this.btnVoltar;
