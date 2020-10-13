@@ -41,7 +41,8 @@ public class GerenciarTorneio extends JFrame {
 	private Torneio torneio;
 
 	public GerenciarTorneio(Usuario usuario, Torneio torneio) throws ParseException, IOException {
-
+		this.usuario = usuario;
+		this.torneio = torneio;
 		configFrame();
 		this.getContentPane().add(configLblMenu());
 		this.getContentPane().add(configLblImagem());
@@ -141,6 +142,7 @@ public class GerenciarTorneio extends JFrame {
 	private JButton configBtnGradeJogos(Usuario user, Torneio torneio) throws ParseException {
 		btnGradeDeJogos = new JButton("Grade de Jogos");
 		controllerGrade = new GradeJogosController(usuario, torneio, this);
+		btnGradeDeJogos.setName("btnGradeDeJogos");
 		btnGradeDeJogos.addActionListener(controllerGrade);
 		btnGradeDeJogos.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnGradeDeJogos.setBounds(359, 182, 207, 23);

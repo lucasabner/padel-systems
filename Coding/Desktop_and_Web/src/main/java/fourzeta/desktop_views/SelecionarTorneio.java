@@ -173,6 +173,7 @@ public class SelecionarTorneio extends JFrame {
 
 	private void configComboCircuito() {
 		comboCircuito = new JComboBox();
+		comboCircuito.setName("comboCircuito");
 		comboCircuito.setBounds(404, 99, 165, 22);
 		comboCircuito.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		comboCircuito.addItem("Selecionar");

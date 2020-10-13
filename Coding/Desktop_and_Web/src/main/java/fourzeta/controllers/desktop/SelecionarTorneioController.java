@@ -7,6 +7,7 @@ import java.rmi.NotBoundException;
 import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import fourzeta.desktop_views.CadastrarCircuito;
 import fourzeta.desktop_views.CadastrarTorneio;
@@ -16,9 +17,9 @@ import fourzeta.desktop_views.ExcluirTorneio;
 import fourzeta.desktop_views.GerenciarTorneio;
 import fourzeta.desktop_views.Inicial;
 import fourzeta.desktop_views.SelecionarTorneio;
-import fourzeta.models.Usuario;
 import fourzeta.models.Circuito;
 import fourzeta.models.Torneio;
+import fourzeta.models.Usuario;
 import fourzeta.resources.TorneioResource;
 
 public class SelecionarTorneioController implements ActionListener {
@@ -39,35 +40,40 @@ public class SelecionarTorneioController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		tr = new TorneioResource();
-		JButton source = (JButton) arg0.getSource();
-		switch (source.getName()) {
-		case "btnSelecionar":
-			openTorneio();
-			break;
-		case "btnVoltar":
-			actionVoltar();
-			break;
-		case "btnNovoCircuito":
-			novoCircuito();
-			break;
-		case "btnNovoTorneio":
-			novoTorneio();
-			break;
-		case "btnEditarCircuito":
-			editarCircuito();
-			break;
-		case "btnExcluirCircuito":
-			excluirCircuito();
-			break;
-		case "btnEditarTorneio":
-			editarTorneio();
-			break;
-		case "btnExcluirTorneio":
-			excluirTorneio();
-			break;
-		default:
-			opcoesTorneio();
-		}
+		Object obj = arg0.getSource();
+		 if (obj instanceof JButton) {
+			 JButton source = (JButton) arg0.getSource();
+				switch (source.getName()) {
+				case "btnSelecionar":
+					openTorneio();
+					break;
+				case "btnVoltar":
+					actionVoltar();
+					break;
+				case "btnNovoCircuito":
+					novoCircuito();
+					break;
+				case "btnNovoTorneio":
+					novoTorneio();
+					break;
+				case "btnEditarCircuito":
+					editarCircuito();
+					break;
+				case "btnExcluirCircuito":
+					excluirCircuito();
+					break;
+				case "btnEditarTorneio":
+					editarTorneio();
+					break;
+				case "btnExcluirTorneio":
+					excluirTorneio();
+					break;
+				default:
+				}
+			 
+		    } else if (obj instanceof JComboBox) {
+		      opcoesTorneio();
+		    }
 	}
 
 	private void excluirTorneio() {
@@ -169,6 +175,7 @@ public class SelecionarTorneioController implements ActionListener {
 				torneio = t;
 			}
 		}
+		
 		try {
 			gerenciarTela = new GerenciarTorneio(usuario, torneio);
 			this.tela.setVisible(false);

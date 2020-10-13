@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import fourzeta.desktop_views.GerenciarTorneio;
@@ -24,7 +25,7 @@ import fourzeta.resources.TorneioResource;
 
 public class EncerrarController implements ActionListener {
 
-	private GerenciarTorneio tela;
+	private JFrame tela;
 	private TorneioResource tr;
 	private DuplaResource dr;
 	private ChaveResource chaver;
@@ -43,15 +44,14 @@ public class EncerrarController implements ActionListener {
 	private List<String> horariosDomingoTarde = new ArrayList<String>();
 	private List<String> horariosDomingoNoite = new ArrayList<String>();
 
-	public EncerrarController(Usuario usuario, Torneio torneio, GerenciarTorneio tela) {
+	public EncerrarController(Usuario usuario, Torneio torneio, JFrame tela) {
 		this.tela = tela;
 		this.usuario = usuario;
 		this.torneio = torneio;
+		distribuirChavesController = new DistribuirChavesController(usuario,torneio,tela);
+		distribuirJogosController = new DistribuirJogosController(usuario,torneio);
 	}
 
-	public EncerrarController() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

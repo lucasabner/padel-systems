@@ -40,11 +40,11 @@ public class Inicial extends JFrame {
 	private ImageIcon imgLogin;
 
 	public Inicial(Usuario usuario) throws ParseException, IOException {
+		this.usuario = usuario;
 		controllerRanking = new MostrarRankingController(usuario, this);
 		controllerCreditos = new MostrarCreditosController(this);
 		controllerGerenciar = new InicialGerenciarController(usuario, this);
 		configFrame();
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		configImgLogin();
 		configTitulo();
 		configBtn();

@@ -30,9 +30,12 @@ public class GradeJogosController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton source = (JButton) arg0.getSource();		
-		if(source.getName() == "btnPesquisar") {
+		if(source.getName().equals("btnPesquisar") ) {
 			actionPesquisar();
-		}else {
+		}else if(source.getName().equals("btnGradeDeJogos")) {
+			
+		}
+		else {
 			actionVoltar();
 		}
 	}

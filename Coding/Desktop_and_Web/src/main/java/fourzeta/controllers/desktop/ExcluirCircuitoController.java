@@ -52,7 +52,7 @@ public class ExcluirCircuitoController implements ActionListener {
 			actionVoltar();
 		}
 	}
-	
+
 	private void actionVoltar() {
 		SelecionarTorneio inicio = null;
 		try {
@@ -64,5 +64,5 @@ public class ExcluirCircuitoController implements ActionListener {
 		tela.setVisible(false);
 		inicio.setVisible(true);
 	}
-	
+
 }

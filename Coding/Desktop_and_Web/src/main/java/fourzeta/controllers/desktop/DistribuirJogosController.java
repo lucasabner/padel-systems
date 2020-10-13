@@ -24,8 +24,13 @@ public class DistribuirJogosController implements ActionListener {
 	private JogoResource jr;
 	private ActionListener arg0;
 
-	public DistribuirJogosController(Usuario usuario, Torneio torneio,  DistribuirJogos tela) {
+	public DistribuirJogosController(Usuario usuario,  DistribuirJogos tela) {
 		this.tela = tela;
+		this.usuario = usuario;
+		this.torneio = torneio;
+	}
+	
+	public DistribuirJogosController(Usuario usuario, Torneio torneio) {
 		this.usuario = usuario;
 		this.torneio = torneio;
 	}
@@ -71,7 +76,7 @@ public class DistribuirJogosController implements ActionListener {
 		}
 	}
 	public void montarJogos() {
-		EncerrarController eC = new EncerrarController();
+		EncerrarController eC = new EncerrarController(usuario,torneio,tela);
 		List<Jogo> jogos = new ArrayList<Jogo>();
 		for (Chave chave : torneio.getChaves()) { // Jogos 1 VS 2
 			Jogo jo1 = new Jogo();

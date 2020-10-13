@@ -3,7 +3,8 @@ package fourzeta.controllers.desktop;
 import java.util.ArrayList;
 import java.util.List;
 
-import fourzeta.desktop_views.DistribuirJogos;
+import javax.swing.JFrame;
+
 import fourzeta.models.Chave;
 import fourzeta.models.Dupla;
 import fourzeta.models.OrderDuplasPontuacao;
@@ -16,17 +17,15 @@ public class DistribuirChavesController {
 	private Torneio torneio;
 	private Chave chave;
 	private Dupla dupla;
-	private DistribuirJogos tela;
+	private JFrame tela;
 	private List<Dupla> duplas;
 	private List<Chave> chaves;
 
 
-	public DistribuirChavesController(Usuario usuario, Torneio torneio, Chave chave, Dupla dupla,
-			DistribuirJogos tela) {
+	public DistribuirChavesController(Usuario usuario, Torneio torneio,
+			JFrame tela) {
 		this.usuario = usuario;
 		this.torneio = torneio;
-		this.chave = chave;
-		this.dupla = dupla;
 		this.tela = tela;
 
 

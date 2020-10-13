@@ -43,9 +43,9 @@ public class CadastrarTorneioController implements ActionListener {
 				}
 			}
 
-			if (torneio.bindTorneio(tela).getNome().isEmpty() || torneio.bindTorneio(tela).getDescricao().isEmpty()
-					|| torneio.bindTorneio(tela).getDatIniJogos().isEmpty()
-					|| torneio.bindTorneio(tela).getDatFimJogos().isEmpty()) {
+			if (this.bindTorneio(tela).getNome().isEmpty() || this.bindTorneio(tela).getDescricao().isEmpty()
+					|| this.bindTorneio(tela).getDatIniJogos().isEmpty()
+					|| this.bindTorneio(tela).getDatFimJogos().isEmpty()) {
 				tela.notifyCampoIncompleto();
 			} else {
 				realizarCadastro();
@@ -60,6 +60,18 @@ public class CadastrarTorneioController implements ActionListener {
 			actionVoltar();
 		}
 
+	}
+	
+	private void actionVoltar() {
+		SelecionarTorneio inicio = null;
+		try {
+			inicio = new SelecionarTorneio(usuario);
+		} catch (ParseException | IOException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tela.setVisible(false);
+		inicio.setVisible(true);
 	}
 
 	public void realizarCadastro() {
