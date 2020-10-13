@@ -292,6 +292,7 @@ public class CadastrarTorneio extends JFrame {
 	private void configBtnCadastrar() {
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setBounds(208, 538, 114, 25);
+		btnCadastrar.setName("btnCadastrar");
 		btnCadastrar.addActionListener(this.cadTorneio);
 		getContentPane().add(btnCadastrar);
 	}

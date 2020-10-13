@@ -36,19 +36,18 @@ public class CadastrarTorneioController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		cr = new CircuitoResource();
 		JButton source = (JButton) arg0.getSource();
-		if (source.getName() == "btnCadastrar") {
-			for (Circuito c : cr.listaCircuitos()) {
-				if (c.getNome().equalsIgnoreCase(tela.getComboBoxCircuito().getSelectedItem().toString())) {
-					circuito = c;
-				}
-			}
+		if(source.getName() == "btnVoltar") {
+			actionVoltar();
+		}else if (source.getName() == "btnCadastrar") {
+			actionCadastro();
+		}
 
-			if (this.bindTorneio(tela).getNome().isEmpty() || this.bindTorneio(tela).getDescricao().isEmpty()
-					|| this.bindTorneio(tela).getDatIniJogos().isEmpty()
-					|| this.bindTorneio(tela).getDatFimJogos().isEmpty()) {
-				tela.notifyCampoIncompleto();
-			} else {
-				realizarCadastro();
+	}
+	
+	private void actionCadastro() {
+		for (Circuito c : cr.listaCircuitos()) {
+			if (c.getNome().equalsIgnoreCase(tela.getComboBoxCircuito().getSelectedItem().toString())) {
+				circuito = c;
 			}
 		}
 
@@ -57,9 +56,8 @@ public class CadastrarTorneioController implements ActionListener {
 				|| this.bindTorneio(tela).getDatFimJogos().isEmpty()) {
 			tela.notifyCampoIncompleto();
 		} else {
-			actionVoltar();
+			realizarCadastro();
 		}
-
 	}
 	
 	private void actionVoltar() {
