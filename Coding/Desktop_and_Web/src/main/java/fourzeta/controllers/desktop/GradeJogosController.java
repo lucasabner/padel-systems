@@ -33,7 +33,7 @@ public class GradeJogosController implements ActionListener {
 		if(source.getName().equals("btnPesquisar") ) {
 			actionPesquisar();
 		}else if(source.getName().equals("btnGradeDeJogos")) {
-			
+			actionAbreGrade();
 		}
 		else {
 			actionVoltar();
@@ -41,6 +41,16 @@ public class GradeJogosController implements ActionListener {
 	}
 	
 	private void actionPesquisar() {
+		try {
+			this.grade = new GradeJogos(usuario, torneio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.tela.setVisible(false);
+		this.grade.setVisible(true);
+	}
+	
+	private void actionAbreGrade() {
 		try {
 			this.grade = new GradeJogos(usuario, torneio);
 		} catch (ParseException e) {
