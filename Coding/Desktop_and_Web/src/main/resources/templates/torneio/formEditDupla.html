@@ -54,7 +54,7 @@
 				Nome: <input type="text" th:value="${dupla.atleta1.nome}" name="atleta1.nome">
 			</div>
 			<div class="input-field col s6">
-				CPF: <input type="text" th:value="${dupla.atleta1.cpf}" name="atleta1.cpf"/>
+				CPF: <input type="number" id="cpf1" th:value="${dupla.atleta1.cpf}" name="atleta1.cpf"/>
 			</div>
 			<div class="input-field col s6">
 				Telefone: <input type="text" th:value="${dupla.atleta1.tel}" name="atleta1.tel"/>
@@ -79,7 +79,7 @@
 				Nome: <input type="text" th:value="${dupla.atleta2.nome}" name="atleta2.nome">
 			</div>
 			<div class="input-field col s6">
-				CPF: <input type="text" th:value="${dupla.atleta2.cpf}" name="atleta2.cpf"/>
+				CPF: <input type="number"  id="cpf2" th:value="${dupla.atleta2.cpf}" name="atleta2.cpf"/>
 			</div>
 			<div class="input-field col s6">
 				Telefone: <input type="text" th:value="${dupla.atleta2.tel}" name="atleta2.tel"/>
@@ -123,6 +123,12 @@
 	</div>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+     <script type="text/javascript">
+	$(document).ready(function(){
+		$("#cpf1").mask("999.999.999-99");
+		$("#cpf2").mask("999.999.999-99");
+	});
+</script>
 </body>
 
 
