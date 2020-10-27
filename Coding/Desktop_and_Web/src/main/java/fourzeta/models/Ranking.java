@@ -20,22 +20,17 @@ public class Ranking implements Comparable<Ranking>, Serializable, IElement {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
-	@Null()
 	private int pontos;
 
-	@NotNull()
 	@ManyToOne(targetEntity = Atleta.class)
 	private Atleta atleta;
 
 	@ManyToOne
-	@NotNull()
 	private Circuito circuito;
 
 	@ManyToOne
-	@NotNull()
 	private Torneio torneio;
 
-	@NotNull()
 	private String categoria;
 
 	public int getId() {
