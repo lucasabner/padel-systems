@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import fourzeta.models.Circuito;
 import fourzeta.models.Dupla;
 import fourzeta.models.Ranking;
@@ -68,14 +71,15 @@ public class DuplaController {
 		ranking1.setCategoria(dupla.getCategoria());
 		ranking1.setCircuito(torneio.getCircuito());
 		ranking1.setAtleta(dupla.getAtleta1());
+		ranking1.setTorneio(torneio);
 
 		ranking2.setCategoria(dupla.getCategoria());
 		ranking2.setCircuito(torneio.getCircuito());
 		ranking2.setAtleta(dupla.getAtleta2());
+		ranking2.setTorneio(torneio);
 
 		dupla.getAtleta1().getRankings().add(ranking1);
 		dupla.getAtleta2().getRankings().add(ranking2);
-
 
 		ar.save(dupla.getAtleta1());
 		ar.save(dupla.getAtleta2());
@@ -109,10 +113,25 @@ public class DuplaController {
 
 	@RequestMapping(value = "/inscricaoUsuario{idUser}circuito{idCirc}torneio{idTorn}dupla", method = RequestMethod.POST)
 	public String cadastrarDupla(Dupla dupla, @PathVariable("idUser") int idUser, @PathVariable("idCirc") int idCirc,
-			@PathVariable("idTorn") int idTorn) {
+			@PathVariable("idTorn") int idTorn, @RequestParam("cpf1") String cpf1, @RequestParam("cpf2") String cpf2) {
 		Torneio torneio = tr.findById(idTorn);
-		torneio.setQtdAtletas(torneio.getQtdAtletas() + 2);
+//		RedirectAttributes attributes
 
+		dupla.getAtleta1().setId(Long.parseLong(cpf1.replaceAll("[.-]", "")));
+		dupla.getAtleta2().setId(Long.parseLong(cpf2.replaceAll("[.-]", "")));
+		int idInt1 = torneio.getCircuito().getUsuario().getId();
+		int idInt2 = torneio.getCircuito().getId();
+		int idInt3 = torneio.getId();
+		String codigoUser = "" + idInt1;
+		String codigoCirc = "" + idInt2;
+		String codigoTorn = "" + idInt3;
+//		if (ar.findByCpf(dupla.getAtleta1().getId()) != null) {
+//			attributes.addFlashAttribute("mensagem", "Cpf já existente!");
+//			return "redirect:/inscricaoUsuario" + codigoUser + "circuito" + codigoCirc + "torneio" + codigoTorn
+//					+ "dupla";
+//		}
+
+		torneio.setQtdAtletas(torneio.getQtdAtletas() + 2);
 		dupla.setTorneio(torneio);
 		ranking1 = new Ranking();
 		ranking2 = new Ranking();
@@ -120,30 +139,26 @@ public class DuplaController {
 		ranking1.setCategoria(dupla.getCategoria());
 		ranking1.setCircuito(torneio.getCircuito());
 		ranking1.setAtleta(dupla.getAtleta1());
+		ranking1.setTorneio(torneio);
 
 		ranking2.setCategoria(dupla.getCategoria());
 		ranking2.setCircuito(torneio.getCircuito());
 		ranking2.setAtleta(dupla.getAtleta2());
+		ranking2.setTorneio(torneio);
 
 		dupla.getAtleta1().getRankings().add(ranking1);
 		dupla.getAtleta2().getRankings().add(ranking2);
-
+		
 		ar.save(dupla.getAtleta1());
 		ar.save(dupla.getAtleta2());
 
 		dr.save(dupla);
+		
 
 		rr.save(ranking1);
 		rr.save(ranking2);
 
 		tr.save(torneio);
-
-		int idInt1 = torneio.getCircuito().getUsuario().getId();
-		int idInt2 = torneio.getCircuito().getId();
-		int idInt3 = torneio.getId();
-		String codigoUser = "" + idInt1;
-		String codigoCirc = "" + idInt2;
-		String codigoTorn = "" + idInt3;
 
 		return "redirect:/Usuario" + codigoUser + "circuito" + codigoCirc + "torneio" + codigoTorn;
 	}
