@@ -5,6 +5,6 @@ import fourzeta.models.Atleta;
 
 public interface AtletaRepository extends CrudRepository<Atleta, String> {
 //	Iterable<Atleta> findByDuplas(List<Dupla> dupla);
-	Atleta findById(int id);
+	Atleta findByCpf(long cpf);
 
 }
