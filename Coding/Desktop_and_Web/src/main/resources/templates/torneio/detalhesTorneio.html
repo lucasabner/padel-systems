@@ -47,7 +47,8 @@
 			<p>Data Fim Inscricao: <span th:text="${torneio.datFimInsc}"></span></p>
 			<p>Data Inicio Jogos: <span th:text="${torneio.datIniJogos}"></span></p>
 			<p>Data Fim Jogos: <span th:text="${torneio.datFimJogos}"></span></p>
-			<a  class="waves-effect waves-light btn"><i class="material-icons left">assignment_turned_in
+			 <input type="hidden" id="torneio_insc" value="${torneio.inscEncerradas}">
+			<a id="insc"  th:href="${(#mvc.url('TC#encerrarInscricao').arg(0, torneio.id)).build()}" class="waves-effect waves-light btn"><i  class="material-icons left">assignment_turned_in
 </i>Encerrar Incricoes</a>
 		</div>
 	</div>
@@ -88,36 +89,18 @@
 			<tr>
 				<th>Nome</th>
 				<th>Categoria</th>
-				<th>Acoes</th>
+				<th>Dupla 1</th>
+				<th>Dupla 2</th>
+				<th>Dupla 3</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="chave : ${chaves}">
 				<td><span th:text="${chave.nome}"></span></td>
 				<td><span th:text="${chave.categoria}"></span></td>
-				<td><a class="waves-effect waves-light btn-small" ><i class="material-icons left">edit</i></a>|<a class="waves-effect waves-light btn-small"><i class="material-icons left">delete</i></a></td>
-			</tr>
-		</tbody>
-	</table>
-	
-	<div class="container" style="margin-bottom: 60px;
-	margin-top: 60px;">
-	<h5>Quadras</h5>
-	</div>
-
-	<table class="container tabelaConvidado">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Categoria</th>
-				<th>Acoes</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="chave : ${chaves}">
-				<td><span th:text="${chave.nome}"></span></td>
-				<td><span th:text="${chave.categoria}"></span></td>
-				<td><a class="waves-effect waves-light btn-small" ><i class="material-icons left">edit</i></a>|<a class="waves-effect waves-light btn-small"><i class="material-icons left">delete</i></a></td>
+				<td><span th:text="${chave.dupla1}"></span></td>
+				<td><span th:text="${chave.dupla2}"></span></td>
+				<td><span th:text="${chave.dupla2}"></span></td>
 			</tr>
 		</tbody>
 	</table>
@@ -126,6 +109,9 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="materialize/js/controle.js">
+   
+    </script>
 
 </body>
 
