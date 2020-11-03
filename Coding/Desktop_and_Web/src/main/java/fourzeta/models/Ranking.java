@@ -7,17 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import fourzeta.IElement;
 
 @Entity
+@Table(name="ranking", schema = "public")
 public class Ranking implements Comparable<Ranking>, Serializable, IElement {
 
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private int pontos;

@@ -148,6 +148,7 @@ public class DuplaController {
 
 		dupla.getAtleta1().getRankings().add(ranking1);
 		dupla.getAtleta2().getRankings().add(ranking2);
+		dupla.setPonTotal(0);
 		
 		ar.save(dupla.getAtleta1());
 		ar.save(dupla.getAtleta2());
