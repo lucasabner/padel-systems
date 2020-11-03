@@ -69,7 +69,7 @@ public class DistribuirJogosController implements ActionListener {
 		jr = new JogoResource();
 		for (Jogo j : jogos) {
 			if (j.getCategoria().equalsIgnoreCase(categoria)) {
-				j.setQuadra(quadra);
+//				j.setQuadra(quadra);
 				jr.registraJogo(j);
 			}
 		}

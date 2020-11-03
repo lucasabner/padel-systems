@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
@@ -26,7 +27,8 @@ import fourzeta.resources.ChaveResource;
 import fourzeta.resources.JogoResource;
 
 @Entity
-@JsonIgnoreProperties("circuito")
+//@JsonIgnoreProperties("circuito")
+@Table(name="torneio", schema = "public")
 public class Torneio implements Serializable, IElement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,36 +40,40 @@ public class Torneio implements Serializable, IElement {
 	private int qtdAtletas;
 	private String valor;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "torneio")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Ranking> rankings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
-	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
-	private List<Quadra> quadras;
+//	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
+//	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+//	private List<Quadra> quadras;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Dupla.class, mappedBy = "torneio")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Dupla> duplas;
 
 	@ManyToOne()
 	private Circuito circuito;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Chave.class, mappedBy = "torneio", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Chave.class, mappedBy = "torneio")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Chave> chaves; // Lista deve estar SEMPRE ORDENADA por duplas com maiores pontos
 
+	@Column(name = "datfiminsc")
 	private String datFimInsc;
 
+	@Column(name = "datinijogos")
 	private String datIniJogos;
 
+	@Column(name = "datfimjogos")
 	private String datFimJogos;
 
 	@Transient
 	private int[] distribuicaoJogos;
 
-	@Column(name = "inscencerradas", nullable = false)
+	@Column(name = "inscencerradas")
 	private boolean inscEncerradas;
+	
 
 	public List<Chave> getChavesCat(String categoria) {
 		List<Chave> chavesCat = new ArrayList<Chave>();
@@ -92,6 +98,7 @@ public class Torneio implements Serializable, IElement {
 		this.distribuicaoJogos = new int[6];
 		this.chaves = new ArrayList<Chave>();
 		this.duplas = new ArrayList<Dupla>();
+		this.inscEncerradas = false;
 	}
 
 	public Circuito getCircuito() {
@@ -134,13 +141,13 @@ public class Torneio implements Serializable, IElement {
 		return nome;
 	}
 
-	public List<Quadra> getQuadras() {
-		return quadras;
-	}
-
-	public void setQuadras(List<Quadra> quadras) {
-		this.quadras = quadras;
-	}
+//	public List<Quadra> getQuadras() {
+//		return quadras;
+//	}
+//
+//	public void setQuadras(List<Quadra> quadras) {
+//		this.quadras = quadras;
+//	}
 
 	public String getDescricao() {
 		return descricao;
