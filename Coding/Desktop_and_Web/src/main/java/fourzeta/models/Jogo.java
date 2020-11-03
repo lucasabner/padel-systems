@@ -8,9 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import fourzeta.IElement;
 
-@Entity
+
+@Table(name="jogo", schema = "public")
 public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	
 
@@ -30,8 +33,8 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	@ManyToOne
 	private Chave chave;
 
-	@OneToOne
-	private Quadra quadra;
+//	@OneToOne
+//	private Quadra quadra;
 	
 	// lower
 	private String categoria;
@@ -113,13 +116,13 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 		this.partida = partida;
 	}
 
-	public Quadra getQuadra() {
-		return quadra;
-	}
-
-	public void setQuadra(Quadra quadra) {
-		this.quadra = quadra;
-	}
+//	public Quadra getQuadra() {
+//		return quadra;
+//	}
+//
+//	public void setQuadra(Quadra quadra) {
+//		this.quadra = quadra;
+//	}
 
 	public String getData() {
 		return data;
