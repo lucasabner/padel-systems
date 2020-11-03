@@ -16,11 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
 import fourzeta.resources.JogoResource;
 
 @Entity
+@Table(name="chave", schema = "public")
 public class Chave implements Serializable, IElement {
 
 	@Id
@@ -39,35 +42,35 @@ public class Chave implements Serializable, IElement {
 	@OneToOne
 	private Dupla dupla3;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Jogo.class, mappedBy ="chave",cascade = CascadeType.REMOVE)
-	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
-	private List<Jogo> jogos;
+//	@OneToMany(fetch = FetchType.EAGER, targetEntity = Jogo.class, mappedBy ="chave")
+//	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+//	private List<Jogo> jogos;
 
 	@ManyToOne
 	private Torneio torneio;
 
-	public List<Jogo> getJogos() {
-		return jogos;
-	}
-
-	public Chave() {
-		this.jogos = new ArrayList<Jogo>();
-	}
-
-	public Chave(int id, String nome, String categoria, Dupla dupla1, Dupla dupla2, Dupla dupla3, List<Jogo> jogos) {
-		this.id = id;
-		this.nome = nome;
-		this.categoria = categoria;
-		this.dupla1 = dupla1;
-		this.dupla2 = dupla2;
-		this.dupla3 = dupla3;
-		this.jogos = jogos;
-	}
-
-	
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
-	}
+//	public List<Jogo> getJogos() {
+//		return jogos;
+//	}
+//
+//	public Chave() {
+//		this.jogos = new ArrayList<Jogo>();
+//	}
+//
+//	public Chave(int id, String nome, String categoria, Dupla dupla1, Dupla dupla2, Dupla dupla3, List<Jogo> jogos) {
+//		this.id = id;
+//		this.nome = nome;
+//		this.categoria = categoria;
+//		this.dupla1 = dupla1;
+//		this.dupla2 = dupla2;
+//		this.dupla3 = dupla3;
+//		this.jogos = jogos;
+//	}
+//
+//	
+//	public void setJogos(List<Jogo> jogos) {
+//		this.jogos = jogos;
+//	}
 	
 	public Torneio getTorneio() {
 		return torneio;

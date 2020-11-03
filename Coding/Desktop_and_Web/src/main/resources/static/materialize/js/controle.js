@@ -14,9 +14,14 @@
 //
 //cpf2.addEventListener("blur", function(){
 //   if(cpf2.value) cpf2.value = cpf2.value.match(/.{1,3}/g).join(".").replace(/\.(?=[^.]*$)/,"-");
-//});
+//})
 
-
+ if (document.getElementById("torneio_insc").value) {
+   	   document.getElementById("insc").style.display = 'none';
+    } else {
+    	document.getElementById("insc"),style.display = 'block';
+    }
+ 
 function mascaraCpf1(i){
 	   
 	   var v = i.value;

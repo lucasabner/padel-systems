@@ -18,7 +18,7 @@ import org.hibernate.annotations.CascadeType;
 import fourzeta.IElement;
 
 @Entity
-@Table(name = "usuario")
+@Table(name="usuario", schema = "public")
 public class Usuario implements Serializable, IElement{
 	
 	@Id
@@ -34,7 +34,6 @@ public class Usuario implements Serializable, IElement{
 	private String senha;
 	
 	@OneToMany(fetch = FetchType.EAGER,  targetEntity = Circuito.class, mappedBy ="usuario")
-	@Cascade(CascadeType.ALL)
 	private List<Circuito> circuitos;
 
 	public int getId() {
