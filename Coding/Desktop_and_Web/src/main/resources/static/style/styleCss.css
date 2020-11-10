@@ -15,6 +15,10 @@
 	margin-top: 60px;
 }
 
+th,td{
+  text-align: center;
+}
+
 .tabelaConvidado{
 	width: 50%;
 }
@@ -43,3 +47,9 @@
   display: inline-block;
   font-size: 16px;
 }
+button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+  	pointer-events: all !important;
+}
+.button2 {background-color: #008CBA;} /* Blue */
