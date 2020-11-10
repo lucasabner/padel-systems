@@ -3,27 +3,29 @@ package fourzeta.controllers.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import fourzeta.models.Chave;
 import fourzeta.models.Circuito;
 import fourzeta.models.Dupla;
+import fourzeta.models.Etapa;
+import fourzeta.models.Impedimento;
+import fourzeta.models.Jogo;
 import fourzeta.models.OrderDuplasPontuacao;
 import fourzeta.models.Torneio;
-import fourzeta.models.Usuario;
 import fourzeta.repository.ChaveRepository;
 import fourzeta.repository.CircuitoRepository;
 import fourzeta.repository.DuplaRepository;
+import fourzeta.repository.JogoRepository;
 import fourzeta.repository.RankingRepository;
 import fourzeta.repository.TorneioRepository;
 import fourzeta.resources.ChaveResource;
-import fourzeta.resources.DuplaResource;
+import fourzeta.resources.JogoResource;
 
 @Controller
 public class TorneioController {
@@ -42,6 +44,9 @@ public class TorneioController {
 
 	@Autowired
 	private RankingRepository rr;
+	
+	@Autowired
+	private JogoRepository jr;
 	
 
 	@RequestMapping(value = "/EditarUsuario{idUser}circuito{idCirc}torneio{idTorn}", method = RequestMethod.GET)
@@ -127,6 +132,9 @@ public class TorneioController {
 
 		Iterable<Chave> chaves = chr.findByTorneio(torneio);
 		mv.addObject("chaves", chaves);
+		
+		Iterable<Jogo> jogos = jr.findByTorneio(torneio);
+		mv.addObject("jogos", jogos);
 
 		Iterable<Dupla> duplas = dr.findByTorneio(torneio);
 		mv.addObject("duplas", duplas);
@@ -158,6 +166,7 @@ public class TorneioController {
 		torneio.setInscEncerradas(true);
 		tr.save(torneio);
 		montarChave(torneio);
+		distribuirJogos(torneio);
 		
 		int idInt1 = torneio.getCircuito().getUsuario().getId();
 		int idInt2 = torneio.getCircuito().getId();
@@ -261,6 +270,66 @@ public class TorneioController {
 		}
 			chr.saveAll(chaves);
 	}
+	
+	public void distribuirJogos(Torneio torneio) {
+		List<Chave> chaves =  (List<Chave>) chr.findByTorneio(torneio);
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		
+		for (Chave chave : chaves) { // Jogos 1 VS 2
+			Jogo jo1 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla2() != null) {
+				jo1.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla2().toString());
+				jo1.setDupla1(chave.getDupla1());
+				jo1.setDupla2(chave.getDupla2());
+				jo1.setCategoria(chave.getCategoria());
+				jo1.setChave(chave);
+				jo1.setTorneio(torneio);
+			}
+			jogos.add(distribuirHorarios(chave, chave.getDupla1(), chave.getDupla2(), jo1));
+			chave.setJogos(jogos);
+			torneio.getJogos().add(jo1);
+			chr.save(chave);
+			jr.save(jo1);
+			tr.save(torneio);
+
+		}
+		for (Chave chave : chaves) { // Jogos 1 VS 3
+			Jogo jo2 = new Jogo();
+			if (chave.getDupla1() != null && chave.getDupla3() != null) {
+				jo2.setPartida(chave.getDupla1().toString() + "     X     " + chave.getDupla3().toString());
+				jo2.setDupla1(chave.getDupla1());
+				jo2.setDupla2(chave.getDupla3());
+				jo2.setCategoria(chave.getCategoria());
+				jo2.setChave(chave);
+				jo2.setTorneio(torneio);
+			}
+			jogos.add(distribuirHorarios(chave, chave.getDupla1(), chave.getDupla3(), jo2));
+			chave.setJogos(jogos);
+			torneio.getJogos().add(jo2);
+			chr.save(chave);
+			jr.save(jo2);
+			tr.save(torneio);
+			
+		}
+		for (Chave chave : chaves) { // Jogos 2 VS 3
+			Jogo jo3 = new Jogo();
+			if (chave.getDupla2() != null && chave.getDupla3() != null) {
+				jo3.setPartida(chave.getDupla2().toString() + "     X     " + chave.getDupla3().toString());
+				jo3.setDupla1(chave.getDupla2());
+				jo3.setDupla2(chave.getDupla3());
+				jo3.setCategoria(chave.getCategoria());
+				jo3.setChave(chave);
+				jo3.setTorneio(torneio);
+			}
+			jogos.add(distribuirHorarios(chave, chave.getDupla2(), chave.getDupla3(), jo3));
+			chave.setJogos(jogos);
+			torneio.getJogos().add(jo3);
+			chr.save(chave);
+			jr.save(jo3);
+			tr.save(torneio);
+
+		}
+	}
 
 	public void retirarSuplentes(List<Dupla> duplas) {
 		int numDuplasSemSuplentes = duplas.size() % 3;
@@ -270,4 +339,110 @@ public class TorneioController {
 			duplas.remove(duplas.size() - 1);
 		}
 	}
+	
+	public static Jogo distribuirHorarios(Chave chave, Dupla d1, Dupla d2, Jogo jogo) {
+		List<List<String>> hrs = getHorarios();
+		if (jogo.getEtapa() == Etapa.CHAVEAMENTO.name()) {
+			if (!d1.getImpedimento().equals(Impedimento.NENHUM.name())) {
+				switch (d1.getImpedimento().toString()) {
+				case "QUINTA":
+					hrs.remove(horariosQuinta);
+					break;
+				case "SEXTA":
+					hrs.remove(horariosSexta);
+					break;
+				case "SABADO":
+					hrs.remove(horariosSabadoManha);
+					break;
+				}
+			}
+
+			if (!d2.getImpedimento().equals(Impedimento.NENHUM.name())) {
+				switch (d2.getImpedimento().toString()) {
+				case "QUINTA":
+					hrs.remove(horariosQuinta);
+					break;
+				case "SEXTA":
+					hrs.remove(horariosSexta);
+					break;
+				case "SABADO":
+					hrs.remove(horariosSabadoManha);
+					break;
+				}
+			}
+		}
+
+		jogo.setData(hrs.get(0).remove(0));
+
+		return jogo;
+	}
+
+	public static List<List<String>> getHorarios() {
+		List<List<String>> horarios = new ArrayList<List<String>>();
+		horariosQuinta.add("QUINTA-FEIRA 18:00");
+		horariosQuinta.add("QUINTA-FEIRA 18:50");
+		horariosQuinta.add("QUINTA-FEIRA 19:40");
+		horariosQuinta.add("QUINTA-FEIRA 20:30");
+		horariosQuinta.add("QUINTA-FEIRA 21:20");
+		horariosQuinta.add("QUINTA-FEIRA 22:10");
+		horariosQuinta.add("QUINTA-FEIRA 23:00");
+		horariosSexta.add("SEXTA-FEIRA 18:00");
+		horariosSexta.add("SEXTA-FEIRA 18:50");
+		horariosSexta.add("SEXTA-FEIRA 19:40");
+		horariosSexta.add("SEXTA-FEIRA 20:30");
+		horariosSexta.add("SEXTA-FEIRA 21:20");
+		horariosSexta.add("SEXTA-FEIRA 22:10");
+		horariosSexta.add("SEXTA-FEIRA 23:00");
+		horariosSabadoManha.add("SÁBADO 08:00");
+		horariosSabadoManha.add("SÁBADO 08:50");
+		horariosSabadoManha.add("SÁBADO 09:40");
+		horariosSabadoManha.add("SÁBADO 10:30");
+		horariosSabadoManha.add("SÁBADO 11:20");
+		horariosSabadoTarde.add("SÁBADO 13:50");
+		horariosSabadoTarde.add("SÁBADO 14:40");
+		horariosSabadoTarde.add("SÁBADO 15:30");
+		horariosSabadoTarde.add("SÁBADO 16:20");
+		horariosSabadoTarde.add("SÁBADO 17:10");
+		horariosSabadoNoite.add("SÁBADO 18:00");
+		horariosSabadoNoite.add("SÁBADO 18:50");
+		horariosSabadoNoite.add("SÁBADO 19:40");
+		horariosSabadoNoite.add("SÁBADO 20:30");
+		horariosSabadoNoite.add("SÁBADO 21:20");
+		horariosSabadoNoite.add("SÁBADO 22:10");
+		horariosSabadoNoite.add("SÁBADO 23:00");
+		horariosDomingoManha.add("DOMINGO 08:00");
+		horariosDomingoManha.add("DOMINGO 08:50");
+		horariosDomingoManha.add("DOMINGO 09:40");
+		horariosDomingoManha.add("DOMINGO 10:30");
+		horariosDomingoManha.add("DOMINGO 11:20");
+		horariosDomingoTarde.add("DOMINGO 13:50");
+		horariosDomingoTarde.add("DOMINGO 14:40");
+		horariosDomingoTarde.add("DOMINGO 15:30");
+		horariosDomingoTarde.add("DOMINGO 16:20");
+		horariosDomingoTarde.add("DOMINGO 17:10");
+		horariosDomingoNoite.add("DOMINGO 18:00");
+		horariosDomingoNoite.add("DOMINGO 18:50");
+		horariosDomingoNoite.add("DOMINGO 19:40");
+		horariosDomingoNoite.add("DOMINGO 20:30");
+		horariosDomingoNoite.add("DOMINGO 21:20");
+		horariosDomingoNoite.add("DOMINGO 22:10");
+		horariosDomingoNoite.add("DOMINGO 23:00");
+		horarios.add(horariosQuinta);
+		horarios.add(horariosSexta);
+		horarios.add(horariosSabadoManha);
+		horarios.add(horariosSabadoTarde);
+		horarios.add(horariosSabadoNoite);
+		horarios.add(horariosDomingoManha);
+		horarios.add(horariosDomingoTarde);
+		horarios.add(horariosDomingoNoite);
+		return horarios;
+	}
+	private static List<String> horariosQuinta = new ArrayList<String>();
+	private static List<String> horariosSexta = new ArrayList<String>();
+	private static List<String> horariosSabadoManha = new ArrayList<String>();
+	private static List<String> horariosSabadoTarde = new ArrayList<String>();
+	private static List<String> horariosSabadoNoite = new ArrayList<String>();
+	private static List<String> horariosDomingoManha = new ArrayList<String>();
+	private static List<String> horariosDomingoTarde = new ArrayList<String>();
+	private static List<String> horariosDomingoNoite = new ArrayList<String>();
 }
