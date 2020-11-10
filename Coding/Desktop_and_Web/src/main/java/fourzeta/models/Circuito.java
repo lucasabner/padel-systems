@@ -12,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Fetch;
 import fourzeta.IElement;
 
 @Entity
+@Table(name="circuito", schema = "public")
 public class Circuito implements Serializable, IElement {
 
 	@Id
@@ -25,11 +28,11 @@ public class Circuito implements Serializable, IElement {
 	private String nome;
 	private String descricao;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "circuito", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Ranking.class, mappedBy = "circuito")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Ranking> rankings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy = "circuito", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Torneio.class, mappedBy = "circuito")
 	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	private List<Torneio> torneios;
 

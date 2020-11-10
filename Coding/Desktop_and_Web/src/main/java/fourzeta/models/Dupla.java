@@ -1,6 +1,7 @@
 package fourzeta.models;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Table;
+
 import fourzeta.IElement;
 
 @Entity
-@JsonIgnoreProperties("torneio")
+//@JsonIgnoreProperties("torneio")
+@Table(name="dupla", schema = "public")
 public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,9 +39,10 @@ public class Dupla implements Comparable<Dupla>, Serializable, IElement{
 	@OneToOne()
 	private Atleta atleta2;
 
+	@Column(name = "pon_total")
 	private long ponTotal;
 
-	//@Override
+//	@Override
 	public int getId() {
 		return id;
 	}

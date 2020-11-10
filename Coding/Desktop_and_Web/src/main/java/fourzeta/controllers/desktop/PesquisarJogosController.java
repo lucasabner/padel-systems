@@ -29,13 +29,13 @@ public class PesquisarJogosController implements ActionListener {
 
 	}
 	
-	public void definirQuadraJogo(List<Jogo> jogos, List<Jogo> slc, int i) {
-		for (Jogo j : jogos) {
-			if (j.getQuadra().getNumero() == i) {
-				slc.add(j);
-			}
-	}
-	}
+//	public void definirQuadraJogo(List<Jogo> jogos, List<Jogo> slc, int i) {
+//		for (Jogo j : jogos) {
+//			if (j.getQuadra().getNumero() == i) {
+//				slc.add(j);
+//			}
+//	}
+//	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -86,14 +86,14 @@ public class PesquisarJogosController implements ActionListener {
 		this.tela.readTable(selecionados);
 	}
 
-	public void configurarQuadras(List<Jogo> jogos) {
-		Random random = new Random();
-		for (Jogo j : jogos) {
-			System.out.println(j.getPartida());
-			if (j.getQuadra() != new Quadra(1) || j.getQuadra() != new Quadra(0) || j.getQuadra() != new Quadra(2)) {
-				j.setQuadra(new Quadra(random.nextInt(2)));
-			}
-		}
-	}
+//	public void configurarQuadras(List<Jogo> jogos) {
+//		Random random = new Random();
+//		for (Jogo j : jogos) {
+//			System.out.println(j.getPartida());
+//			if (j.getQuadra() != new Quadra(1) || j.getQuadra() != new Quadra(0) || j.getQuadra() != new Quadra(2)) {
+//				j.setQuadra(new Quadra(random.nextInt(2)));
+//			}
+//		}
+//	}
 
 }
