@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>FourZeta</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style/styleCss.css" />
+</head>
+<body>
+
+	<header>
+		<nav class="menu">
+			<div class="nav-wrapper" th:each="torneio : ${torneio}">
+				<a href="#" class="brand-logo">&nbsp;Inscricao de Dupla</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a
+						th:href="${(#mvc.url('TC#detalhesTorneio').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id).arg(2, torneio.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Detalhes do
+							Torneio</a></li>
+					<li><a
+						th:href="${(#mvc.url('CC#listaCircuitos').arg(0, torneio.circuito.usuario.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>lista de
+							Circuitos</a></li>
+					<li><a
+						th:href="${(#mvc.url('CC#detalhesCircuito').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Detalhes do
+							Circuito</a></li>
+				</ul>
+			</div>
+		</nav>
+
+	</header>
+
+	<div th:each="circuito : ${circuito}" class="container detalhesEvento">
+		<h5>Detalhes do Circuito</h5>
+		<div class="row">
+			<p>
+				Nome: <span th:text="${circuito.nome}"></span>
+			</p>
+			<p>
+				Descricao: <span th:text="${circuito.descricao}"></span>
+			</p>
+		</div>
+	</div>
+
+	<div th:each="torneio : ${torneio}" class="container detalhesEvento">
+		<h5>Detalhes do Torneio</h5>
+		<div class="row">
+			<p>
+				Nome: <span th:text="${torneio.nome}"></span>
+			</p>
+			<p>
+				Descricao: <span th:text="${torneio.descricao}"></span>
+			</p>
+		</div>
+	</div>
+
+
+	<div class="container formEvento">
+
+		<form class="container" method="post">
+			<div class="row">
+				<div class="input-field col s12">
+					<h5>Atleta 1</h5>
+				</div>
+				<div class="input-field col s6">
+					Nome: <input type="text" value="" name="atleta1.nome">
+				</div>
+				<div class="input-field col s6">
+					CPF: <input type="text" id="cpf1" value="" maxlength="11"
+						oninput="mascaraCpf(this)" required placeholder="Digite Somente Numeros" name="cpf1" />
+				</div>
+				<div class="input-field col s6">
+					Telefone: <input type="text" value="" name="atleta1.tel" />
+				</div>
+				<div class="input-field col s6">
+					Email: <input type="text" value="" name="atleta1.email" />
+				</div>
+				<div>
+					<select class="browser-default" name="atleta1.sexo">
+						<option value="" disabled selected>Selecione um SEXO</option>
+						<option value="MASCULINO">MASCULINO</option>
+						<option value="FEMININO">FEMININO</option>
+					</select>
+				</div>
+
+				<div class="input-field col s6">
+					Data Nascimento: <input type="date" value=""
+						name="atleta1.dataNascimento" />
+				</div>
+
+				<div class="input-field col s12">
+					<h5>Atleta 2</h5>
+				</div>
+				<div class="input-field col s6">
+					Nome: <input type="text" value="" name="atleta2.nome">
+				</div>
+				<div class="input-field col s6">
+					CPF: <input type="text" id="cpf2" value="" maxlength="11"
+						oninput="mascaraCpf(this)" required placeholder="Digite Somente Numeros" name="cpf2" />
+				</div>
+				<div class="input-field col s6">
+					Telefone: <input type="text" value="" name="atleta2.tel" />
+				</div>
+				<div class="input-field col s6">
+					Email: <input type="text" value="" name="atleta2.email" />
+				</div>
+
+				<div>
+					<select class="browser-default" name="atleta2.sexo">
+						<option value="" disabled selected>Selecione um SEXO</option>
+						<option value="MASCULINO">MASCULINO</option>
+						<option value="FEMININO">FEMININO</option>
+					</select>
+				</div>
+
+				<div class="input-field col s6">
+					Data Nascimento: <input type="date" value=""
+						name="atleta2.dataNascimento" />
+				</div>
+
+				<div>
+					<select class="browser-default"  required name="categoria">
+						<option value="" disabled selected>Selecione um Categoria</option>
+						<option value="PRIMEIRA">PRIMEIRA</option>
+						<option value="SEGUNDA">SEGUNDA</option>
+						<option value="TERCEIRA">TERCEIRA</option>
+						<option value="QUARTA">QUARTA</option>
+						<option value="QUINTA">QUINTA</option>
+						<option value="INICIANTES">INICIANTES</option>
+					</select>
+				</div>
+
+				<div class="input-field col s12">
+					Impedimento: <input type="text" value="" name="impedimento" />
+				</div>
+
+			</div>
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="materialize/js/controle.js">
+		
+	</script>
+</body>
+
+
+</html>
