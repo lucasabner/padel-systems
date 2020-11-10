@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import fourzeta.IElement;
 
-
+@Entity
 @Table(name="jogo", schema = "public")
 public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	
@@ -32,6 +32,9 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 
 	@ManyToOne
 	private Chave chave;
+	
+	@ManyToOne
+	private Torneio torneio;
 
 //	@OneToOne
 //	private Quadra quadra;
@@ -46,6 +49,16 @@ public class Jogo implements Comparable<Jogo>, Serializable, IElement {
 	private String placar;
 	
 	private String etapa;
+
+
+	public Torneio getTorneio() {
+		return torneio;
+	}
+
+
+	public void setTorneio(Torneio torneio) {
+		this.torneio = torneio;
+	}
 
 
 	public String getEtapa() {
