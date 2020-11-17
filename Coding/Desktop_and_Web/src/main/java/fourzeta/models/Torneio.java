@@ -67,6 +67,10 @@ public class Torneio implements Serializable, IElement {
 
 	@Column(name = "datfimjogos")
 	private String datFimJogos;
+	
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Jogo.class, mappedBy ="torneio")
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	private List<Jogo> jogos;
 
 	@Transient
 	private int[] distribuicaoJogos;
@@ -111,6 +115,14 @@ public class Torneio implements Serializable, IElement {
 
 	public List<Dupla> getDuplas() {
 		return duplas;
+	}
+
+	public List<Jogo> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
 	}
 
 	public List<Ranking> getRankings() {

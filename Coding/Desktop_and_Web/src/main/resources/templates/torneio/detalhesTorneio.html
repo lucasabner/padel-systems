@@ -1,61 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>FourZeta</title>
-	 <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+<title>FourZeta</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      
-      <link rel="stylesheet" href="style/styleCss.css"/>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="style/styleCss.css" />
+
 </head>
 <body>
 
 	<header>
 		<nav class="menu">
-		    <div class="nav-wrapper" th:each="torneio : ${torneio}">
-		      <a href="#" class="brand-logo">&nbsp;Torneio</a>
-		      <ul id="nav-mobile" class="right hide-on-med-and-down">
-		      <li><a  class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Quadra</a></li>
-		      <li><a th:href="${(#mvc.url('DC#formDupla').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id).arg(2, torneio.id)).build()}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Dupla</a></li>
-		      	<li><a th:href="${(#mvc.url('CC#listaCircuitos').arg(0, torneio.circuito.usuario.id)).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>lista Circuitos</a></li>
-				<li><a th:href="${(#mvc.url('CC#detalhesCircuito').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id)).build()}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Detalhes do Circuito</a></li>
-		      </ul>
-		    </div>
+			<div class="nav-wrapper" th:each="torneio : ${torneio}">
+				<a href="#" class="brand-logo">&nbsp;Torneio</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a id="cadDupla"
+						th:href="${(#mvc.url('DC#formDupla').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id).arg(2, torneio.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">add_circle_outline</i>Cadastrar Dupla</a></li>
+					<li><a
+						th:href="${(#mvc.url('CC#listaCircuitos').arg(0, torneio.circuito.usuario.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>lista
+							Circuitos</a></li>
+					<li><a
+						th:href="${(#mvc.url('CC#detalhesCircuito').arg(0, torneio.circuito.usuario.id).arg(1, torneio.circuito.id)).build()}"
+						class="waves-effect waves-light btn"><i
+							class="material-icons left">format_list_bulleted</i>Detalhes do
+							Circuito</a></li>
+				</ul>
+			</div>
 		</nav>
 	</header>
-	
+
 	<div th:each="circuito : ${circuito}" class="container detalhesEvento">
-	<h5>Detalhes do Circuito</h5>
+		<h5>Detalhes do Circuito</h5>
 		<div class="row">
-			<p>Nome: <span th:text="${circuito.nome}"></span></p>
-			<p>Descricao: <span th:text="${circuito.descricao}"></span></p>
+			<p>
+				Nome: <span th:text="${circuito.nome}"></span>
+			</p>
+			<p>
+				Descricao: <span th:text="${circuito.descricao}"></span>
+			</p>
 		</div>
 	</div>
-	
+
 	<div th:each="torneio : ${torneio}" class="container detalhesEvento">
-	<h5>Detalhes do Torneio</h5>
+		<h5>Detalhes do Torneio</h5>
 		<div class="row">
-			<p>Nome: <span th:text="${torneio.nome}"></span></p>
-			<p>Descricao: <span th:text="${torneio.descricao}"></span></p>
-			<p>Qtd.Atletas: <span th:text="${torneio.qtdAtletas}"></span></p>
-			<p>Valor: <span th:text="${torneio.valor}"></span></p>
-			<p>Data Fim Inscricao: <span th:text="${torneio.datFimInsc}"></span></p>
-			<p>Data Inicio Jogos: <span th:text="${torneio.datIniJogos}"></span></p>
-			<p>Data Fim Jogos: <span th:text="${torneio.datFimJogos}"></span></p>
-			 <input type="hidden" id="torneio_insc" value="${torneio.inscEncerradas}">
-			<a id="insc"  th:href="${(#mvc.url('TC#encerrarInscricao').arg(0, torneio.id)).build()}" class="waves-effect waves-light btn"><i  class="material-icons left">assignment_turned_in
-</i>Encerrar Incricoes</a>
+			<p>
+				Nome: <span th:text="${torneio.nome}"></span>
+			</p>
+			<p>
+				Descricao: <span th:text="${torneio.descricao}"></span>
+			</p>
+			<p>
+				Qtd.Atletas: <span th:text="${torneio.qtdAtletas}"></span>
+			</p>
+			<p>
+				Valor: <span th:text="${torneio.valor}"></span>
+			</p>
+			<p>
+				Data Fim Inscricao: <span th:text="${torneio.datFimInsc}"></span>
+			</p>
+			<p>
+				Data Inicio Jogos: <span th:text="${torneio.datIniJogos}"></span>
+			</p>
+			<p>
+				Data Fim Jogos: <span th:text="${torneio.datFimJogos}"></span>
+			</p>
+				<input type="hidden" id="torneio_insc"
+					th:value ="${torneio.inscEncerradas}" /> <a id="insc"
+					th:href="${(#mvc.url('TC#encerrarInscricao').arg(0, torneio.id)).build()}"
+					class="waves-effect waves-light btn"><i
+					class="material-icons left">assignment_turned_in </i>Encerrar
+					Incricoes</a>
+			
 		</div>
 	</div>
-	
-	<div class="container" style="margin-bottom: 60px;
-	margin-top: 60px;">
-	<h5>Duplas</h5>
+
+	<div class="container" style="margin-bottom: 60px; margin-top: 60px;">
+		<h5>Duplas</h5>
 	</div>
 
 	<table class="container tabelaConvidado">
@@ -70,18 +104,24 @@
 		</thead>
 		<tbody>
 			<tr th:each="dupla : ${duplas}">
-				<td><span th:text="${dupla.atleta1.nome}"></span>/<span th:text="${dupla.atleta2.nome}"></span></td>
+				<td><span th:text="${dupla.atleta1.nome}"></span>/<span
+					th:text="${dupla.atleta2.nome}"></span></td>
 				<td><span th:text="${dupla.categoria}"></span></td>
 				<td><span th:text="${dupla.ponTotal}"></span></td>
 				<td><span th:text="${dupla.impedimento}"></span></td>
-				<td><a th:href="${(#mvc.url('DC#formEditDupla').arg(0, dupla.torneio.circuito.usuario.id).arg(1, dupla.torneio.circuito.id).arg(2, dupla.torneio.id).arg(3, dupla.id)).build()}" class="waves-effect waves-light btn-small" ><i class="material-icons left">edit</i></a>|<a th:href="${(#mvc.url('DC#deletarDupla').arg(0, dupla.id)).build()}" class="waves-effect waves-light btn-small"><i class="material-icons right">delete</i></a></td>
+				<td><a
+					th:href="${(#mvc.url('DC#formEditDupla').arg(0, dupla.torneio.circuito.usuario.id).arg(1, dupla.torneio.circuito.id).arg(2, dupla.torneio.id).arg(3, dupla.id)).build()}"
+					class="waves-effect waves-light btn-small"><i
+						class="material-icons left">edit</i></a>|<a
+					th:href="${(#mvc.url('DC#deletarDupla').arg(0, dupla.id)).build()}"
+					class="waves-effect waves-light btn-small"><i
+						class="material-icons right">delete</i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	
-	<div class="container" style="margin-bottom: 60px;
-	margin-top: 60px;">
-	<h5>Chaves</h5>
+
+	<div class="container" style="margin-bottom: 60px; margin-top: 60px;">
+		<h5>Chaves</h5>
 	</div>
 
 	<table class="container tabelaConvidado">
@@ -100,18 +140,45 @@
 				<td><span th:text="${chave.categoria}"></span></td>
 				<td><span th:text="${chave.dupla1}"></span></td>
 				<td><span th:text="${chave.dupla2}"></span></td>
-				<td><span th:text="${chave.dupla2}"></span></td>
+				<td><span th:text="${chave.dupla3}"></span></td>
 			</tr>
 		</tbody>
 	</table>
-	
-	
 
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    <script type="text/javascript" src="materialize/js/controle.js">
-   
-    </script>
+	<div class="container" style="margin-bottom: 60px; margin-top: 60px;">
+		<h5>Jogos</h5>
+	</div>
+
+	<table class="container tabelaConvidado">
+		<thead>
+			<tr>
+				<th>Horario</th>
+				<th>Categoria</th>
+				<th>Confronto</th>
+				<th>Placar</th>
+				<th>Etapa</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="jogo : ${jogos}">
+				<td><span th:text="${jogo.data}"></span></td>
+				<td><span th:text="${jogo.categoria}"></span></td>
+				<td><span th:text="${jogo.dupla1.atleta1.nome}"></span> / <span
+					th:text="${jogo.dupla1.atleta2.nome}"></span> X <span
+					th:text="${jogo.dupla2.atleta1.nome}"></span> / <span
+					th:text="${jogo.dupla2.atleta2.nome}"></span></td>
+				<td><span th:text="${jogo.placar}"></span></td>
+				<td><span th:text="${jogo.etapa}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="materialize/js/controle.js"></script>
 
 </body>
 
