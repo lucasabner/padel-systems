@@ -15,9 +15,10 @@
 > + Apache Tomcat;
 > + Spring Framework;
 > + PostgreSQL;
-> + Java Swing ou JavaFx;
+> + Java Swing / JavaFx;
 > + Java Server Faces (JSF);
 > + RMI para web service.
+> + JUnit
 > + Java Android
 
 -----------------------
